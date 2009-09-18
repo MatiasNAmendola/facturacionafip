@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginTicketResponse version="1">
+    <header>
+        <source>CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>
+        <destination>SERIALNUMBER=CUIT 20131507969, EMAILADDRESS=gfisanotti@afip.gov.ar, CN=ghf, OU=diopin, O=afip, ST=buenos aires, C=ar</destination>
+        <uniqueId>3332868326</uniqueId>
+        <generationTime>2009-09-17T11:47:30.050-03:00</generationTime>
+        <expirationTime>2009-09-17T23:47:30.050-03:00</expirationTime>
+    </header>
+    <credentials>
+        <token>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgdW5pcXVlX2lkPSIxOTAyMDA3NDU3IiBzcmM9IkNOPXdzYWFob21vLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBnZW5fdGltZT0iMTIyMjk1ODc5MCIgZXhwX3RpbWU9IjEyMjMwMDIwNTAiIGRzdD0iQ049d3NmZSwgTz1BRklQLCBDPUFSIi8+CiAgICA8b3BlcmF0aW9uIHZhbHVlPSJncmFudGVkIiB0eXBlPSJsb2dpbiI+CiAgICAgICAgPGxvZ2luIHVpZD0iU0VSSUFMTlVNQkVSPUNVSVQgMjAxMzE1MDc5NjksIEVNQUlMQUREUkVTUz1nZmlzYW5vdHRpQGFmaXAuZ292LmFyLCBDTj1naGYsIE9VPWRpb3BpbiwgTz1hZmlwLCBTVD1idWVub3MgYWlyZXMsIEM9YXIiIHNlcnZpY2U9IndzZmUiIHJlZ21ldGhvZD0iMjIiIGVudGl0eT0iMzM2OTM0NTAyMzkiIGF1dGhtZXRob2Q9ImNtcyI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24gcmVsdHlwZT0iNCIga2V5PSIyMDEzMTUwNzk2OSIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgoK</token>
+        <sign>biS7nqciRLAhgAtHb9olk9k6KSf0X9JVEtZUkD2Bzjr1yPjmxy5yAVqZrGg0f3td/rFtzQTNtCLzjRtT4XtZU/sFVi/JrwhbLk0NB6CEzrvIvRxNzIRAe1I/L02ype5eX34ja/0VmPzXT/YqEhtJiPKnhxPImQhmcZa74kWhqKE=</sign>
+    </credentials>
+</loginTicketResponse>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginTicketResponse version="1">
+    <header>
+        <source>CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>
+        <destination>C=ar, O=velasco, SERIALNUMBER=CUIT 20135344991, CN=miguel angel pepe</destination>
+        <uniqueId>3830021928</uniqueId>
+        <generationTime>2009-09-19T09:57:40.240-03:00</generationTime>
+        <expirationTime>2009-09-19T21:57:40.240-03:00</expirationTime>
+    </header>
+    <credentials>
+        <token>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgdW5pcXVlX2lkPSIyMzc0NzM3MzU5IiBzcmM9IkNOPXdzYWFob21vLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBnZW5fdGltZT0iMTI1MzM2NTAwMCIgZXhwX3RpbWU9IjEyNTM0MDgyNjAiIGRzdD0iQ049d3NmZSwgTz1BRklQLCBDPUFSIi8+CiAgICA8b3BlcmF0aW9uIHZhbHVlPSJncmFudGVkIiB0eXBlPSJsb2dpbiI+CiAgICAgICAgPGxvZ2luIHVpZD0iQz1hciwgTz12ZWxhc2NvLCBTRVJJQUxOVU1CRVI9Q1VJVCAyMDEzNTM0NDk5MSwgQ049bWlndWVsIGFuZ2VsIHBlcGUiIHNlcnZpY2U9IndzZmUiIHJlZ21ldGhvZD0iMjIiIGVudGl0eT0iMzM2OTM0NTAyMzkiIGF1dGhtZXRob2Q9ImNtcyI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24gcmVsdHlwZT0iNCIga2V5PSIyMDEzNTM0NDk5MSIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgoK</token>
+        <sign>L+lh/3U2UKrdK2EY2yINAS7TrkyVvZSRozwahEj11upVjQmvtw61z+qix5tIZUH4TvrqjhZCQl5I2IjAa5YXEqYNkhltQZl0f4xRoRN3Tqjy/mfhtXOgM/6NSlkAcCpL1S+FCdjuTen4ySm7VS5TXj+vYv1zV22zm52fcd6HM0g=</sign>
+    </credentials>
+</loginTicketResponse>
+

@@ -16,8 +16,23 @@ propel:
     description: { type: varchar(255), required: true }
 
   comprobante:
-    id:                  ~
-    tipo_comprobante_id: ~
+    id:                     ~
+    tipo_comprobante_id:    ~
+    nro_comprobante:        { type: varchar(255), required: true }
+    punto_venta:            { type: varchar(255), required: true }
+    fecha_comprobante:      { type: timestamp, required:true }
+    cliente_id:             ~
+    cbt_desde:              { type: integer, required: true }
+    cbt_hasta:              { type: integer, required: true }
+    imp_total:              { type: real, required: true }
+    imp_total_conceptos:    { type: real, required: true }
+    imp_neto:               { type: real, required: true }
+    imp_liquidado:          { type: real, required: true }
+    imp_liquidado_rni:      { type: real, required: true }
+    imp_operaciones_ex:     { type: real, required: true }
+    fecha_servicio_desde:   { type: timestamp }
+    fecha_servicio_hasta:   { type: timestamp }
+    fecha_vencimiento_pago: { type: timestamp }
     
   tipo_comprobante:
     id:          ~

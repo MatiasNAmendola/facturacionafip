@@ -11,11 +11,15 @@ propel:
     updated_at:         ~
     
   tipo_documento:
-    id:
-    code: { type: varchar(2), required: true }
+    id:          ~
+    code:        { type: varchar(2), required: true }
     description: { type: varchar(255), required: true }
 
+  comprobante:
+    id:                  ~
+    tipo_comprobante_id: ~
+    
   tipo_comprobante:
-    id:
-    code: { type: varchar(2), required: true }
+    id:          ~
+    code:        { type: varchar(2), required: true }
     description: { type: varchar(255), required: true }

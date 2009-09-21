@@ -15,7 +15,7 @@ all:
       classname:  PropelPDO
       dsn:        mysql:dbname=facturacionafip;host=localhost
       username:   root
-      password:   
+      password:   root
       encoding:   utf8
       persistent: true
       pooling:    true

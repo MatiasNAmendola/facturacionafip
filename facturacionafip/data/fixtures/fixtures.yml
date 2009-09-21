@@ -15,3 +15,53 @@
 #     password: changeme
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
+
+TipoComprobante:
+  Facturas_A:
+    code: "01"
+    description: Facturas A
+  Notas_de_Debito_A:
+    code: "02"
+    description: Notas de Débito A
+  Notas_de_Crédito_A:
+    code: "03"
+    description: Notas de Crédito A
+  Recibos_A:
+    code: "04"
+    description: Recibos A
+  Notas_de_Venta_al_contado_A:
+    code: "05"
+    description: Notas de Venta al contado A
+  Facturas_B:
+    code: "06"
+    description: Facturas B
+  Notas_de_Debito_B:
+    code: "07"
+    description: Notas de Débito B
+  Notas_de_Credito_B:
+    code: "08"
+    description: Notas de Crédito B
+  Recibos_B:
+    code: "09"
+    description: Recibos B
+  Notas_de_Venta_al_contado_B:
+    code: "10"
+    description: Notas de Venta al contado B
+  R_G_N_3419A:
+    code: "39"
+    description: Otros comprobantes A que cumplan con la R.G. N° 3419
+  R_G_N_3419B:
+    code: "40"
+    description: Otros comprobantes B que cumplan con la R.G. N° 3419
+  Venta_Liquidacion_A:
+    code: "60"
+    description: Cuenta de Venta y Líquido producto A
+  Venta_Liquidacion_B:
+    code: "61"
+    description: Cuenta de Venta y Líquido producto B
+  Liquidacion_A:
+    code: "63"
+    description: Liquidación A
+  Liquidacion_B:
+    code: "64"
+    description: Liquidación B

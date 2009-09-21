@@ -15,21 +15,23 @@ class BaseClienteFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'razon_social' => new sfWidgetFormFilterInput(),
-      'cuit'         => new sfWidgetFormFilterInput(),
-      'activo'       => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
-      'direccion'    => new sfWidgetFormFilterInput(),
-      'created_at'   => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
-      'updated_at'   => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'razon_social'      => new sfWidgetFormFilterInput(),
+      'tipo_documento_id' => new sfWidgetFormPropelChoice(array('model' => 'TipoDocumento', 'add_empty' => true)),
+      'nro_documento'     => new sfWidgetFormFilterInput(),
+      'activo'            => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'direccion'         => new sfWidgetFormFilterInput(),
+      'created_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'updated_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'razon_social' => new sfValidatorPass(array('required' => false)),
-      'cuit'         => new sfValidatorPass(array('required' => false)),
-      'activo'       => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
-      'direccion'    => new sfValidatorPass(array('required' => false)),
-      'created_at'   => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
-      'updated_at'   => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'razon_social'      => new sfValidatorPass(array('required' => false)),
+      'tipo_documento_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'TipoDocumento', 'column' => 'id')),
+      'nro_documento'     => new sfValidatorPass(array('required' => false)),
+      'activo'            => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'direccion'         => new sfValidatorPass(array('required' => false)),
+      'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'updated_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 
     $this->widgetSchema->setNameFormat('cliente_filters[%s]');
@@ -47,13 +49,14 @@ class BaseClienteFormFilter extends BaseFormFilterPropel
   public function getFields()
   {
     return array(
-      'id'           => 'Number',
-      'razon_social' => 'Text',
-      'cuit'         => 'Text',
-      'activo'       => 'Boolean',
-      'direccion'    => 'Text',
-      'created_at'   => 'Date',
-      'updated_at'   => 'Date',
+      'id'                => 'Number',
+      'razon_social'      => 'Text',
+      'tipo_documento_id' => 'ForeignKey',
+      'nro_documento'     => 'Text',
+      'activo'            => 'Boolean',
+      'direccion'         => 'Text',
+      'created_at'        => 'Date',
+      'updated_at'        => 'Date',
     );
   }
 }

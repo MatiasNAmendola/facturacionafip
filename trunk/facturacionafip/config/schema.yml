@@ -1,0 +1,20 @@
+propel:
+
+  cliente:
+    id:           ~
+    razon_social: { type: varchar(255), required: true }
+    cuit:         { type: varchar(255), required: true }
+    activo:       { type: boolean, required: true, default: 1 }
+    direccion:    { type: varchar(255) }
+    created_at:   ~
+    updated_at:   ~
+    
+  tipo_comprobante:
+    id:
+    code: { type: varchar(2), required: true }
+    description: { type: varchar(255), required: true }
+    
+  tipo_documento:
+    id:
+    code: { type: varchar(2), required: true }
+    description: { type: varchar(255), required: true }

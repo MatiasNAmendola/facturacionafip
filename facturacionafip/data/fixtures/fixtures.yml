@@ -65,3 +65,83 @@ TipoComprobante:
   Liquidacion_B:
     code: "64"
     description: Liquidación B
+    
+TipoDocumento:
+  80 - CUIT:
+    code: "80"
+    description: CUIT
+  86 - CUIL:
+    code: "86"
+    description: CUIL
+  87 - CDI:
+    code: "87"
+    description: CDI
+  89 - LE:
+    code: "89"
+    description: LE
+  90 - LC:
+    code: "90"
+    description: LC
+  91 - CI extranjera:
+    code: "91"
+    description: CI extranjera
+  92 - en trámite:
+    code: "92"
+    description: en trámite
+  93 - Acta nacimiento:
+    code: "93"
+    description: Acta nacimiento
+  95 - CI Bs. As. RNP:
+    code: "95"
+    description: CI Bs. As. RNP
+  96 - DNI:
+    code: "96"
+    description: DNI
+  94 - Pasaporte:
+    code: "94"
+    description: Pasaporte
+  00 - CI Policía Federal:
+    code: "00"
+    description: CI Policía Federal
+  01 - CI Buenos Aires:
+    code: "01"
+    description: CI Buenos Aires
+  07 - CI Mendoza:
+    code: "07"
+    description: CI Mendoza
+  08 - CI La Rioja:
+    code: "08"
+    description: CI La Rioja
+  09 - CI Salta:
+    code: "09"
+    description: CI Salta
+  10 - CI San Juan:
+    code: "10"
+    description: CI San Juan
+  11 - CI San Luis:
+    code: "11"
+    description: CI San Luis
+  12 - CI Santa Fe:
+    code: "12"
+    description: CI Santa Fe
+  13 - CI Santiago del Estero:
+    code: "13"
+    description: CI Santiago del Estero
+  14 - CI Tucumán:
+    code: "14"
+    description: CI Tucumán
+  16 - CI Chaco:
+    code: "16"
+    description: CI Chaco
+  17 - CI Chubut:
+    code: "17"
+    description: CI Chubut
+  18 - CI Formosa:
+    code: "18"
+    description: CI Formosa
+  19 - CI Misiones:
+    code: "19"
+    description: CI Misiones
+  20 - CI Neuquén:
+    code: "20"
+    description: CI Neuquén

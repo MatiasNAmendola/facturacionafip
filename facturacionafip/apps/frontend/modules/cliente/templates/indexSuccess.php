@@ -1,5 +1,3 @@
-<h1>Cliente List</h1>
-
 <table>
   <thead>
     <tr>

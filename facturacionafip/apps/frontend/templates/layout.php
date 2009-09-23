@@ -7,6 +7,21 @@
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body>
-    <?php echo $sf_content ?>
+    <div id="header" class="header">HEAD</div>
+   
+    <div id="menu" class="menu">
+   <div><a href="<?php echo url_for('cliente/index') ?>">Clientes</a></div>
+   <div><a href="<?php echo url_for('comprobante/index') ?>">Comprobantes</a></div>
+    </div>
+
+    <div id="principal" class="principal"> 
+       <div id="titulo" class="titulo">TITULO</div>
+       <div id="contenido" class="contenido">
+         <?php echo $sf_content ?>
+       </div>
+    </div>
+    <hr/>
+    <div id="footer" class="footer">FOOT</div>
+   
   </body>
 </html>

@@ -1,0 +1,46 @@
+.menu{
+    background-color: blue;
+    width:100%;
+    float:left;
+    padding: 5px;
+}
+
+.menu div{
+    background-color:white;
+    float:left;
+    margin-right: 30px;
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 3px outset gray;
+    font-size:14px;
+    font-family:Arial
+}
+
+
+body{
+width:90%;
+margin-left: 5%;
+margin-right: 5%;
+margin-top: 2%
+
+}
+
+.principal{
+    width: 90%;
+    margin-left:5%;
+    margin-right: 5%;
+}
+
+.principal table{
+  border: 2px inset Blue;
+  align:center;
+}
+
+
+.principal th,td{
+    text-align:left;
+    font-size:12px;
+    font-family:Arial;
+    border:1px dotted;
+}

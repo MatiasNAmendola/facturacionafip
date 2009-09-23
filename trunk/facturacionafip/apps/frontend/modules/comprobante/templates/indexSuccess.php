@@ -1,5 +1,3 @@
-<h1>Comprobante List</h1>
-
 <table>
   <thead>
     <tr>

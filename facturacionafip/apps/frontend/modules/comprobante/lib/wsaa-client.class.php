@@ -51,7 +51,7 @@
 	  $TRA->header->addChild('generationTime',date('c',date('U')-600));
 	  $TRA->header->addChild('expirationTime',date('c',date('U')+600));
 	  $TRA->addChild('service',sfConfig::get('SERVICE'));
-	  $TRA->asXML('TRA.xml');
+	  $TRA->asXML(dirname(__FILE__).'/'.'TRA.xml');
 	}
 	
 	#==============================================================================
@@ -62,13 +62,13 @@
 		if (!file_exists(dirname(__FILE__).'/'.sfConfig::get('CERT'))) {exit("Failed to open ".dirname(__FILE__).'/'.sfConfig::get('CERT')."\n");}
 		if (!file_exists(dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'))) {exit("Failed to open ".dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY')."\n");}
 		
-	  $STATUS=openssl_pkcs7_sign("TRA.xml", "TRA.tmp", dirname(__FILE__).'/'.sfConfig::get('CERT'),
+	  $STATUS=openssl_pkcs7_sign(dirname(__FILE__).'/'."TRA.xml", dirname(__FILE__).'/'."TRA.tmp", dirname(__FILE__).'/'.sfConfig::get('CERT'),
 	    array(dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'), sfConfig::get('PASSPHRASE')),
 	    array(),
 	    !PKCS7_DETACHED
 	    );
 	  if (!$STATUS) {exit("ERROR generating PKCS#7 signature\n"); var_dump(!$STATUS);}
-	  $inf=fopen("TRA.tmp", "r");
+	  $inf=fopen(dirname(__FILE__).'/'."TRA.tmp", "r");
 	  $i=0;
 	  $CMS="";
 	  while (!feof($inf)) 
@@ -77,8 +77,8 @@
 	      if ( $i++ >= 4 ) {$CMS.=$buffer;}
 	    }
 	  fclose($inf);
-	  unlink("TRA.xml");
-	  unlink("TRA.tmp");
+	  unlink(dirname(__FILE__).'/'."TRA.xml");
+	  unlink(dirname(__FILE__).'/'."TRA.tmp");
 	  return $CMS;
 	}
 	

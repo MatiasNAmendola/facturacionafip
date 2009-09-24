@@ -29,7 +29,7 @@ class comprobanteActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod('post'));
-
+    
     $this->form = new ComprobanteForm();
 
     $this->processForm($request, $this->form);
@@ -69,8 +69,32 @@ class comprobanteActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $comprobante = $form->save();
+//      $comprobante = $form->save();
+/**
+ * El updateObject() me llena mi objeto $comprobante con los datos que 
+ * vienen en el formulario. Luego de llamar al service, puedo enviar a
+ * grabar 
+ */
+    	/**
+    	 * TESTS TESTS
+    	 * @var unknown_type
+    	 */
+    	
+    ini_set("soap.wsdl_cache_enabled", "0");
 
+    WsaaClient::CreateTRA();
+	$CMS = WsaaClient::SignTRA();
+	$TA = CallWSAA($CMS);
+	var_dump($TA);
+	die();
+	
+	if (!file_put_contents("TA.xml", $TA)) {
+		exit("Error writing TA.xml\n");
+	}else{
+		echo "listo el pollo, pelada la gallina";
+	}
+    	
+      $comprobante = $form->updateObject();
       $this->redirect('comprobante/edit?id='.$comprobante->getId());
     }
   }

@@ -84,9 +84,7 @@ class comprobanteActions extends sfActions
 
     WsaaClient::CreateTRA();
 	$CMS = WsaaClient::SignTRA();
-	$TA = CallWSAA($CMS);
-	var_dump($TA);
-	die();
+	$TA = WsaaClient::CallWSAA($CMS);
 	
 	if (!file_put_contents("TA.xml", $TA)) {
 		exit("Error writing TA.xml\n");

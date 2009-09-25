@@ -145,3 +145,8 @@ TipoDocumento:
   20 - CI Neuquén:
     code: "20"
     description: CI Neuquén
+    
+PuntoVenta:
+  Ppal:
+    code: 1
+    description: Casa Central

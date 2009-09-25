@@ -41,6 +41,7 @@ class clienteActions extends sfActions
   {
     $this->forward404Unless($cliente = ClientePeer::retrieveByPk($request->getParameter('id')), sprintf('Object cliente does not exist (%s).', $request->getParameter('id')));
     $this->form = new ClienteForm($cliente);
+    $this->cliente = $cliente;
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -48,10 +49,8 @@ class clienteActions extends sfActions
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($cliente = ClientePeer::retrieveByPk($request->getParameter('id')), sprintf('Object cliente does not exist (%s).', $request->getParameter('id')));
     $this->form = new ClienteForm($cliente);
-
+    
     $this->processForm($request, $this->form);
-
-    $this->setTemplate('edit');
   }
 
   public function executeDelete(sfWebRequest $request)

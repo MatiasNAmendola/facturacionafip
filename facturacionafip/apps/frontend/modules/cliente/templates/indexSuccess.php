@@ -1,3 +1,7 @@
+<?php slot('title') ?>
+Clientes
+<?php end_slot(); ?>
+
 <table>
   <thead>
     <tr>
@@ -5,10 +9,7 @@
       <th>Razon social</th>
       <th>Tipo documento</th>
       <th>Nro documento</th>
-      <th>Activo</th>
       <th>Direccion</th>
-      <th>Created at</th>
-      <th>Updated at</th>
     </tr>
   </thead>
   <tbody>
@@ -18,10 +19,7 @@
       <td><?php echo $cliente->getRazonSocial() ?></td>
       <td><?php echo $cliente->getTipoDocumentoId() ?></td>
       <td><?php echo $cliente->getNroDocumento() ?></td>
-      <td><?php echo $cliente->getActivo() ?></td>
       <td><?php echo $cliente->getDireccion() ?></td>
-      <td><?php echo $cliente->getCreatedAt() ?></td>
-      <td><?php echo $cliente->getUpdatedAt() ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

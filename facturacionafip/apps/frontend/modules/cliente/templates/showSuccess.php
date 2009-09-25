@@ -1,3 +1,11 @@
+<?php slot('title') ?>
+
+<?php 
+echo 'Detalles del Cliente';
+?>
+
+<?php end_slot(); ?>
+
 <table>
   <tbody>
     <tr>
@@ -17,20 +25,8 @@
       <td><?php echo $cliente->getNroDocumento() ?></td>
     </tr>
     <tr>
-      <th>Activo:</th>
-      <td><?php echo $cliente->getActivo() ?></td>
-    </tr>
-    <tr>
       <th>Direccion:</th>
       <td><?php echo $cliente->getDireccion() ?></td>
-    </tr>
-    <tr>
-      <th>Created at:</th>
-      <td><?php echo $cliente->getCreatedAt() ?></td>
-    </tr>
-    <tr>
-      <th>Updated at:</th>
-      <td><?php echo $cliente->getUpdatedAt() ?></td>
     </tr>
   </tbody>
 </table>

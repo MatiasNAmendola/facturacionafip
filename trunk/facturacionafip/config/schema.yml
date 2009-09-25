@@ -19,22 +19,34 @@ propel:
     id:                     ~
     tipo_comprobante_id:    ~
     nro_comprobante:        { type: varchar(255), required: true }
-    punto_venta:            { type: varchar(255), required: true }
-    fecha_comprobante:      { type: timestamp, required:true }
+    punto_venta_id:         ~
+    fecha_comprobante:      { type: timestamp, required: true }
     cliente_id:             ~
     cbt_desde:              { type: integer, required: true }
     cbt_hasta:              { type: integer, required: true }
     imp_total:              { type: real, required: true }
-    imp_total_conceptos:    { type: real, required: true }
-    imp_neto:               { type: real, required: true }
-    imp_liquidado:          { type: real, required: true }
-    imp_liquidado_rni:      { type: real, required: true }
-    imp_operaciones_ex:     { type: real, required: true }
+    imp_total_conceptos:    { type: real, required: true, default 0 }
+    imp_neto:               { type: real, required: true, default 0 }
+    imp_liquidado:          { type: real, required: true, default 0 }
+    imp_liquidado_rni:      { type: real, required: true, default 0 }
+    imp_operaciones_ex:     { type: real, required: true, default 0 }
+    es_servicio:            { type: boolean, required: true}
     fecha_servicio_desde:   { type: timestamp }
     fecha_servicio_hasta:   { type: timestamp }
     fecha_vencimiento_pago: { type: timestamp }
-    
+    cae:                    { type: varchar(255), required: true }
+    fecha_cae:              { type: timestamp, required: true }
+    fecha_vto_cae:          { type: timestamp, required: true }
+    resultado:              { type: varchar(255) }
+    motivo:                 { type: varchar(255) }
+    reproceso:              { type: varchar(255) }
+
   tipo_comprobante:
+    id:          ~
+    code:        { type: varchar(2), required: true }
+    description: { type: varchar(255), required: true }
+    
+  punto_venta:
     id:          ~
     code:        { type: varchar(2), required: true }
     description: { type: varchar(255), required: true }

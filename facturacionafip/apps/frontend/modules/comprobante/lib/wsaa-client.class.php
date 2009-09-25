@@ -51,7 +51,7 @@
 	  $TRA->header->addChild('generationTime',date('c',date('U')-600));
 	  $TRA->header->addChild('expirationTime',date('c',date('U')+600));
 	  $TRA->addChild('service',sfConfig::get('SERVICE'));
-	  $TRA->asXML(dirname(__FILE__).'/'.'TRA.xml');
+	  $TRA->asXML('TRA.xml');
 	}
 	
 	#==============================================================================
@@ -59,16 +59,19 @@
 	# PRIVATEKEY to sign. Generates an intermediate file and finally trims the 
 	# MIME heading leaving the final CMS required by WSAA.
 	public static function SignTRA() {
-		if (!file_exists(dirname(__FILE__).'/'.sfConfig::get('CERT'))) {exit("Failed to open ".dirname(__FILE__).'/'.sfConfig::get('CERT')."\n");}
-		if (!file_exists(dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'))) {exit("Failed to open ".dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY')."\n");}
+//		if (file_exists(dirname(__FILE__).'/'.sfConfig::get('CERT'))) {echo "file:/".dirname(__FILE__).'/'.sfConfig::get('CERT'); echo "<br>";}
+//		if (file_exists(dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'))) {echo "file:/".dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'); echo "<br>";}
 		
-	  $STATUS=openssl_pkcs7_sign(dirname(__FILE__).'/'."TRA.xml", dirname(__FILE__).'/'."TRA.tmp", dirname(__FILE__).'/'.sfConfig::get('CERT'),
-	    array(dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'), sfConfig::get('PASSPHRASE')),
+//		$ruta = "file:/".dirname(__FILE__).'/'.sfConfig::get('CERT');
+//		print_r(file_get_contents($ruta)); echo "<br>";
+		
+	  $STATUS=openssl_pkcs7_sign("TRA.xml", "TRA.tmp", "file://".sfConfig::get('CERT'),
+	    array("file://".sfConfig::get('PRIVATEKEY'), sfConfig::get('PASSPHRASE')),
 	    array(),
 	    !PKCS7_DETACHED
 	    );
 	  if (!$STATUS) {exit("ERROR generating PKCS#7 signature\n"); var_dump(!$STATUS);}
-	  $inf=fopen(dirname(__FILE__).'/'."TRA.tmp", "r");
+	  $inf=fopen("TRA.tmp", "r");
 	  $i=0;
 	  $CMS="";
 	  while (!feof($inf)) 
@@ -77,8 +80,8 @@
 	      if ( $i++ >= 4 ) {$CMS.=$buffer;}
 	    }
 	  fclose($inf);
-	  unlink(dirname(__FILE__).'/'."TRA.xml");
-	  unlink(dirname(__FILE__).'/'."TRA.tmp");
+	  unlink("TRA.xml");
+	  unlink("TRA.tmp");
 	  return $CMS;
 	}
 	
@@ -95,7 +98,7 @@
 	     'allow_self_signed' => sfConfig::get('REMSELFSIGN'),
 	     'verify_peer'       => sfConfig::get('REMVERIFY')
 	     )));
-	  $client=new SoapClient(sfConfig::get('WSDL'), array(
+	  $client=new SoapClient("wsdls/".sfConfig::get('WSDL'), array(
 	          #'proxy_host'     => "proxy",
 	          #'proxy_port'     => 80,
 	          'stream_context' => $ctx,

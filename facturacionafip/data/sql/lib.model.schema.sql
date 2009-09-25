@@ -54,27 +54,38 @@ CREATE TABLE `comprobante`
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`tipo_comprobante_id` INTEGER,
 	`nro_comprobante` VARCHAR(255)  NOT NULL,
-	`punto_venta` VARCHAR(255)  NOT NULL,
+	`punto_venta_id` INTEGER,
 	`fecha_comprobante` DATETIME  NOT NULL,
 	`cliente_id` INTEGER,
 	`cbt_desde` INTEGER  NOT NULL,
 	`cbt_hasta` INTEGER  NOT NULL,
 	`imp_total` REAL  NOT NULL,
-	`imp_total_conceptos` REAL  NOT NULL,
-	`imp_neto` REAL  NOT NULL,
-	`imp_liquidado` REAL  NOT NULL,
-	`imp_liquidado_rni` REAL  NOT NULL,
-	`imp_operaciones_ex` REAL  NOT NULL,
+	`imp_total_conceptos` REAL default 0 NOT NULL,
+	`imp_neto` REAL default 0 NOT NULL,
+	`imp_liquidado` REAL default 0 NOT NULL,
+	`imp_liquidado_rni` REAL default 0 NOT NULL,
+	`imp_operaciones_ex` REAL default 0 NOT NULL,
+	`es_servicio` TINYINT  NOT NULL,
 	`fecha_servicio_desde` DATETIME,
 	`fecha_servicio_hasta` DATETIME,
 	`fecha_vencimiento_pago` DATETIME,
+	`cae` VARCHAR(255)  NOT NULL,
+	`fecha_cae` DATETIME  NOT NULL,
+	`fecha_vto_cae` DATETIME  NOT NULL,
+	`resultado` VARCHAR(255),
+	`motivo` VARCHAR(255),
+	`reproceso` VARCHAR(255),
 	PRIMARY KEY (`id`),
 	INDEX `comprobante_FI_1` (`tipo_comprobante_id`),
 	CONSTRAINT `comprobante_FK_1`
 		FOREIGN KEY (`tipo_comprobante_id`)
 		REFERENCES `tipo_comprobante` (`id`),
-	INDEX `comprobante_FI_2` (`cliente_id`),
+	INDEX `comprobante_FI_2` (`punto_venta_id`),
 	CONSTRAINT `comprobante_FK_2`
+		FOREIGN KEY (`punto_venta_id`)
+		REFERENCES `punto_venta` (`id`),
+	INDEX `comprobante_FI_3` (`cliente_id`),
+	CONSTRAINT `comprobante_FK_3`
 		FOREIGN KEY (`cliente_id`)
 		REFERENCES `cliente` (`id`)
 )Type=InnoDB;
@@ -87,6 +98,21 @@ DROP TABLE IF EXISTS `tipo_comprobante`;
 
 
 CREATE TABLE `tipo_comprobante`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(2)  NOT NULL,
+	`description` VARCHAR(255)  NOT NULL,
+	PRIMARY KEY (`id`)
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- punto_venta
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `punto_venta`;
+
+
+CREATE TABLE `punto_venta`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(2)  NOT NULL,

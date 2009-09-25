@@ -14,7 +14,7 @@
     </tr>
     <tr>
       <th>Punto venta:</th>
-      <td><?php echo $comprobante->getPuntoVenta() ?></td>
+      <td><?php echo $comprobante->getPuntoVentaId() ?></td>
     </tr>
     <tr>
       <th>Fecha comprobante:</th>
@@ -57,6 +57,10 @@
       <td><?php echo $comprobante->getImpOperacionesEx() ?></td>
     </tr>
     <tr>
+      <th>Es servicio:</th>
+      <td><?php echo $comprobante->getEsServicio() ?></td>
+    </tr>
+    <tr>
       <th>Fecha servicio desde:</th>
       <td><?php echo $comprobante->getFechaServicioDesde() ?></td>
     </tr>
@@ -67,6 +71,30 @@
     <tr>
       <th>Fecha vencimiento pago:</th>
       <td><?php echo $comprobante->getFechaVencimientoPago() ?></td>
+    </tr>
+    <tr>
+      <th>Cae:</th>
+      <td><?php echo $comprobante->getCae() ?></td>
+    </tr>
+    <tr>
+      <th>Fecha cae:</th>
+      <td><?php echo $comprobante->getFechaCae() ?></td>
+    </tr>
+    <tr>
+      <th>Fecha vto cae:</th>
+      <td><?php echo $comprobante->getFechaVtoCae() ?></td>
+    </tr>
+    <tr>
+      <th>Resultado:</th>
+      <td><?php echo $comprobante->getResultado() ?></td>
+    </tr>
+    <tr>
+      <th>Motivo:</th>
+      <td><?php echo $comprobante->getMotivo() ?></td>
+    </tr>
+    <tr>
+      <th>Reproceso:</th>
+      <td><?php echo $comprobante->getReproceso() ?></td>
     </tr>
   </tbody>
 </table>

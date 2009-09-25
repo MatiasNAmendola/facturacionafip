@@ -1,8 +1,9 @@
 .menu{
     background-color: blue;
     width:100%;
-    float:left;
+    float: left;
     padding: 5px;
+    margin-bottom: 1%;
 }
 
 .menu div{
@@ -19,11 +20,10 @@
 
 
 body{
-width:90%;
-margin-left: 5%;
-margin-right: 5%;
-margin-top: 2%
-
+    width:90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%
 }
 
 .principal{
@@ -43,4 +43,26 @@ margin-top: 2%
     font-size:12px;
     font-family:Arial;
     border:1px dotted;
+}
+
+.titulo h1{
+    font-size:20px;
+    font-family:Arial;
+}
+
+.footer{
+    text-align : center;
+    font-size:9px;
+    font-family:Arial;
+    color: gray;
+}
+
+.separadorFinal{
+    margin-top: 2%;
+}
+
+.header p{
+    font-family: Arial;
+    font-size: 30px;
+    font-style: italic;
 }

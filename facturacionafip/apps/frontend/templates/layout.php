@@ -7,7 +7,11 @@
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body>
-    <div id="header" class="header">HEAD</div>
+    <div id="header" class="header">
+       <p>
+          FACTURACION AFIP
+       <P>
+    </div>
    
     <div id="menu" class="menu">
    <div><a href="<?php echo url_for('cliente/index') ?>">Clientes</a></div>
@@ -15,13 +19,23 @@
     </div>
 
     <div id="principal" class="principal"> 
-       <div id="titulo" class="titulo">TITULO</div>
+       <div id="titulo" class="titulo">
+           <h1>
+               <?php if (!include_slot('title')): ?>
+                    Bienvenido
+               <?php endif; ?>
+            </h1>
+        </div>
        <div id="contenido" class="contenido">
          <?php echo $sf_content ?>
        </div>
     </div>
-    <hr/>
-    <div id="footer" class="footer">FOOT</div>
+
+    <div id="separadorFinal" class="separadorFinal">
+       <hr/>
+    </div>
+
+    <div id="footer" class="footer">Powered by symfony  -  Todos los derechos reservados</div>
    
   </body>
 </html>

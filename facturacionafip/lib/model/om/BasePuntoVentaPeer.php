@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base static class for performing query and update operations on the 'cliente' table.
+ * Base static class for performing query and update operations on the 'punto_venta' table.
  *
  * 
  *
@@ -11,52 +11,37 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseClientePeer {
+abstract class BasePuntoVentaPeer {
 
 	/** the default database name for this class */
 	const DATABASE_NAME = 'propel';
 
 	/** the table name for this class */
-	const TABLE_NAME = 'cliente';
+	const TABLE_NAME = 'punto_venta';
 
 	/** A class that can be returned by this peer. */
-	const CLASS_DEFAULT = 'lib.model.Cliente';
+	const CLASS_DEFAULT = 'lib.model.PuntoVenta';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 3;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 	/** the column name for the ID field */
-	const ID = 'cliente.ID';
+	const ID = 'punto_venta.ID';
 
-	/** the column name for the RAZON_SOCIAL field */
-	const RAZON_SOCIAL = 'cliente.RAZON_SOCIAL';
+	/** the column name for the CODE field */
+	const CODE = 'punto_venta.CODE';
 
-	/** the column name for the TIPO_DOCUMENTO_ID field */
-	const TIPO_DOCUMENTO_ID = 'cliente.TIPO_DOCUMENTO_ID';
-
-	/** the column name for the NRO_DOCUMENTO field */
-	const NRO_DOCUMENTO = 'cliente.NRO_DOCUMENTO';
-
-	/** the column name for the ACTIVO field */
-	const ACTIVO = 'cliente.ACTIVO';
-
-	/** the column name for the DIRECCION field */
-	const DIRECCION = 'cliente.DIRECCION';
-
-	/** the column name for the CREATED_AT field */
-	const CREATED_AT = 'cliente.CREATED_AT';
-
-	/** the column name for the UPDATED_AT field */
-	const UPDATED_AT = 'cliente.UPDATED_AT';
+	/** the column name for the DESCRIPTION field */
+	const DESCRIPTION = 'punto_venta.DESCRIPTION';
 
 	/**
-	 * An identiy map to hold any loaded instances of Cliente objects.
+	 * An identiy map to hold any loaded instances of PuntoVenta objects.
 	 * This must be public so that other peer classes can access this when hydrating from JOIN
 	 * queries.
-	 * @var        array Cliente[]
+	 * @var        array PuntoVenta[]
 	 */
 	public static $instances = array();
 
@@ -73,11 +58,11 @@ abstract class BaseClientePeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'RazonSocial', 'TipoDocumentoId', 'NroDocumento', 'Activo', 'Direccion', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'razonSocial', 'tipoDocumentoId', 'nroDocumento', 'activo', 'direccion', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::ID, self::RAZON_SOCIAL, self::TIPO_DOCUMENTO_ID, self::NRO_DOCUMENTO, self::ACTIVO, self::DIRECCION, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'razon_social', 'tipo_documento_id', 'nro_documento', 'activo', 'direccion', 'created_at', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Code', 'Description', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'code', 'description', ),
+		BasePeer::TYPE_COLNAME => array (self::ID, self::CODE, self::DESCRIPTION, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'code', 'description', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	/**
@@ -87,11 +72,11 @@ abstract class BaseClientePeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'RazonSocial' => 1, 'TipoDocumentoId' => 2, 'NroDocumento' => 3, 'Activo' => 4, 'Direccion' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'razonSocial' => 1, 'tipoDocumentoId' => 2, 'nroDocumento' => 3, 'activo' => 4, 'direccion' => 5, 'createdAt' => 6, 'updatedAt' => 7, ),
-		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::RAZON_SOCIAL => 1, self::TIPO_DOCUMENTO_ID => 2, self::NRO_DOCUMENTO => 3, self::ACTIVO => 4, self::DIRECCION => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'razon_social' => 1, 'tipo_documento_id' => 2, 'nro_documento' => 3, 'activo' => 4, 'direccion' => 5, 'created_at' => 6, 'updated_at' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Code' => 1, 'Description' => 2, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'code' => 1, 'description' => 2, ),
+		BasePeer::TYPE_COLNAME => array (self::ID => 0, self::CODE => 1, self::DESCRIPTION => 2, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'code' => 1, 'description' => 2, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	/**
@@ -101,7 +86,7 @@ abstract class BaseClientePeer {
 	public static function getMapBuilder()
 	{
 		if (self::$mapBuilder === null) {
-			self::$mapBuilder = new ClienteMapBuilder();
+			self::$mapBuilder = new PuntoVentaMapBuilder();
 		}
 		return self::$mapBuilder;
 	}
@@ -151,12 +136,12 @@ abstract class BaseClientePeer {
 	 *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
 	 * </code>
 	 * @param      string $alias The alias for the current table.
-	 * @param      string $column The column name for current table. (i.e. ClientePeer::COLUMN_NAME).
+	 * @param      string $column The column name for current table. (i.e. PuntoVentaPeer::COLUMN_NAME).
 	 * @return     string
 	 */
 	public static function alias($alias, $column)
 	{
-		return str_replace(ClientePeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(PuntoVentaPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	/**
@@ -173,21 +158,11 @@ abstract class BaseClientePeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(ClientePeer::ID);
+		$criteria->addSelectColumn(PuntoVentaPeer::ID);
 
-		$criteria->addSelectColumn(ClientePeer::RAZON_SOCIAL);
+		$criteria->addSelectColumn(PuntoVentaPeer::CODE);
 
-		$criteria->addSelectColumn(ClientePeer::TIPO_DOCUMENTO_ID);
-
-		$criteria->addSelectColumn(ClientePeer::NRO_DOCUMENTO);
-
-		$criteria->addSelectColumn(ClientePeer::ACTIVO);
-
-		$criteria->addSelectColumn(ClientePeer::DIRECCION);
-
-		$criteria->addSelectColumn(ClientePeer::CREATED_AT);
-
-		$criteria->addSelectColumn(ClientePeer::UPDATED_AT);
+		$criteria->addSelectColumn(PuntoVentaPeer::DESCRIPTION);
 
 	}
 
@@ -207,27 +182,27 @@ abstract class BaseClientePeer {
 		// We need to set the primary table name, since in the case that there are no WHERE columns
 		// it will be impossible for the BasePeer::createSelectSql() method to determine which
 		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(ClientePeer::TABLE_NAME);
+		$criteria->setPrimaryTableName(PuntoVentaPeer::TABLE_NAME);
 
 		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->setDistinct();
 		}
 
 		if (!$criteria->hasSelectClause()) {
-			ClientePeer::addSelectColumns($criteria);
+			PuntoVentaPeer::addSelectColumns($criteria);
 		}
 
 		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
 		$criteria->setDbName(self::DATABASE_NAME); // Set the correct dbName
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 
-    foreach (sfMixer::getCallables('BaseClientePeer:doCount:doCount') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVentaPeer:doCount:doCount') as $callable)
     {
-      call_user_func($callable, 'BaseClientePeer', $criteria, $con);
+      call_user_func($callable, 'BasePuntoVentaPeer', $criteria, $con);
     }
 
 
@@ -247,7 +222,7 @@ abstract class BaseClientePeer {
 	 *
 	 * @param      Criteria $criteria object used to create the SELECT statement.
 	 * @param      PropelPDO $con
-	 * @return     Cliente
+	 * @return     PuntoVenta
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
@@ -255,7 +230,7 @@ abstract class BaseClientePeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = ClientePeer::doSelect($critcopy, $con);
+		$objects = PuntoVentaPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -272,7 +247,7 @@ abstract class BaseClientePeer {
 	 */
 	public static function doSelect(Criteria $criteria, PropelPDO $con = null)
 	{
-		return ClientePeer::populateObjects(ClientePeer::doSelectStmt($criteria, $con));
+		return PuntoVentaPeer::populateObjects(PuntoVentaPeer::doSelectStmt($criteria, $con));
 	}
 	/**
 	 * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -290,19 +265,19 @@ abstract class BaseClientePeer {
 	public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseClientePeer:doSelectStmt:doSelectStmt') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVentaPeer:doSelectStmt:doSelectStmt') as $callable)
     {
-      call_user_func($callable, 'BaseClientePeer', $criteria, $con);
+      call_user_func($callable, 'BasePuntoVentaPeer', $criteria, $con);
     }
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		if (!$criteria->hasSelectClause()) {
 			$criteria = clone $criteria;
-			ClientePeer::addSelectColumns($criteria);
+			PuntoVentaPeer::addSelectColumns($criteria);
 		}
 
 		// Set the correct dbName
@@ -320,10 +295,10 @@ abstract class BaseClientePeer {
 	 * to the cache in order to ensure that the same objects are always returned by doSelect*()
 	 * and retrieveByPK*() calls.
 	 *
-	 * @param      Cliente $value A Cliente object.
+	 * @param      PuntoVenta $value A PuntoVenta object.
 	 * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
 	 */
-	public static function addInstanceToPool(Cliente $obj, $key = null)
+	public static function addInstanceToPool(PuntoVenta $obj, $key = null)
 	{
 		if (Propel::isInstancePoolingEnabled()) {
 			if ($key === null) {
@@ -341,18 +316,18 @@ abstract class BaseClientePeer {
 	 * methods in your stub classes -- you may need to explicitly remove objects
 	 * from the cache in order to prevent returning objects that no longer exist.
 	 *
-	 * @param      mixed $value A Cliente object or a primary key value.
+	 * @param      mixed $value A PuntoVenta object or a primary key value.
 	 */
 	public static function removeInstanceFromPool($value)
 	{
 		if (Propel::isInstancePoolingEnabled() && $value !== null) {
-			if (is_object($value) && $value instanceof Cliente) {
+			if (is_object($value) && $value instanceof PuntoVenta) {
 				$key = (string) $value->getId();
 			} elseif (is_scalar($value)) {
 				// assume we've been passed a primary key
 				$key = (string) $value;
 			} else {
-				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or Cliente object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+				$e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or PuntoVenta object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
 				throw $e;
 			}
 
@@ -367,7 +342,7 @@ abstract class BaseClientePeer {
 	 * a multi-column primary key, a serialize()d version of the primary key will be returned.
 	 *
 	 * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-	 * @return     Cliente Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+	 * @return     PuntoVenta Found object or NULL if 1) no instance exists for specified key or 2) instance pooling has been disabled.
 	 * @see        getPrimaryKeyHash()
 	 */
 	public static function getInstanceFromPool($key)
@@ -421,12 +396,12 @@ abstract class BaseClientePeer {
 		$results = array();
 	
 		// set the class once to avoid overhead in the loop
-		$cls = ClientePeer::getOMClass();
+		$cls = PuntoVentaPeer::getOMClass();
 		$cls = substr('.'.$cls, strrpos('.'.$cls, '.') + 1);
 		// populate the object(s)
 		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key = ClientePeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj = ClientePeer::getInstanceFromPool($key))) {
+			$key = PuntoVentaPeer::getPrimaryKeyHashFromRow($row, 0);
+			if (null !== ($obj = PuntoVentaPeer::getInstanceFromPool($key))) {
 				// We no longer rehydrate the object, since this can cause data loss.
 				// See http://propel.phpdb.org/trac/ticket/509
 				// $obj->hydrate($row, 0, true); // rehydrate
@@ -436,276 +411,12 @@ abstract class BaseClientePeer {
 				$obj = new $cls();
 				$obj->hydrate($row);
 				$results[] = $obj;
-				ClientePeer::addInstanceToPool($obj, $key);
+				PuntoVentaPeer::addInstanceToPool($obj, $key);
 			} // if key exists
 		}
 		$stmt->closeCursor();
 		return $results;
 	}
-
-	/**
-	 * Returns the number of rows matching criteria, joining the related TipoDocumento table
-	 *
-	 * @param      Criteria $c
-	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     int Number of matching rows.
-	 */
-	public static function doCountJoinTipoDocumento(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		// we're going to modify criteria, so copy it first
-		$criteria = clone $criteria;
-
-		// We need to set the primary table name, since in the case that there are no WHERE columns
-		// it will be impossible for the BasePeer::createSelectSql() method to determine which
-		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(ClientePeer::TABLE_NAME);
-
-		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->setDistinct();
-		}
-
-		if (!$criteria->hasSelectClause()) {
-			ClientePeer::addSelectColumns($criteria);
-		}
-
-		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-
-		// Set the correct dbName
-		$criteria->setDbName(self::DATABASE_NAME);
-
-		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
-		}
-
-		$criteria->addJoin(array(ClientePeer::TIPO_DOCUMENTO_ID,), array(TipoDocumentoPeer::ID,), $join_behavior);
-
-
-    foreach (sfMixer::getCallables('BaseClientePeer:doCount:doCount') as $callable)
-    {
-      call_user_func($callable, 'BaseClientePeer', $criteria, $con);
-    }
-
-
-		$stmt = BasePeer::doCount($criteria, $con);
-
-		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$count = (int) $row[0];
-		} else {
-			$count = 0; // no rows returned; we infer that means 0 matches.
-		}
-		$stmt->closeCursor();
-		return $count;
-	}
-
-
-	/**
-	 * Selects a collection of Cliente objects pre-filled with their TipoDocumento objects.
-	 * @param      Criteria  $c
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of Cliente objects.
-	 * @throws     PropelException Any exceptions caught during processing will be
-	 *		 rethrown wrapped into a PropelException.
-	 */
-	public static function doSelectJoinTipoDocumento(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-
-    foreach (sfMixer::getCallables('BaseClientePeer:doSelectJoin:doSelectJoin') as $callable)
-    {
-      call_user_func($callable, 'BaseClientePeer', $c, $con);
-    }
-
-
-		$c = clone $c;
-
-		// Set the correct dbName if it has not been overridden
-		if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		ClientePeer::addSelectColumns($c);
-		$startcol = (ClientePeer::NUM_COLUMNS - ClientePeer::NUM_LAZY_LOAD_COLUMNS);
-		TipoDocumentoPeer::addSelectColumns($c);
-
-		$c->addJoin(array(ClientePeer::TIPO_DOCUMENTO_ID,), array(TipoDocumentoPeer::ID,), $join_behavior);
-		$stmt = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = ClientePeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = ClientePeer::getInstanceFromPool($key1))) {
-				// We no longer rehydrate the object, since this can cause data loss.
-				// See http://propel.phpdb.org/trac/ticket/509
-				// $obj1->hydrate($row, 0, true); // rehydrate
-			} else {
-
-				$omClass = ClientePeer::getOMClass();
-
-				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-				$obj1 = new $cls();
-				$obj1->hydrate($row);
-				ClientePeer::addInstanceToPool($obj1, $key1);
-			} // if $obj1 already loaded
-
-			$key2 = TipoDocumentoPeer::getPrimaryKeyHashFromRow($row, $startcol);
-			if ($key2 !== null) {
-				$obj2 = TipoDocumentoPeer::getInstanceFromPool($key2);
-				if (!$obj2) {
-
-					$omClass = TipoDocumentoPeer::getOMClass();
-
-					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-					$obj2 = new $cls();
-					$obj2->hydrate($row, $startcol);
-					TipoDocumentoPeer::addInstanceToPool($obj2, $key2);
-				} // if obj2 already loaded
-
-				// Add the $obj1 (Cliente) to $obj2 (TipoDocumento)
-				$obj2->addCliente($obj1);
-
-			} // if joined row was not null
-
-			$results[] = $obj1;
-		}
-		$stmt->closeCursor();
-		return $results;
-	}
-
-
-	/**
-	 * Returns the number of rows matching criteria, joining all related tables
-	 *
-	 * @param      Criteria $c
-	 * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     int Number of matching rows.
-	 */
-	public static function doCountJoinAll(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-		// we're going to modify criteria, so copy it first
-		$criteria = clone $criteria;
-
-		// We need to set the primary table name, since in the case that there are no WHERE columns
-		// it will be impossible for the BasePeer::createSelectSql() method to determine which
-		// tables go into the FROM clause.
-		$criteria->setPrimaryTableName(ClientePeer::TABLE_NAME);
-
-		if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->setDistinct();
-		}
-
-		if (!$criteria->hasSelectClause()) {
-			ClientePeer::addSelectColumns($criteria);
-		}
-
-		$criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-
-		// Set the correct dbName
-		$criteria->setDbName(self::DATABASE_NAME);
-
-		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
-		}
-
-		$criteria->addJoin(array(ClientePeer::TIPO_DOCUMENTO_ID,), array(TipoDocumentoPeer::ID,), $join_behavior);
-
-    foreach (sfMixer::getCallables('BaseClientePeer:doCount:doCount') as $callable)
-    {
-      call_user_func($callable, 'BaseClientePeer', $criteria, $con);
-    }
-
-
-		$stmt = BasePeer::doCount($criteria, $con);
-
-		if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$count = (int) $row[0];
-		} else {
-			$count = 0; // no rows returned; we infer that means 0 matches.
-		}
-		$stmt->closeCursor();
-		return $count;
-	}
-
-	/**
-	 * Selects a collection of Cliente objects pre-filled with all related objects.
-	 *
-	 * @param      Criteria  $c
-	 * @param      PropelPDO $con
-	 * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-	 * @return     array Array of Cliente objects.
-	 * @throws     PropelException Any exceptions caught during processing will be
-	 *		 rethrown wrapped into a PropelException.
-	 */
-	public static function doSelectJoinAll(Criteria $c, $con = null, $join_behavior = Criteria::LEFT_JOIN)
-	{
-
-    foreach (sfMixer::getCallables('BaseClientePeer:doSelectJoinAll:doSelectJoinAll') as $callable)
-    {
-      call_user_func($callable, 'BaseClientePeer', $c, $con);
-    }
-
-
-		$c = clone $c;
-
-		// Set the correct dbName if it has not been overridden
-		if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		ClientePeer::addSelectColumns($c);
-		$startcol2 = (ClientePeer::NUM_COLUMNS - ClientePeer::NUM_LAZY_LOAD_COLUMNS);
-
-		TipoDocumentoPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + (TipoDocumentoPeer::NUM_COLUMNS - TipoDocumentoPeer::NUM_LAZY_LOAD_COLUMNS);
-
-		$c->addJoin(array(ClientePeer::TIPO_DOCUMENTO_ID,), array(TipoDocumentoPeer::ID,), $join_behavior);
-		$stmt = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-			$key1 = ClientePeer::getPrimaryKeyHashFromRow($row, 0);
-			if (null !== ($obj1 = ClientePeer::getInstanceFromPool($key1))) {
-				// We no longer rehydrate the object, since this can cause data loss.
-				// See http://propel.phpdb.org/trac/ticket/509
-				// $obj1->hydrate($row, 0, true); // rehydrate
-			} else {
-				$omClass = ClientePeer::getOMClass();
-
-				$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-				$obj1 = new $cls();
-				$obj1->hydrate($row);
-				ClientePeer::addInstanceToPool($obj1, $key1);
-			} // if obj1 already loaded
-
-			// Add objects for joined TipoDocumento rows
-
-			$key2 = TipoDocumentoPeer::getPrimaryKeyHashFromRow($row, $startcol2);
-			if ($key2 !== null) {
-				$obj2 = TipoDocumentoPeer::getInstanceFromPool($key2);
-				if (!$obj2) {
-
-					$omClass = TipoDocumentoPeer::getOMClass();
-
-
-					$cls = substr('.'.$omClass, strrpos('.'.$omClass, '.') + 1);
-					$obj2 = new $cls();
-					$obj2->hydrate($row, $startcol2);
-					TipoDocumentoPeer::addInstanceToPool($obj2, $key2);
-				} // if obj2 loaded
-
-				// Add the $obj1 (Cliente) to the collection in $obj2 (TipoDocumento)
-				$obj2->addCliente($obj1);
-			} // if joined row not null
-
-			$results[] = $obj1;
-		}
-		$stmt->closeCursor();
-		return $results;
-	}
-
 
   static public function getUniqueColumnNames()
   {
@@ -734,13 +445,13 @@ abstract class BaseClientePeer {
 	 */
 	public static function getOMClass()
 	{
-		return ClientePeer::CLASS_DEFAULT;
+		return PuntoVentaPeer::CLASS_DEFAULT;
 	}
 
 	/**
-	 * Method perform an INSERT on the database, given a Cliente or Criteria object.
+	 * Method perform an INSERT on the database, given a PuntoVenta or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or Cliente object containing data that is used to create the INSERT statement.
+	 * @param      mixed $values Criteria or PuntoVenta object containing data that is used to create the INSERT statement.
 	 * @param      PropelPDO $con the PropelPDO connection to use
 	 * @return     mixed The new primary key.
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -749,9 +460,9 @@ abstract class BaseClientePeer {
 	public static function doInsert($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseClientePeer:doInsert:pre') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVentaPeer:doInsert:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseClientePeer', $values, $con);
+      $ret = call_user_func($callable, 'BasePuntoVentaPeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -760,17 +471,17 @@ abstract class BaseClientePeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 		} else {
-			$criteria = $values->buildCriteria(); // build Criteria from Cliente object
+			$criteria = $values->buildCriteria(); // build Criteria from PuntoVenta object
 		}
 
-		if ($criteria->containsKey(ClientePeer::ID) && $criteria->keyContainsValue(ClientePeer::ID) ) {
-			throw new PropelException('Cannot insert a value for auto-increment primary key ('.ClientePeer::ID.')');
+		if ($criteria->containsKey(PuntoVentaPeer::ID) && $criteria->keyContainsValue(PuntoVentaPeer::ID) ) {
+			throw new PropelException('Cannot insert a value for auto-increment primary key ('.PuntoVentaPeer::ID.')');
 		}
 
 
@@ -789,18 +500,18 @@ abstract class BaseClientePeer {
 		}
 
 		
-    foreach (sfMixer::getCallables('BaseClientePeer:doInsert:post') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVentaPeer:doInsert:post') as $callable)
     {
-      call_user_func($callable, 'BaseClientePeer', $values, $con, $pk);
+      call_user_func($callable, 'BasePuntoVentaPeer', $values, $con, $pk);
     }
 
     return $pk;
 	}
 
 	/**
-	 * Method perform an UPDATE on the database, given a Cliente or Criteria object.
+	 * Method perform an UPDATE on the database, given a PuntoVenta or Criteria object.
 	 *
-	 * @param      mixed $values Criteria or Cliente object containing data that is used to create the UPDATE statement.
+	 * @param      mixed $values Criteria or PuntoVenta object containing data that is used to create the UPDATE statement.
 	 * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 * @throws     PropelException Any exceptions caught during processing will be
@@ -809,9 +520,9 @@ abstract class BaseClientePeer {
 	public static function doUpdate($values, PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseClientePeer:doUpdate:pre') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVentaPeer:doUpdate:pre') as $callable)
     {
-      $ret = call_user_func($callable, 'BaseClientePeer', $values, $con);
+      $ret = call_user_func($callable, 'BasePuntoVentaPeer', $values, $con);
       if (false !== $ret)
       {
         return $ret;
@@ -820,7 +531,7 @@ abstract class BaseClientePeer {
 
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
@@ -828,10 +539,10 @@ abstract class BaseClientePeer {
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; // rename for clarity
 
-			$comparison = $criteria->getComparison(ClientePeer::ID);
-			$selectCriteria->add(ClientePeer::ID, $criteria->remove(ClientePeer::ID), $comparison);
+			$comparison = $criteria->getComparison(PuntoVentaPeer::ID);
+			$selectCriteria->add(PuntoVentaPeer::ID, $criteria->remove(PuntoVentaPeer::ID), $comparison);
 
-		} else { // $values is Cliente object
+		} else { // $values is PuntoVenta object
 			$criteria = $values->buildCriteria(); // gets full criteria
 			$selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
 		}
@@ -842,30 +553,30 @@ abstract class BaseClientePeer {
 		$ret = BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	
 
-    foreach (sfMixer::getCallables('BaseClientePeer:doUpdate:post') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVentaPeer:doUpdate:post') as $callable)
     {
-      call_user_func($callable, 'BaseClientePeer', $values, $con, $ret);
+      call_user_func($callable, 'BasePuntoVentaPeer', $values, $con, $ret);
     }
 
     return $ret;
   }
 
 	/**
-	 * Method to DELETE all rows from the cliente table.
+	 * Method to DELETE all rows from the punto_venta table.
 	 *
 	 * @return     int The number of affected rows (if supported by underlying database driver).
 	 */
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		$affectedRows = 0; // initialize var to track total num of affected rows
 		try {
 			// use transaction because $criteria could contain info
 			// for more than one table or we could emulating ON DELETE CASCADE, etc.
 			$con->beginTransaction();
-			$affectedRows += BasePeer::doDeleteAll(ClientePeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(PuntoVentaPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -875,9 +586,9 @@ abstract class BaseClientePeer {
 	}
 
 	/**
-	 * Method perform a DELETE on the database, given a Cliente or Criteria object OR a primary key value.
+	 * Method perform a DELETE on the database, given a PuntoVenta or Criteria object OR a primary key value.
 	 *
-	 * @param      mixed $values Criteria or Cliente object or primary key or array of primary keys
+	 * @param      mixed $values Criteria or PuntoVenta object or primary key or array of primary keys
 	 *              which is used to create the DELETE statement
 	 * @param      PropelPDO $con the connection to use
 	 * @return     int 	The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -888,20 +599,20 @@ abstract class BaseClientePeer {
 	 public static function doDelete($values, PropelPDO $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 
 		if ($values instanceof Criteria) {
 			// invalidate the cache for all objects of this type, since we have no
 			// way of knowing (without running a query) what objects should be invalidated
 			// from the cache based on this Criteria.
-			ClientePeer::clearInstancePool();
+			PuntoVentaPeer::clearInstancePool();
 
 			// rename for clarity
 			$criteria = clone $values;
-		} elseif ($values instanceof Cliente) {
+		} elseif ($values instanceof PuntoVenta) {
 			// invalidate the cache for this single object
-			ClientePeer::removeInstanceFromPool($values);
+			PuntoVentaPeer::removeInstanceFromPool($values);
 			// create criteria based on pk values
 			$criteria = $values->buildPkeyCriteria();
 		} else {
@@ -910,11 +621,11 @@ abstract class BaseClientePeer {
 
 
 			$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(ClientePeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(PuntoVentaPeer::ID, (array) $values, Criteria::IN);
 
 			foreach ((array) $values as $singleval) {
 				// we can invalidate the cache for this single object
-				ClientePeer::removeInstanceFromPool($singleval);
+				PuntoVentaPeer::removeInstanceFromPool($singleval);
 			}
 		}
 
@@ -939,24 +650,24 @@ abstract class BaseClientePeer {
 	}
 
 	/**
-	 * Validates all modified columns of given Cliente object.
+	 * Validates all modified columns of given PuntoVenta object.
 	 * If parameter $columns is either a single column name or an array of column names
 	 * than only those columns are validated.
 	 *
 	 * NOTICE: This does not apply to primary or foreign keys for now.
 	 *
-	 * @param      Cliente $obj The object to validate.
+	 * @param      PuntoVenta $obj The object to validate.
 	 * @param      mixed $cols Column name or array of column names.
 	 *
 	 * @return     mixed TRUE if all columns are valid or the error message of the first invalid column.
 	 */
-	public static function doValidate(Cliente $obj, $cols = null)
+	public static function doValidate(PuntoVenta $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(ClientePeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(ClientePeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(PuntoVentaPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(PuntoVentaPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -972,11 +683,11 @@ abstract class BaseClientePeer {
 
 		}
 
-		$res =  BasePeer::doValidate(ClientePeer::DATABASE_NAME, ClientePeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(PuntoVentaPeer::DATABASE_NAME, PuntoVentaPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = ClientePeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = PuntoVentaPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
         }
     }
 
@@ -988,23 +699,23 @@ abstract class BaseClientePeer {
 	 *
 	 * @param      int $pk the primary key.
 	 * @param      PropelPDO $con the connection to use
-	 * @return     Cliente
+	 * @return     PuntoVenta
 	 */
 	public static function retrieveByPK($pk, PropelPDO $con = null)
 	{
 
-		if (null !== ($obj = ClientePeer::getInstanceFromPool((string) $pk))) {
+		if (null !== ($obj = PuntoVentaPeer::getInstanceFromPool((string) $pk))) {
 			return $obj;
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
-		$criteria = new Criteria(ClientePeer::DATABASE_NAME);
-		$criteria->add(ClientePeer::ID, $pk);
+		$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
+		$criteria->add(PuntoVentaPeer::ID, $pk);
 
-		$v = ClientePeer::doSelect($criteria, $con);
+		$v = PuntoVentaPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -1020,30 +731,30 @@ abstract class BaseClientePeer {
 	public static function retrieveByPKs($pks, PropelPDO $con = null)
 	{
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		$objs = null;
 		if (empty($pks)) {
 			$objs = array();
 		} else {
-			$criteria = new Criteria(ClientePeer::DATABASE_NAME);
-			$criteria->add(ClientePeer::ID, $pks, Criteria::IN);
-			$objs = ClientePeer::doSelect($criteria, $con);
+			$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
+			$criteria->add(PuntoVentaPeer::ID, $pks, Criteria::IN);
+			$objs = PuntoVentaPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
 
-} // BaseClientePeer
+} // BasePuntoVentaPeer
 
 // This is the static code needed to register the MapBuilder for this table with the main Propel class.
 //
-// NOTE: This static code cannot call methods on the ClientePeer class, because it is not defined yet.
-// If you need to use overridden methods, you can add this code to the bottom of the ClientePeer class:
+// NOTE: This static code cannot call methods on the PuntoVentaPeer class, because it is not defined yet.
+// If you need to use overridden methods, you can add this code to the bottom of the PuntoVentaPeer class:
 //
-// Propel::getDatabaseMap(ClientePeer::DATABASE_NAME)->addTableBuilder(ClientePeer::TABLE_NAME, ClientePeer::getMapBuilder());
+// Propel::getDatabaseMap(PuntoVentaPeer::DATABASE_NAME)->addTableBuilder(PuntoVentaPeer::TABLE_NAME, PuntoVentaPeer::getMapBuilder());
 //
 // Doing so will effectively overwrite the registration below.
 
-Propel::getDatabaseMap(BaseClientePeer::DATABASE_NAME)->addTableBuilder(BaseClientePeer::TABLE_NAME, BaseClientePeer::getMapBuilder());
+Propel::getDatabaseMap(BasePuntoVentaPeer::DATABASE_NAME)->addTableBuilder(BasePuntoVentaPeer::TABLE_NAME, BasePuntoVentaPeer::getMapBuilder());
 

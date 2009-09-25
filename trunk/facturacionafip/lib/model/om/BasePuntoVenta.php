@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base class that represents a row from the 'cliente' table.
+ * Base class that represents a row from the 'punto_venta' table.
  *
  * 
  *
@@ -11,16 +11,16 @@
  *
  * @package    lib.model.om
  */
-abstract class BaseCliente extends BaseObject  implements Persistent {
+abstract class BasePuntoVenta extends BaseObject  implements Persistent {
 
 
-  const PEER = 'ClientePeer';
+  const PEER = 'PuntoVentaPeer';
 
 	/**
 	 * The Peer class.
 	 * Instance provides a convenient way of calling static methods on a class
 	 * that calling code may not be able to identify.
-	 * @var        ClientePeer
+	 * @var        PuntoVentaPeer
 	 */
 	protected static $peer;
 
@@ -31,52 +31,16 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	protected $id;
 
 	/**
-	 * The value for the razon_social field.
+	 * The value for the code field.
 	 * @var        string
 	 */
-	protected $razon_social;
+	protected $code;
 
 	/**
-	 * The value for the tipo_documento_id field.
-	 * @var        int
-	 */
-	protected $tipo_documento_id;
-
-	/**
-	 * The value for the nro_documento field.
+	 * The value for the description field.
 	 * @var        string
 	 */
-	protected $nro_documento;
-
-	/**
-	 * The value for the activo field.
-	 * Note: this column has a database default value of: true
-	 * @var        boolean
-	 */
-	protected $activo;
-
-	/**
-	 * The value for the direccion field.
-	 * @var        string
-	 */
-	protected $direccion;
-
-	/**
-	 * The value for the created_at field.
-	 * @var        string
-	 */
-	protected $created_at;
-
-	/**
-	 * The value for the updated_at field.
-	 * @var        string
-	 */
-	protected $updated_at;
-
-	/**
-	 * @var        TipoDocumento
-	 */
-	protected $aTipoDocumento;
+	protected $description;
 
 	/**
 	 * @var        array Comprobante[] Collection to store aggregation of Comprobante objects.
@@ -103,7 +67,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	/**
-	 * Initializes internal state of BaseCliente object.
+	 * Initializes internal state of BasePuntoVenta object.
 	 * @see        applyDefaults()
 	 */
 	public function __construct()
@@ -120,7 +84,6 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function applyDefaultValues()
 	{
-		$this->activo = true;
 	}
 
 	/**
@@ -134,136 +97,30 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	}
 
 	/**
-	 * Get the [razon_social] column value.
+	 * Get the [code] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getRazonSocial()
+	public function getCode()
 	{
-		return $this->razon_social;
+		return $this->code;
 	}
 
 	/**
-	 * Get the [tipo_documento_id] column value.
-	 * 
-	 * @return     int
-	 */
-	public function getTipoDocumentoId()
-	{
-		return $this->tipo_documento_id;
-	}
-
-	/**
-	 * Get the [nro_documento] column value.
+	 * Get the [description] column value.
 	 * 
 	 * @return     string
 	 */
-	public function getNroDocumento()
+	public function getDescription()
 	{
-		return $this->nro_documento;
-	}
-
-	/**
-	 * Get the [activo] column value.
-	 * 
-	 * @return     boolean
-	 */
-	public function getActivo()
-	{
-		return $this->activo;
-	}
-
-	/**
-	 * Get the [direccion] column value.
-	 * 
-	 * @return     string
-	 */
-	public function getDireccion()
-	{
-		return $this->direccion;
-	}
-
-	/**
-	 * Get the [optionally formatted] temporal [created_at] column value.
-	 * 
-	 *
-	 * @param      string $format The date/time format string (either date()-style or strftime()-style).
-	 *							If format is NULL, then the raw DateTime object will be returned.
-	 * @return     mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
-	 * @throws     PropelException - if unable to parse/validate the date/time value.
-	 */
-	public function getCreatedAt($format = 'Y-m-d H:i:s')
-	{
-		if ($this->created_at === null) {
-			return null;
-		}
-
-
-		if ($this->created_at === '0000-00-00 00:00:00') {
-			// while technically this is not a default value of NULL,
-			// this seems to be closest in meaning.
-			return null;
-		} else {
-			try {
-				$dt = new DateTime($this->created_at);
-			} catch (Exception $x) {
-				throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-			}
-		}
-
-		if ($format === null) {
-			// Because propel.useDateTimeClass is TRUE, we return a DateTime object.
-			return $dt;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $dt->format('U'));
-		} else {
-			return $dt->format($format);
-		}
-	}
-
-	/**
-	 * Get the [optionally formatted] temporal [updated_at] column value.
-	 * 
-	 *
-	 * @param      string $format The date/time format string (either date()-style or strftime()-style).
-	 *							If format is NULL, then the raw DateTime object will be returned.
-	 * @return     mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
-	 * @throws     PropelException - if unable to parse/validate the date/time value.
-	 */
-	public function getUpdatedAt($format = 'Y-m-d H:i:s')
-	{
-		if ($this->updated_at === null) {
-			return null;
-		}
-
-
-		if ($this->updated_at === '0000-00-00 00:00:00') {
-			// while technically this is not a default value of NULL,
-			// this seems to be closest in meaning.
-			return null;
-		} else {
-			try {
-				$dt = new DateTime($this->updated_at);
-			} catch (Exception $x) {
-				throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
-			}
-		}
-
-		if ($format === null) {
-			// Because propel.useDateTimeClass is TRUE, we return a DateTime object.
-			return $dt;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $dt->format('U'));
-		} else {
-			return $dt->format($format);
-		}
+		return $this->description;
 	}
 
 	/**
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
-	 * @return     Cliente The current object (for fluent API support)
+	 * @return     PuntoVenta The current object (for fluent API support)
 	 */
 	public function setId($v)
 	{
@@ -273,213 +130,51 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = ClientePeer::ID;
+			$this->modifiedColumns[] = PuntoVentaPeer::ID;
 		}
 
 		return $this;
 	} // setId()
 
 	/**
-	 * Set the value of [razon_social] column.
+	 * Set the value of [code] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Cliente The current object (for fluent API support)
+	 * @return     PuntoVenta The current object (for fluent API support)
 	 */
-	public function setRazonSocial($v)
+	public function setCode($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->razon_social !== $v) {
-			$this->razon_social = $v;
-			$this->modifiedColumns[] = ClientePeer::RAZON_SOCIAL;
+		if ($this->code !== $v) {
+			$this->code = $v;
+			$this->modifiedColumns[] = PuntoVentaPeer::CODE;
 		}
 
 		return $this;
-	} // setRazonSocial()
+	} // setCode()
 
 	/**
-	 * Set the value of [tipo_documento_id] column.
-	 * 
-	 * @param      int $v new value
-	 * @return     Cliente The current object (for fluent API support)
-	 */
-	public function setTipoDocumentoId($v)
-	{
-		if ($v !== null) {
-			$v = (int) $v;
-		}
-
-		if ($this->tipo_documento_id !== $v) {
-			$this->tipo_documento_id = $v;
-			$this->modifiedColumns[] = ClientePeer::TIPO_DOCUMENTO_ID;
-		}
-
-		if ($this->aTipoDocumento !== null && $this->aTipoDocumento->getId() !== $v) {
-			$this->aTipoDocumento = null;
-		}
-
-		return $this;
-	} // setTipoDocumentoId()
-
-	/**
-	 * Set the value of [nro_documento] column.
+	 * Set the value of [description] column.
 	 * 
 	 * @param      string $v new value
-	 * @return     Cliente The current object (for fluent API support)
+	 * @return     PuntoVenta The current object (for fluent API support)
 	 */
-	public function setNroDocumento($v)
+	public function setDescription($v)
 	{
 		if ($v !== null) {
 			$v = (string) $v;
 		}
 
-		if ($this->nro_documento !== $v) {
-			$this->nro_documento = $v;
-			$this->modifiedColumns[] = ClientePeer::NRO_DOCUMENTO;
+		if ($this->description !== $v) {
+			$this->description = $v;
+			$this->modifiedColumns[] = PuntoVentaPeer::DESCRIPTION;
 		}
 
 		return $this;
-	} // setNroDocumento()
-
-	/**
-	 * Set the value of [activo] column.
-	 * 
-	 * @param      boolean $v new value
-	 * @return     Cliente The current object (for fluent API support)
-	 */
-	public function setActivo($v)
-	{
-		if ($v !== null) {
-			$v = (boolean) $v;
-		}
-
-		if ($this->activo !== $v || $v === true) {
-			$this->activo = $v;
-			$this->modifiedColumns[] = ClientePeer::ACTIVO;
-		}
-
-		return $this;
-	} // setActivo()
-
-	/**
-	 * Set the value of [direccion] column.
-	 * 
-	 * @param      string $v new value
-	 * @return     Cliente The current object (for fluent API support)
-	 */
-	public function setDireccion($v)
-	{
-		if ($v !== null) {
-			$v = (string) $v;
-		}
-
-		if ($this->direccion !== $v) {
-			$this->direccion = $v;
-			$this->modifiedColumns[] = ClientePeer::DIRECCION;
-		}
-
-		return $this;
-	} // setDireccion()
-
-	/**
-	 * Sets the value of [created_at] column to a normalized version of the date/time value specified.
-	 * 
-	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
-	 *						be treated as NULL for temporal objects.
-	 * @return     Cliente The current object (for fluent API support)
-	 */
-	public function setCreatedAt($v)
-	{
-		// we treat '' as NULL for temporal objects because DateTime('') == DateTime('now')
-		// -- which is unexpected, to say the least.
-		if ($v === null || $v === '') {
-			$dt = null;
-		} elseif ($v instanceof DateTime) {
-			$dt = $v;
-		} else {
-			// some string/numeric value passed; we normalize that so that we can
-			// validate it.
-			try {
-				if (is_numeric($v)) { // if it's a unix timestamp
-					$dt = new DateTime('@'.$v, new DateTimeZone('UTC'));
-					// We have to explicitly specify and then change the time zone because of a
-					// DateTime bug: http://bugs.php.net/bug.php?id=43003
-					$dt->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-				} else {
-					$dt = new DateTime($v);
-				}
-			} catch (Exception $x) {
-				throw new PropelException('Error parsing date/time value: ' . var_export($v, true), $x);
-			}
-		}
-
-		if ( $this->created_at !== null || $dt !== null ) {
-			// (nested ifs are a little easier to read in this case)
-
-			$currNorm = ($this->created_at !== null && $tmpDt = new DateTime($this->created_at)) ? $tmpDt->format('Y-m-d H:i:s') : null;
-			$newNorm = ($dt !== null) ? $dt->format('Y-m-d H:i:s') : null;
-
-			if ( ($currNorm !== $newNorm) // normalized values don't match 
-					)
-			{
-				$this->created_at = ($dt ? $dt->format('Y-m-d H:i:s') : null);
-				$this->modifiedColumns[] = ClientePeer::CREATED_AT;
-			}
-		} // if either are not null
-
-		return $this;
-	} // setCreatedAt()
-
-	/**
-	 * Sets the value of [updated_at] column to a normalized version of the date/time value specified.
-	 * 
-	 * @param      mixed $v string, integer (timestamp), or DateTime value.  Empty string will
-	 *						be treated as NULL for temporal objects.
-	 * @return     Cliente The current object (for fluent API support)
-	 */
-	public function setUpdatedAt($v)
-	{
-		// we treat '' as NULL for temporal objects because DateTime('') == DateTime('now')
-		// -- which is unexpected, to say the least.
-		if ($v === null || $v === '') {
-			$dt = null;
-		} elseif ($v instanceof DateTime) {
-			$dt = $v;
-		} else {
-			// some string/numeric value passed; we normalize that so that we can
-			// validate it.
-			try {
-				if (is_numeric($v)) { // if it's a unix timestamp
-					$dt = new DateTime('@'.$v, new DateTimeZone('UTC'));
-					// We have to explicitly specify and then change the time zone because of a
-					// DateTime bug: http://bugs.php.net/bug.php?id=43003
-					$dt->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-				} else {
-					$dt = new DateTime($v);
-				}
-			} catch (Exception $x) {
-				throw new PropelException('Error parsing date/time value: ' . var_export($v, true), $x);
-			}
-		}
-
-		if ( $this->updated_at !== null || $dt !== null ) {
-			// (nested ifs are a little easier to read in this case)
-
-			$currNorm = ($this->updated_at !== null && $tmpDt = new DateTime($this->updated_at)) ? $tmpDt->format('Y-m-d H:i:s') : null;
-			$newNorm = ($dt !== null) ? $dt->format('Y-m-d H:i:s') : null;
-
-			if ( ($currNorm !== $newNorm) // normalized values don't match 
-					)
-			{
-				$this->updated_at = ($dt ? $dt->format('Y-m-d H:i:s') : null);
-				$this->modifiedColumns[] = ClientePeer::UPDATED_AT;
-			}
-		} // if either are not null
-
-		return $this;
-	} // setUpdatedAt()
+	} // setDescription()
 
 	/**
 	 * Indicates whether the columns in this object are only set to default values.
@@ -492,11 +187,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	public function hasOnlyDefaultValues()
 	{
 			// First, ensure that we don't have any columns that have been modified which aren't default columns.
-			if (array_diff($this->modifiedColumns, array(ClientePeer::ACTIVO))) {
-				return false;
-			}
-
-			if ($this->activo !== true) {
+			if (array_diff($this->modifiedColumns, array())) {
 				return false;
 			}
 
@@ -523,13 +214,8 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		try {
 
 			$this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-			$this->razon_social = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-			$this->tipo_documento_id = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
-			$this->nro_documento = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-			$this->activo = ($row[$startcol + 4] !== null) ? (boolean) $row[$startcol + 4] : null;
-			$this->direccion = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-			$this->created_at = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-			$this->updated_at = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+			$this->code = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+			$this->description = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -539,10 +225,10 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 			}
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 8; // 8 = ClientePeer::NUM_COLUMNS - ClientePeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 3; // 3 = PuntoVentaPeer::NUM_COLUMNS - PuntoVentaPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating Cliente object", $e);
+			throw new PropelException("Error populating PuntoVenta object", $e);
 		}
 	}
 
@@ -562,9 +248,6 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	public function ensureConsistency()
 	{
 
-		if ($this->aTipoDocumento !== null && $this->tipo_documento_id !== $this->aTipoDocumento->getId()) {
-			$this->aTipoDocumento = null;
-		}
 	} // ensureConsistency
 
 	/**
@@ -588,13 +271,13 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_READ);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_READ);
 		}
 
 		// We don't need to alter the object instance pool; we're just modifying this instance
 		// already in the pool.
 
-		$stmt = ClientePeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+		$stmt = PuntoVentaPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
 		$row = $stmt->fetch(PDO::FETCH_NUM);
 		$stmt->closeCursor();
 		if (!$row) {
@@ -604,7 +287,6 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 
 		if ($deep) {  // also de-associate any related objects?
 
-			$this->aTipoDocumento = null;
 			$this->collComprobantes = null;
 			$this->lastComprobanteCriteria = null;
 
@@ -623,7 +305,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	public function delete(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseCliente:delete:pre') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVenta:delete:pre') as $callable)
     {
       $ret = call_user_func($callable, $this, $con);
       if ($ret)
@@ -638,12 +320,12 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
-			ClientePeer::doDelete($this, $con);
+			PuntoVentaPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -652,7 +334,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		}
 	
 
-    foreach (sfMixer::getCallables('BaseCliente:delete:post') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVenta:delete:post') as $callable)
     {
       call_user_func($callable, $this, $con);
     }
@@ -674,7 +356,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	public function save(PropelPDO $con = null)
 	{
 
-    foreach (sfMixer::getCallables('BaseCliente:save:pre') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVenta:save:pre') as $callable)
     {
       $affectedRows = call_user_func($callable, $this, $con);
       if (is_int($affectedRows))
@@ -684,34 +366,24 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
     }
 
 
-    if ($this->isNew() && !$this->isColumnModified(ClientePeer::CREATED_AT))
-    {
-      $this->setCreatedAt(time());
-    }
-
-    if ($this->isModified() && !$this->isColumnModified(ClientePeer::UPDATED_AT))
-    {
-      $this->setUpdatedAt(time());
-    }
-
 		if ($this->isDeleted()) {
 			throw new PropelException("You cannot save an object that has been deleted.");
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(ClientePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+			$con = Propel::getConnection(PuntoVentaPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
 		
 		$con->beginTransaction();
 		try {
 			$affectedRows = $this->doSave($con);
 			$con->commit();
-    foreach (sfMixer::getCallables('BaseCliente:save:post') as $callable)
+    foreach (sfMixer::getCallables('BasePuntoVenta:save:post') as $callable)
     {
       call_user_func($callable, $this, $con, $affectedRows);
     }
 
-			ClientePeer::addInstanceToPool($this);
+			PuntoVentaPeer::addInstanceToPool($this);
 			return $affectedRows;
 		} catch (PropelException $e) {
 			$con->rollBack();
@@ -736,26 +408,14 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
-			// We call the save method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aTipoDocumento !== null) {
-				if ($this->aTipoDocumento->isModified() || $this->aTipoDocumento->isNew()) {
-					$affectedRows += $this->aTipoDocumento->save($con);
-				}
-				$this->setTipoDocumento($this->aTipoDocumento);
-			}
-
 			if ($this->isNew() ) {
-				$this->modifiedColumns[] = ClientePeer::ID;
+				$this->modifiedColumns[] = PuntoVentaPeer::ID;
 			}
 
 			// If this object has been modified, then save it to the database.
 			if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = ClientePeer::doInsert($this, $con);
+					$pk = PuntoVentaPeer::doInsert($this, $con);
 					$affectedRows += 1; // we are assuming that there is only 1 row per doInsert() which
 										 // should always be true here (even though technically
 										 // BasePeer::doInsert() can insert multiple rows).
@@ -764,7 +424,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 
 					$this->setNew(false);
 				} else {
-					$affectedRows += ClientePeer::doUpdate($this, $con);
+					$affectedRows += PuntoVentaPeer::doUpdate($this, $con);
 				}
 
 				$this->resetModified(); // [HL] After being saved an object is no longer 'modified'
@@ -844,19 +504,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			// We call the validate method on the following object(s) if they
-			// were passed to this object by their coresponding set
-			// method.  This object relates to these object(s) by a
-			// foreign key reference.
-
-			if ($this->aTipoDocumento !== null) {
-				if (!$this->aTipoDocumento->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTipoDocumento->getValidationFailures());
-				}
-			}
-
-
-			if (($retval = ClientePeer::doValidate($this, $columns)) !== true) {
+			if (($retval = PuntoVentaPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -887,7 +535,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = ClientePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = PuntoVentaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		$field = $this->getByPosition($pos);
 		return $field;
 	}
@@ -906,25 +554,10 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getRazonSocial();
+				return $this->getCode();
 				break;
 			case 2:
-				return $this->getTipoDocumentoId();
-				break;
-			case 3:
-				return $this->getNroDocumento();
-				break;
-			case 4:
-				return $this->getActivo();
-				break;
-			case 5:
-				return $this->getDireccion();
-				break;
-			case 6:
-				return $this->getCreatedAt();
-				break;
-			case 7:
-				return $this->getUpdatedAt();
+				return $this->getDescription();
 				break;
 			default:
 				return null;
@@ -945,16 +578,11 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true)
 	{
-		$keys = ClientePeer::getFieldNames($keyType);
+		$keys = PuntoVentaPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getRazonSocial(),
-			$keys[2] => $this->getTipoDocumentoId(),
-			$keys[3] => $this->getNroDocumento(),
-			$keys[4] => $this->getActivo(),
-			$keys[5] => $this->getDireccion(),
-			$keys[6] => $this->getCreatedAt(),
-			$keys[7] => $this->getUpdatedAt(),
+			$keys[1] => $this->getCode(),
+			$keys[2] => $this->getDescription(),
 		);
 		return $result;
 	}
@@ -971,7 +599,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = ClientePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = PuntoVentaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -990,25 +618,10 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setRazonSocial($value);
+				$this->setCode($value);
 				break;
 			case 2:
-				$this->setTipoDocumentoId($value);
-				break;
-			case 3:
-				$this->setNroDocumento($value);
-				break;
-			case 4:
-				$this->setActivo($value);
-				break;
-			case 5:
-				$this->setDireccion($value);
-				break;
-			case 6:
-				$this->setCreatedAt($value);
-				break;
-			case 7:
-				$this->setUpdatedAt($value);
+				$this->setDescription($value);
 				break;
 		} // switch()
 	}
@@ -1032,16 +645,11 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = ClientePeer::getFieldNames($keyType);
+		$keys = PuntoVentaPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setRazonSocial($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setTipoDocumentoId($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setNroDocumento($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setActivo($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setDireccion($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCreatedAt($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setUpdatedAt($arr[$keys[7]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCode($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDescription($arr[$keys[2]]);
 	}
 
 	/**
@@ -1051,16 +659,11 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(ClientePeer::DATABASE_NAME);
+		$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(ClientePeer::ID)) $criteria->add(ClientePeer::ID, $this->id);
-		if ($this->isColumnModified(ClientePeer::RAZON_SOCIAL)) $criteria->add(ClientePeer::RAZON_SOCIAL, $this->razon_social);
-		if ($this->isColumnModified(ClientePeer::TIPO_DOCUMENTO_ID)) $criteria->add(ClientePeer::TIPO_DOCUMENTO_ID, $this->tipo_documento_id);
-		if ($this->isColumnModified(ClientePeer::NRO_DOCUMENTO)) $criteria->add(ClientePeer::NRO_DOCUMENTO, $this->nro_documento);
-		if ($this->isColumnModified(ClientePeer::ACTIVO)) $criteria->add(ClientePeer::ACTIVO, $this->activo);
-		if ($this->isColumnModified(ClientePeer::DIRECCION)) $criteria->add(ClientePeer::DIRECCION, $this->direccion);
-		if ($this->isColumnModified(ClientePeer::CREATED_AT)) $criteria->add(ClientePeer::CREATED_AT, $this->created_at);
-		if ($this->isColumnModified(ClientePeer::UPDATED_AT)) $criteria->add(ClientePeer::UPDATED_AT, $this->updated_at);
+		if ($this->isColumnModified(PuntoVentaPeer::ID)) $criteria->add(PuntoVentaPeer::ID, $this->id);
+		if ($this->isColumnModified(PuntoVentaPeer::CODE)) $criteria->add(PuntoVentaPeer::CODE, $this->code);
+		if ($this->isColumnModified(PuntoVentaPeer::DESCRIPTION)) $criteria->add(PuntoVentaPeer::DESCRIPTION, $this->description);
 
 		return $criteria;
 	}
@@ -1075,9 +678,9 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 */
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(ClientePeer::DATABASE_NAME);
+		$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
 
-		$criteria->add(ClientePeer::ID, $this->id);
+		$criteria->add(PuntoVentaPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1108,26 +711,16 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 * If desired, this method can also make copies of all associated (fkey referrers)
 	 * objects.
 	 *
-	 * @param      object $copyObj An object of Cliente (or compatible) type.
+	 * @param      object $copyObj An object of PuntoVenta (or compatible) type.
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
 	 * @throws     PropelException
 	 */
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setRazonSocial($this->razon_social);
+		$copyObj->setCode($this->code);
 
-		$copyObj->setTipoDocumentoId($this->tipo_documento_id);
-
-		$copyObj->setNroDocumento($this->nro_documento);
-
-		$copyObj->setActivo($this->activo);
-
-		$copyObj->setDireccion($this->direccion);
-
-		$copyObj->setCreatedAt($this->created_at);
-
-		$copyObj->setUpdatedAt($this->updated_at);
+		$copyObj->setDescription($this->description);
 
 
 		if ($deepCopy) {
@@ -1159,7 +752,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 * objects.
 	 *
 	 * @param      boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-	 * @return     Cliente Clone of current object.
+	 * @return     PuntoVenta Clone of current object.
 	 * @throws     PropelException
 	 */
 	public function copy($deepCopy = false)
@@ -1178,65 +771,14 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 * same instance for all member of this class. The method could therefore
 	 * be static, but this would prevent one from overriding the behavior.
 	 *
-	 * @return     ClientePeer
+	 * @return     PuntoVentaPeer
 	 */
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new ClientePeer();
+			self::$peer = new PuntoVentaPeer();
 		}
 		return self::$peer;
-	}
-
-	/**
-	 * Declares an association between this object and a TipoDocumento object.
-	 *
-	 * @param      TipoDocumento $v
-	 * @return     Cliente The current object (for fluent API support)
-	 * @throws     PropelException
-	 */
-	public function setTipoDocumento(TipoDocumento $v = null)
-	{
-		if ($v === null) {
-			$this->setTipoDocumentoId(NULL);
-		} else {
-			$this->setTipoDocumentoId($v->getId());
-		}
-
-		$this->aTipoDocumento = $v;
-
-		// Add binding for other direction of this n:n relationship.
-		// If this object has already been added to the TipoDocumento object, it will not be re-added.
-		if ($v !== null) {
-			$v->addCliente($this);
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Get the associated TipoDocumento object
-	 *
-	 * @param      PropelPDO Optional Connection object.
-	 * @return     TipoDocumento The associated TipoDocumento object.
-	 * @throws     PropelException
-	 */
-	public function getTipoDocumento(PropelPDO $con = null)
-	{
-		if ($this->aTipoDocumento === null && ($this->tipo_documento_id !== null)) {
-			$c = new Criteria(TipoDocumentoPeer::DATABASE_NAME);
-			$c->add(TipoDocumentoPeer::ID, $this->tipo_documento_id);
-			$this->aTipoDocumento = TipoDocumentoPeer::doSelectOne($c, $con);
-			/* The following can be used additionally to
-			   guarantee the related object contains a reference
-			   to this object.  This level of coupling may, however, be
-			   undesirable since it could result in an only partially populated collection
-			   in the referenced object.
-			   $this->aTipoDocumento->addClientes($this);
-			 */
-		}
-		return $this->aTipoDocumento;
 	}
 
 	/**
@@ -1271,8 +813,8 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	 * Gets an array of Comprobante objects which contain a foreign key that references this object.
 	 *
 	 * If this collection has already been initialized with an identical Criteria, it returns the collection.
-	 * Otherwise if this Cliente has previously been saved, it will retrieve
-	 * related Comprobantes from storage. If this Cliente is new, it will return
+	 * Otherwise if this PuntoVenta has previously been saved, it will retrieve
+	 * related Comprobantes from storage. If this PuntoVenta is new, it will return
 	 * an empty collection or the current collection, the criteria is ignored on a new object.
 	 *
 	 * @param      PropelPDO $con
@@ -1283,7 +825,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	public function getComprobantes($criteria = null, PropelPDO $con = null)
 	{
 		if ($criteria === null) {
-			$criteria = new Criteria(ClientePeer::DATABASE_NAME);
+			$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
 		}
 		elseif ($criteria instanceof Criteria)
 		{
@@ -1295,7 +837,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 			   $this->collComprobantes = array();
 			} else {
 
-				$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+				$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 				ComprobantePeer::addSelectColumns($criteria);
 				$this->collComprobantes = ComprobantePeer::doSelect($criteria, $con);
@@ -1308,7 +850,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				// one, just return the collection.
 
 
-				$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+				$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 				ComprobantePeer::addSelectColumns($criteria);
 				if (!isset($this->lastComprobanteCriteria) || !$this->lastComprobanteCriteria->equals($criteria)) {
@@ -1332,7 +874,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	public function countComprobantes(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
 	{
 		if ($criteria === null) {
-			$criteria = new Criteria(ClientePeer::DATABASE_NAME);
+			$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
 		} else {
 			$criteria = clone $criteria;
 		}
@@ -1348,7 +890,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				$count = 0;
 			} else {
 
-				$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+				$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 				$count = ComprobantePeer::doCount($criteria, $con);
 			}
@@ -1360,7 +902,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				// one, just return count of the collection.
 
 
-				$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+				$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 				if (!isset($this->lastComprobanteCriteria) || !$this->lastComprobanteCriteria->equals($criteria)) {
 					$count = ComprobantePeer::doCount($criteria, $con);
@@ -1389,7 +931,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		}
 		if (!in_array($l, $this->collComprobantes, true)) { // only add it if the **same** object is not already associated
 			array_push($this->collComprobantes, $l);
-			$l->setCliente($this);
+			$l->setPuntoVenta($this);
 		}
 	}
 
@@ -1397,18 +939,18 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	/**
 	 * If this collection has already been initialized with
 	 * an identical criteria, it returns the collection.
-	 * Otherwise if this Cliente is new, it will return
-	 * an empty collection; or if this Cliente has previously
+	 * Otherwise if this PuntoVenta is new, it will return
+	 * an empty collection; or if this PuntoVenta has previously
 	 * been saved, it will retrieve related Comprobantes from storage.
 	 *
 	 * This method is protected by default in order to keep the public
 	 * api reasonable.  You can provide public methods for those you
-	 * actually need in Cliente.
+	 * actually need in PuntoVenta.
 	 */
 	public function getComprobantesJoinTipoComprobante($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		if ($criteria === null) {
-			$criteria = new Criteria(ClientePeer::DATABASE_NAME);
+			$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
 		}
 		elseif ($criteria instanceof Criteria)
 		{
@@ -1420,7 +962,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				$this->collComprobantes = array();
 			} else {
 
-				$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+				$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 				$this->collComprobantes = ComprobantePeer::doSelectJoinTipoComprobante($criteria, $con, $join_behavior);
 			}
@@ -1429,7 +971,7 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 			// called for.  If the criteria is the same as the last
 			// one, just return the collection.
 
-			$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+			$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 			if (!isset($this->lastComprobanteCriteria) || !$this->lastComprobanteCriteria->equals($criteria)) {
 				$this->collComprobantes = ComprobantePeer::doSelectJoinTipoComprobante($criteria, $con, $join_behavior);
@@ -1444,18 +986,18 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 	/**
 	 * If this collection has already been initialized with
 	 * an identical criteria, it returns the collection.
-	 * Otherwise if this Cliente is new, it will return
-	 * an empty collection; or if this Cliente has previously
+	 * Otherwise if this PuntoVenta is new, it will return
+	 * an empty collection; or if this PuntoVenta has previously
 	 * been saved, it will retrieve related Comprobantes from storage.
 	 *
 	 * This method is protected by default in order to keep the public
 	 * api reasonable.  You can provide public methods for those you
-	 * actually need in Cliente.
+	 * actually need in PuntoVenta.
 	 */
-	public function getComprobantesJoinPuntoVenta($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+	public function getComprobantesJoinCliente($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
 	{
 		if ($criteria === null) {
-			$criteria = new Criteria(ClientePeer::DATABASE_NAME);
+			$criteria = new Criteria(PuntoVentaPeer::DATABASE_NAME);
 		}
 		elseif ($criteria instanceof Criteria)
 		{
@@ -1467,19 +1009,19 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 				$this->collComprobantes = array();
 			} else {
 
-				$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+				$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
-				$this->collComprobantes = ComprobantePeer::doSelectJoinPuntoVenta($criteria, $con, $join_behavior);
+				$this->collComprobantes = ComprobantePeer::doSelectJoinCliente($criteria, $con, $join_behavior);
 			}
 		} else {
 			// the following code is to determine if a new query is
 			// called for.  If the criteria is the same as the last
 			// one, just return the collection.
 
-			$criteria->add(ComprobantePeer::CLIENTE_ID, $this->id);
+			$criteria->add(ComprobantePeer::PUNTO_VENTA_ID, $this->id);
 
 			if (!isset($this->lastComprobanteCriteria) || !$this->lastComprobanteCriteria->equals($criteria)) {
-				$this->collComprobantes = ComprobantePeer::doSelectJoinPuntoVenta($criteria, $con, $join_behavior);
+				$this->collComprobantes = ComprobantePeer::doSelectJoinCliente($criteria, $con, $join_behavior);
 			}
 		}
 		$this->lastComprobanteCriteria = $criteria;
@@ -1507,15 +1049,14 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
 		} // if ($deep)
 
 		$this->collComprobantes = null;
-			$this->aTipoDocumento = null;
 	}
 
 
   public function __call($method, $arguments)
   {
-    if (!$callable = sfMixer::getCallable('BaseCliente:'.$method))
+    if (!$callable = sfMixer::getCallable('BasePuntoVenta:'.$method))
     {
-      throw new sfException(sprintf('Call to undefined method BaseCliente::%s', $method));
+      throw new sfException(sprintf('Call to undefined method BasePuntoVenta::%s', $method));
     }
 
     array_unshift($arguments, $this);
@@ -1524,4 +1065,4 @@ abstract class BaseCliente extends BaseObject  implements Persistent {
   }
 
 
-} // BaseCliente
+} // BasePuntoVenta

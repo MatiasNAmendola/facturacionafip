@@ -101,6 +101,4 @@
 
 <hr />
 
-<a href="<?php echo url_for('comprobante/edit?id='.$comprobante->getId()) ?>">Edit</a>
-&nbsp;
 <a href="<?php echo url_for('comprobante/index') ?>">List</a>

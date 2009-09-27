@@ -13,6 +13,9 @@ class ComprobanteForm extends BaseComprobanteForm
 	public function configure(){
 	    unset(
 	      $this['id'],
+	      $this['nro_comprobante'],
+	      $this['cbt_desde'],
+	      $this['cbt_hasta'],
 	      $this['created_at'], 
 	      $this['updated_at'],
 	      $this['fecha_cae'],

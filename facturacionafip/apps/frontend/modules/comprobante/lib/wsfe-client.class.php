@@ -94,9 +94,17 @@ class WsfeClient{
 	          $results->FEAutRequestResult->RError->perrmsg);
 	      exit("Error");
 	    }
-	  var_dump($results);
-	  die();
-//	  return $results->FEAutRequestResult->FedResp->FEDetalleResponse->cae;
+	    
+	  $comprobante->setNroComprobante($results->FEAutRequestResult->FecResp->id);
+	  $comprobante->setFechaCae($results->FEAutRequestResult->FecResp->fecha_cae);
+	  $comprobante->setReproceso($results->FEAutRequestResult->FecResp->reproceso);
+	  $comprobante->setMotivo("-Fec: ".$results->FEAutRequestResult->FecResp->motivo);
+	  
+	  $comprobante->setCae($results->FEAutRequestResult->FedResp->FEDetalleResponse->cae);
+	  $comprobante->setResultado($results->FEAutRequestResult->FedResp->FEDetalleResponse->resultado);
+	  $comprobante->setMotivo($comprobante->getMotivo()." -Fed: ".$results->FEAutRequestResult->FedResp->FEDetalleResponse->motivo);
+	  $comprobante->setFechaVtoCae($results->FEAutRequestResult->FedResp->FEDetalleResponse->fecha_vto);
+	  return $comprobante;
 	}
 	
 	#==============================================================================

@@ -59,12 +59,6 @@
 	# PRIVATEKEY to sign. Generates an intermediate file and finally trims the 
 	# MIME heading leaving the final CMS required by WSAA.
 	public static function SignTRA() {
-//		if (file_exists(dirname(__FILE__).'/'.sfConfig::get('CERT'))) {echo "file:/".dirname(__FILE__).'/'.sfConfig::get('CERT'); echo "<br>";}
-//		if (file_exists(dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'))) {echo "file:/".dirname(__FILE__).'/'.sfConfig::get('PRIVATEKEY'); echo "<br>";}
-		
-//		$ruta = "file:/".dirname(__FILE__).'/'.sfConfig::get('CERT');
-//		print_r(file_get_contents($ruta)); echo "<br>";
-		
 	  $STATUS=openssl_pkcs7_sign("TRA.xml", "TRA.tmp", "file://".sfConfig::get('CERT'),
 	    array("file://".sfConfig::get('PRIVATEKEY'), sfConfig::get('PASSPHRASE')),
 	    array(),

@@ -64,36 +64,31 @@ class comprobanteActions extends sfActions
     $this->redirect('comprobante/index');
   }
 
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
+  protected function processForm(sfWebRequest $request, sfForm $form){
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-//      $comprobante = $form->save();
-/**
- * El updateObject() me llena mi objeto $comprobante con los datos que 
- * vienen en el formulario. Luego de llamar al service, puedo enviar a
- * grabar 
- */
-    	/**
-    	 * TESTS TESTS
-    	 * @var unknown_type
-    	 */
-    	
-    ini_set("soap.wsdl_cache_enabled", "0");
-
-    WsaaClient::CreateTRA();
-	$CMS = WsaaClient::SignTRA();
-	$TA = WsaaClient::CallWSAA($CMS);
-	
-	if (!file_put_contents("TA.xml", $TA)) {
-		exit("Error writing TA.xml\n");
-	}else{
-		echo "listo el pollo, pelada la gallina";
-	}
-    	
-      $comprobante = $form->updateObject();
-      $this->redirect('comprobante/edit?id='.$comprobante->getId());
+    if ($form->isValid()){
+		$comprobante = $this->generarComprobante($form);
+		$comprobante->save();
+	    $this->redirect('comprobante/edit?id='.$comprobante->getId());
     }
+  }
+  
+  private function generarComprobante(ComprobanteForm $form){
+  	$comprobante = $form->updateObject();
+  	$client = WsfeClient::generateSoapClient();
+  	$sing = TA::getSign();
+  	$token = TA::getToken();
+  	/**
+  	 * TODO: Validar que el TA sea vigente. Esto se logra modificando los métodos del WSFE para
+  	 * que lance los errores como excepciones y sean tratados aquí. 
+  	 * Lo anterior sería lógica de negocio, sacar la lógica de negocio de este Action y ponerla en Comprobante->generate();
+  	 * @var unknown_type
+  	 */
+  	$ultimoNro = WsfeClient::UltNro($client, $token, $sing, WsfeClient::getCuitEmisor());
+  	/**
+  	 * TODO: Realizar las validaciones pertinentes de las posibles salidas
+  	 * @var unknown_type
+  	 */
+  	$comprobante = WsfeClient::Aut($client, $token, $sign, $client, $ultimoNro + 1, $ultimoNro, $comprobante);
   }
 }

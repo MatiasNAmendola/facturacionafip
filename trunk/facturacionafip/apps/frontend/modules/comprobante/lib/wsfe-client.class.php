@@ -1,6 +1,13 @@
 <?php
+#==============================================================================
+//define ("WSDL", "wsfe.wsdl");     # The WSDL corresponding to WSFE
+sfConfig::set("WSDL", "wsdls/wsfe.wsdl");
+//define ("WSFEURL", "https://wswhomo.afip.gov.ar/wsfe/service.asmx");
+sfConfig::set("WSFEURL", "https://wswhomo.afip.gov.ar/wsfe/service.asmx");
+//define ("CUIT", 20135344991);     # CUIT del emisor de las facturas
+sfConfig::set("CUIT", 20135344991);
+#==============================================================================
 class WsfeClient{
-	
 	public static function RecuperaQTY ($client, $token, $sign, $cuit) {
 	  $results=$client->FERecuperaQTYRequest(
 	    array('argAuth'=>array('Token' => $token,
@@ -51,7 +58,7 @@ class WsfeClient{
 	}
 	
 	#==============================================================================
-	public static function Aut ($client, $token, $sign, $cuit, $ID, $cbte) {
+	public static function Aut ($client, $token, $sign, $cuit, $ID, $cbte, Comprobante $comprobante) {
 	  $results=$client->FEAutRequest(
 	    array('argAuth' => array(
 	             'Token' => $token,
@@ -60,24 +67,26 @@ class WsfeClient{
 	          'Fer' => array(
 	             'Fecr' => array(
 	                'id' => $ID, 
-	                'cantidadreg' => 1, 
-	                'presta_serv' => 0),
+	                'cantidadreg' => 1, //TODO: hacer una llamada para esto recursivo. Solo se hace si es factura B y por montos menores a $1000 x c/u 
+	                'presta_serv' => $comprobante->getEsServicio()),
 	             'Fedr' => array(
 	                'FEDetalleRequest' => array(
-	                   'tipo_doc' => 80,
-	                   'nro_doc' => 23111111113,
-	                   'tipo_cbte' => 1,
-	                   'punto_vta' => 1,
-	                   'cbt_desde' => $cbte,
-	                   'cbt_hasta' => $cbte,
-	                   'imp_total' => 121.0,
-	                   'imp_tot_conc' => 0,
-	                   'imp_neto' => 100.0,
-	                   'impto_liq' => 21.0,
-	                   'impto_liq_rni' => 0.0,
-	                   'imp_op_ex' => 0.0,
-	                   'fecha_cbte' => date('Ymd'),
-	                   'fecha_venc_pago' => date('Ymd'))))));
+	                   'tipo_doc' => $comprobante->getCliente()->getTipoDocumento()->getCode(),
+	                   'nro_doc' => $comprobante->getCliente()->getNroDocumento(),
+	                   'tipo_cbte' => $comprobante->getTipoComprobante()->getCode(),
+	                   'punto_vta' => $comprobante->getPuntoVenta()->getCode(),
+	                   'cbt_desde' => $cbte,//TODO: hacer una llamada para esto recursivo. Solo se hace si es factura B y por montos menores a $1000 x c/u
+	                   'cbt_hasta' => $cbte,//Si es B, es el número de factura desde y el número de factura hasta. Solo se permite para B
+	                   'imp_total' => $comprobante->getImpTotal(),
+	                   'imp_tot_conc' => $comprobante->getImpTotalConceptos(),
+	                   'imp_neto' => $comprobante->getImpNeto(),
+	                   'impto_liq' => $comprobante->getImpLiquidado(),
+	                   'impto_liq_rni' => $comprobante->getImpLiquidadoRni(),
+	                   'imp_op_ex' => $comprobante->getImpOperacionesEx(),
+	                   'fecha_cbte' => $comprobante->getFechaComprobante('Ymd'),
+	    			   'fecha_serv_desde' => $comprobante->getFechaServicioDesde('Ymd'),
+	    			   'fecha_serv_hasta' => $comprobante->getFechaServicioHasta('Ymd'),
+	                   'fecha_venc_pago' => $comprobante->getFechaVencimientoPago('Ymd'))))));
 	  if ( $results->FEAutRequestResult->RError->percode != 0 )
 	    {
 	      printf ("Percode: %d\nPerrmsg: %s\n", 
@@ -85,10 +94,9 @@ class WsfeClient{
 	          $results->FEAutRequestResult->RError->perrmsg);
 	      exit("Error");
 	    }
-	# printf ("HEADERs:\n%s\n", $client->__getLastRequestHeaders());
-	# printf ("REQUEST:\n%s\n", $client->__getLastRequest());
-	#  file_put_contents("FE.xml",$client->__getLastResponse());
-	  return $results->FEAutRequestResult->FedResp->FEDetalleResponse->cae;
+	  var_dump($results);
+	  die();
+//	  return $results->FEAutRequestResult->FedResp->FEDetalleResponse->cae;
 	}
 	
 	#==============================================================================
@@ -104,6 +112,22 @@ class WsfeClient{
 	     exit (1);
 	   }
 	  return;
+	}
+	#==============================================================================
+	public static function generateSoapClient(){
+	  $client=new SoapClient(sfConfig::get("WSDL"), 
+  		array('soap_version' => SOAP_1_2,
+        'location'     => sfConfig::get("WSFEURL"),
+#       'proxy_host'   => "proxy",
+#       'proxy_port'   => 80,
+        'exceptions'   => 0,
+        'trace'        => 1)); # needed by getLastRequestHeaders and others
+
+  	  return $client;
+	}
+	#==============================================================================
+	public static function getCuitEmisor(){
+		return sfConfig::get("CUIT");
 	}
 }
 ?>

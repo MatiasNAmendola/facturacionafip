@@ -28,6 +28,27 @@ CREATE TABLE `cliente`
 )Type=InnoDB;
 
 #-----------------------------------------------------------------------------
+#-- contacto
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `contacto`;
+
+
+CREATE TABLE `contacto`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`nombre` VARCHAR(255)  NOT NULL,
+	`telefono` VARCHAR(255),
+	`email` VARCHAR(255),
+	`cliente_id` INTEGER  NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `contacto_FI_1` (`cliente_id`),
+	CONSTRAINT `contacto_FK_1`
+		FOREIGN KEY (`cliente_id`)
+		REFERENCES `cliente` (`id`)
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
 #-- tipo_documento
 #-----------------------------------------------------------------------------
 
@@ -52,7 +73,7 @@ DROP TABLE IF EXISTS `comprobante`;
 CREATE TABLE `comprobante`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
-	`tipo_comprobante_id` INTEGER,
+	`tipo_documento_id` INTEGER,
 	`nro_comprobante` VARCHAR(255)  NOT NULL,
 	`punto_venta_id` INTEGER,
 	`fecha_comprobante` DATETIME  NOT NULL,
@@ -76,10 +97,10 @@ CREATE TABLE `comprobante`
 	`motivo` VARCHAR(255),
 	`reproceso` VARCHAR(255),
 	PRIMARY KEY (`id`),
-	INDEX `comprobante_FI_1` (`tipo_comprobante_id`),
+	INDEX `comprobante_FI_1` (`tipo_documento_id`),
 	CONSTRAINT `comprobante_FK_1`
-		FOREIGN KEY (`tipo_comprobante_id`)
-		REFERENCES `tipo_comprobante` (`id`),
+		FOREIGN KEY (`tipo_documento_id`)
+		REFERENCES `tipo_documento` (`id`),
 	INDEX `comprobante_FI_2` (`punto_venta_id`),
 	CONSTRAINT `comprobante_FK_2`
 		FOREIGN KEY (`punto_venta_id`)

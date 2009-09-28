@@ -20,7 +20,7 @@ class BaseTipoDocumentoFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'code'        => new sfValidatorPass(array('required' => false)),
+      'code'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'description' => new sfValidatorPass(array('required' => false)),
     ));
 
@@ -40,7 +40,7 @@ class BaseTipoDocumentoFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'          => 'Number',
-      'code'        => 'Text',
+      'code'        => 'Number',
       'description' => 'Text',
     );
   }

@@ -16,6 +16,7 @@
     <div id="menu" class="menu">
    <div><a href="<?php echo url_for('cliente/index') ?>">Clientes</a></div>
    <div><a href="<?php echo url_for('comprobante/index') ?>">Comprobantes</a></div>
+   <div><a href="<?php echo url_for('puntoVenta/index') ?>">Puntos de venta</a></div>
     </div>
 
     <div id="principal" class="principal"> 

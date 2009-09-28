@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `tipo_documento`;
 CREATE TABLE `tipo_documento`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
-	`code` VARCHAR(2)  NOT NULL,
+	`code` INTEGER  NOT NULL,
 	`description` VARCHAR(255)  NOT NULL,
 	PRIMARY KEY (`id`)
 )Type=InnoDB;
@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `tipo_comprobante`;
 CREATE TABLE `tipo_comprobante`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
-	`code` VARCHAR(2)  NOT NULL,
+	`code` INTEGER  NOT NULL,
 	`description` VARCHAR(255)  NOT NULL,
 	PRIMARY KEY (`id`)
 )Type=InnoDB;
@@ -136,9 +136,13 @@ DROP TABLE IF EXISTS `punto_venta`;
 CREATE TABLE `punto_venta`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
-	`code` VARCHAR(2)  NOT NULL,
+	`code` INTEGER  NOT NULL,
 	`description` VARCHAR(255)  NOT NULL,
-	PRIMARY KEY (`id`)
+	`active` TINYINT default 1 NOT NULL,
+	`created_at` DATETIME,
+	`updated_at` DATETIME,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `punto_venta_U_1` (`code`)
 )Type=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

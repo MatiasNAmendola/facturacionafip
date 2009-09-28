@@ -12,5 +12,11 @@ class PuntoVentaForm extends BasePuntoVentaForm
 {
   public function configure()
   {
+  	unset(
+	      $this['id'],
+	      $this['created_at'], 
+	      $this['updated_at'],
+	      $this['active']
+	    );	    
   }
 }

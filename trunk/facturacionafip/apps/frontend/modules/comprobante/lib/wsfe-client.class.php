@@ -8,11 +8,11 @@ sfConfig::set("WSFEURL", "https://wswhomo.afip.gov.ar/wsfe/service.asmx");
 sfConfig::set("CUIT", 20135344991);
 #==============================================================================
 class WsfeClient{
-	public static function RecuperaQTY ($client, $token, $sign, $cuit) {
+	public static function RecuperaQTY ($client, $token, $sign) {
 	  $results=$client->FERecuperaQTYRequest(
 	    array('argAuth'=>array('Token' => $token,
 	                            'Sign' => $sign,
-	                            'cuit' => $cuit)));
+	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FERecuperaQTYRequestResult->RError->percode != 0 )
 	    {
 	      printf ("Percode: %d\nPerrmsg: %s\n", 
@@ -24,11 +24,11 @@ class WsfeClient{
 	}
 	
 	#==============================================================================
-	public static function UltNro ($client, $token, $sign, $cuit) {
+	public static function UltNro ($client, $token, $sign) {
 	  $results=$client->FEUltNroRequest(
 	    array('argAuth'=>array('Token' => $token,
 	                            'Sign' => $sign,
-	                            'cuit' => $cuit)));
+	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FEUltNroRequestResult->RError->percode != 0 )
 	    {
 	      printf ("Percode: %d\nPerrmsg: %s\n", 
@@ -40,11 +40,11 @@ class WsfeClient{
 	}
 	
 	#==============================================================================
-	public static function RecuperaLastCMP ($client, $token, $sign, $cuit, $ptovta, $tipocbte){
+	public static function RecuperaLastCMP ($client, $token, $sign, $ptovta, $tipocbte){
 	  $results=$client->FERecuperaLastCMPRequest(
 	    array('argAuth' =>  array('Token'    => $token,
 	                              'Sign'     => $sign,
-	                              'cuit'     => $cuit),
+	                              'cuit'     => sfConfig::get("CUIT")),
 	           'argTCMP' => array('PtoVta'   => $ptovta,
 	                              'TipoCbte' => $tipocbte)));
 	  if ( $results->FERecuperaLastCMPRequestResult->RError->percode != 0 )
@@ -58,12 +58,12 @@ class WsfeClient{
 	}
 	
 	#==============================================================================
-	public static function Aut ($client, $token, $sign, $cuit, $ID, $cbte, Comprobante $comprobante) {
+	public static function Aut ($client, $token, $sign, $ID, $cbte, Comprobante $comprobante) {
 	  $results=$client->FEAutRequest(
 	    array('argAuth' => array(
 	             'Token' => $token,
 	             'Sign'  => $sign,
-	             'cuit'  => $cuit),
+	             'cuit'  => sfConfig::get("CUIT")),
 	          'Fer' => array(
 	             'Fecr' => array(
 	                'id' => $ID, 

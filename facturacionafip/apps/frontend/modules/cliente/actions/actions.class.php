@@ -19,6 +19,7 @@ class clienteActions extends sfActions
   {
     $this->cliente = ClientePeer::retrieveByPk($request->getParameter('id'));
     $this->forward404Unless($this->cliente);
+    $this->contactos = $this->cliente->getContactos();
   }
 
   public function executeNew(sfWebRequest $request)
@@ -70,7 +71,7 @@ class clienteActions extends sfActions
     {
       $cliente = $form->save();
 
-      $this->redirect('cliente/edit?id='.$cliente->getId());
+      $this->redirect('cliente/index');
     }
   }
 }

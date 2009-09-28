@@ -25,4 +25,7 @@ Clientes
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('cliente/new') ?>">New</a>
+<div id="linkBoton" class="linkBoton">
+  <a href="<?php echo url_for('cliente/new')
+ ?>">Nuevo Cliente</a>
+</div>

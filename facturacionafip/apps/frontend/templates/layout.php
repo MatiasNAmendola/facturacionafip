@@ -9,7 +9,7 @@
   <body>
     <div id="header" class="header">
        <p>
-          FACTURACION AFIP
+          <a href="<?php echo url_for('home/index') ?>">FACTURACION AFIP</a>
        <P>
     </div>
    

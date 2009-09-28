@@ -24,7 +24,7 @@ propel:
 
   comprobante:
     id:                     ~
-    tipo_documento_id:	    ~
+    tipo_comprobante_id:	    ~
     nro_comprobante:        { type: varchar(255), required: true }
     punto_venta_id:         ~
     fecha_comprobante:      { type: timestamp, required: true }

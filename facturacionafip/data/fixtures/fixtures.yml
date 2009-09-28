@@ -67,7 +67,7 @@ TipoComprobante:
     description: Liquidación B
     
 TipoDocumento:
-  80 - CUIT:
+  CUIT:
     code: "80"
     description: CUIT
   86 - CUIL:
@@ -150,3 +150,10 @@ PuntoVenta:
   Ppal:
     code: 1
     description: Casa Central
+    
+#Cliente:
+#  protean:
+#    razonSocial: Protean
+#    tipoDocumento: CUIT
+#    nroDocumento: 20284542895
+#    direccion: Urquiza 1114

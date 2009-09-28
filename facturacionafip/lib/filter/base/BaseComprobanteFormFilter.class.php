@@ -15,7 +15,7 @@ class BaseComprobanteFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'tipo_documento_id'      => new sfWidgetFormPropelChoice(array('model' => 'TipoDocumento', 'add_empty' => true)),
+      'tipo_comprobante_id'    => new sfWidgetFormPropelChoice(array('model' => 'TipoComprobante', 'add_empty' => true)),
       'nro_comprobante'        => new sfWidgetFormFilterInput(),
       'punto_venta_id'         => new sfWidgetFormPropelChoice(array('model' => 'PuntoVenta', 'add_empty' => true)),
       'fecha_comprobante'      => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -41,7 +41,7 @@ class BaseComprobanteFormFilter extends BaseFormFilterPropel
     ));
 
     $this->setValidators(array(
-      'tipo_documento_id'      => new sfValidatorPropelChoice(array('required' => false, 'model' => 'TipoDocumento', 'column' => 'id')),
+      'tipo_comprobante_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'TipoComprobante', 'column' => 'id')),
       'nro_comprobante'        => new sfValidatorPass(array('required' => false)),
       'punto_venta_id'         => new sfValidatorPropelChoice(array('required' => false, 'model' => 'PuntoVenta', 'column' => 'id')),
       'fecha_comprobante'      => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -82,7 +82,7 @@ class BaseComprobanteFormFilter extends BaseFormFilterPropel
   {
     return array(
       'id'                     => 'Number',
-      'tipo_documento_id'      => 'ForeignKey',
+      'tipo_comprobante_id'    => 'ForeignKey',
       'nro_comprobante'        => 'Text',
       'punto_venta_id'         => 'ForeignKey',
       'fecha_comprobante'      => 'Date',

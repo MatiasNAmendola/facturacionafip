@@ -18,6 +18,19 @@
     font-family:Arial
 }
 
+.linkBoton{
+    font-size:12px;
+    font-family:Arial;
+    margin-top: 10px;
+}
+
+.linkBoton a{
+   background-color: Blue;
+   padding: 5px;
+   color: white;
+   border: 1px dotted white;
+}
+
 
 body{
     width:90%;
@@ -28,13 +41,18 @@ body{
 
 .principal{
     width: 90%;
+    margin-top: 6%;
     margin-left:5%;
     margin-right: 5%;
+
+    background-color:#E5E5FF;
+    padding: 10px;
 }
 
 .principal table{
-  border: 2px inset Blue;
+  border: 3px inset Blue;
   align:center;
+  background-color: white;
 }
 
 
@@ -49,6 +67,13 @@ body{
     font-size:20px;
     font-family:Arial;
 }
+
+.subtitulo{
+    font-size:12px;
+    font-family:Arial;
+    font-weight:bold;
+}
+
 
 .footer{
     text-align : center;
@@ -65,4 +90,13 @@ body{
     font-family: Arial;
     font-size: 30px;
     font-style: italic;
+}
+
+.header a{
+    font-family: Arial;
+    font-size: 30px;
+    font-style: italic;
+    color: black;
+    text-decoration:none;
+
 }

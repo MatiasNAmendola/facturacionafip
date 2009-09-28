@@ -16,13 +16,23 @@ class BasePuntoVentaForm extends BaseFormPropel
       'id'          => new sfWidgetFormInputHidden(),
       'code'        => new sfWidgetFormInput(),
       'description' => new sfWidgetFormInput(),
+      'active'      => new sfWidgetFormInputCheckbox(),
+      'created_at'  => new sfWidgetFormDateTime(),
+      'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
       'id'          => new sfValidatorPropelChoice(array('model' => 'PuntoVenta', 'column' => 'id', 'required' => false)),
-      'code'        => new sfValidatorString(array('max_length' => 2)),
+      'code'        => new sfValidatorInteger(),
       'description' => new sfValidatorString(array('max_length' => 255)),
+      'active'      => new sfValidatorBoolean(),
+      'created_at'  => new sfValidatorDateTime(array('required' => false)),
+      'updated_at'  => new sfValidatorDateTime(array('required' => false)),
     ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorPropelUnique(array('model' => 'PuntoVenta', 'column' => array('code')))
+    );
 
     $this->widgetSchema->setNameFormat('punto_venta[%s]');
 

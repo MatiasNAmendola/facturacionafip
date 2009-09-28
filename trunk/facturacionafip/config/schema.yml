@@ -11,20 +11,20 @@ propel:
     updated_at:         ~
     
   contacto:
-    id: 		~
+    id: 		    ~
     nombre: 		{ type: varchar(255), required: true }
     telefono:		{ type: varchar(255) }
-    email:		{ type: varchar(255) }
+    email:		    { type: varchar(255) }
     cliente_id:		{ type: integer, foreignTable: cliente, foreignReference: id, required: true }
 
   tipo_documento:
     id:          ~
-    code:        { type: varchar(2), required: true }
+    code:        { type: integer, required: true }
     description: { type: varchar(255), required: true }
 
   comprobante:
     id:                     ~
-    tipo_comprobante_id:	    ~
+    tipo_comprobante_id:	~
     nro_comprobante:        { type: varchar(255), required: true }
     punto_venta_id:         ~
     fecha_comprobante:      { type: timestamp, required: true }
@@ -50,10 +50,13 @@ propel:
 
   tipo_comprobante:
     id:          ~
-    code:        { type: varchar(2), required: true }
+    code:        { type: integer, required: true }
     description: { type: varchar(255), required: true }
     
   punto_venta:
     id:          ~
-    code:        { type: varchar(2), required: true }
+    code:        { type: integer, required: true, index: unique }
     description: { type: varchar(255), required: true }
+    active:      { type: boolean, required: true, default: 1 }
+    created_at:  ~
+    updated_at:  ~

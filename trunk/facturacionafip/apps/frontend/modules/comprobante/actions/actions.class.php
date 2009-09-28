@@ -36,18 +36,18 @@ class comprobanteActions extends sfActions {
 		$comprobante = $form->updateObject();
 		try{
 			$comprobante->generate();
+			$comprobante->save();
+		    $this->redirect('comprobante/show?id='.$comprobante->getId());
 		}catch (WsaaException $wsaaE){
 			echo "WSAA_Exception: ".$wsaaE->getMessage();
-			die();
+			$this->redirect('comprobante/index');
 		}catch (WsfeException $wsfeE){
 			echo "WSFE_Exception: ".$wsfeE->getMessage();
-			die();
+			$this->redirect('comprobante/index');
 		}catch (BusinessException $be){
 			echo "BusinessE: ".$be->getMessage();
-			die();
+		    $this->setTemplate('new');
 		}
-		$comprobante->save();
-	    $this->redirect('comprobante/show?id='.$comprobante->getId());
     }
   }
 }

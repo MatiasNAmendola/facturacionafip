@@ -20,7 +20,7 @@ class BaseTipoDocumentoForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'          => new sfValidatorPropelChoice(array('model' => 'TipoDocumento', 'column' => 'id', 'required' => false)),
-      'code'        => new sfValidatorString(array('max_length' => 2)),
+      'code'        => new sfValidatorInteger(),
       'description' => new sfValidatorString(array('max_length' => 255)),
     ));
 

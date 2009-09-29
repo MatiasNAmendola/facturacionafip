@@ -100,3 +100,32 @@ body{
     text-decoration:none;
 
 }
+
+.messageBoxError{
+    position: absolute;
+    top  : 20%;
+    left : 30%;
+
+    width: 15%;
+    font-size: 15px;
+    color: white;
+    text-decoration:none;
+    border: 4px dashed white;
+    text-align: center;
+    background-color:#FF0000;
+}
+
+
+.messageBoxSuccess{
+    position: absolute;
+    top  : 35%;
+    left : 25%;
+
+    width: 60%;
+    font-size: 15px;
+    color: white;
+    text-decoration:none;
+    border: 4px dashed white;
+    text-align: center;
+    background-color:#009900;
+}

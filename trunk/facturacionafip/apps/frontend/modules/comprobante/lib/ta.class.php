@@ -22,6 +22,10 @@ class TA{
   	return $this->TAfile;
   }
   
+  public function actualizate(){
+  	$this->generateTA();
+  }
+  
   /**
    * Manejar el error como la gente
    * @return unknown_type
@@ -34,6 +38,9 @@ class TA{
 	$TA = WsaaClient::CallWSAA($CMS);
 	
 	if (!file_put_contents(sfConfig::get("TA"), $TA)) {
+		/**
+		 * TODO: GENERAR EXCEPCIÓN
+		 */
 		echo "ERROR ERROR ERROR ta.class.php.generateTA";
 		die();
 	}

@@ -9,7 +9,15 @@ class Comprobante extends BaseComprobante{
 		$sign = $ta->getSign();
 		$token = $ta->getToken();
 
-		$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
+		try {
+			$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
+		}catch (WsfeException $e){
+			if ($e->getMessage() == "1000"){
+				$ta->actualizate();
+				$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
+			}
+		}
+			
 		$ultimoCbt = WsfeClient::RecuperaLastCMP($client, $token, $sign, $this->getPuntoVenta()->getCode(), $this->getTipoComprobante()->getCode());
 		$comprobanteAutorizado = WsfeClient::Aut($client, $token, $sign, $ultimoNro + 1, $ultimoCbt + 1, $this);
 		

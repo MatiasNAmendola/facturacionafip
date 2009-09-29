@@ -39,14 +39,13 @@ class comprobanteActions extends sfActions {
 			$comprobante->save();
 		    $this->redirect('comprobante/show?id='.$comprobante->getId());
 		}catch (WsaaException $wsaaE){
-			echo "WSAA_Exception: ".$wsaaE->getMessage();
+			$this->messageBox = new MessageBox('error', $wsaaE->getMessage());
 			$this->redirect('comprobante/index');
 		}catch (WsfeException $wsfeE){
-			echo "WSFE_Exception: ".$wsfeE->getMessage();
+			$this->messageBox = new MessageBox('error', $wsfeE->getMessage());
 			$this->redirect('comprobante/index');
 		}catch (BusinessException $be){
-			echo "BusinessE: ".$be->getMessage();
-		    $this->setTemplate('new');
+			$this->messageBox = new MessageBox('error', $be->getMessage());
 		}
     }
   }

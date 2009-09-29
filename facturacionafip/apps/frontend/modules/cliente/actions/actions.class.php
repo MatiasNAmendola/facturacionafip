@@ -13,6 +13,7 @@ class clienteActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->cliente_list = ClientePeer::doSelect(new Criteria());
+    $this->messageBox = new MessageBox('success', 'Foo Bar');
   }
 
   public function executeShow(sfWebRequest $request)

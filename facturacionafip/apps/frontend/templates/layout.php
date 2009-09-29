@@ -37,6 +37,5 @@
     </div>
 
     <div id="footer" class="footer">Powered by symfony  -  Todos los derechos reservados</div>
-   
   </body>
 </html>

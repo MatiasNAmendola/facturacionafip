@@ -15,7 +15,11 @@
       </tr>
     </tfoot>
     <tbody>
+    <?php if ($form->getObject()->isNew()) {?>
       <?php echo $form ?>
+    <?php } else {?>
+      <?php echo $form['description']->renderRow() ?>
+    <?php } ?>
     </tbody>
   </table>
 </form>

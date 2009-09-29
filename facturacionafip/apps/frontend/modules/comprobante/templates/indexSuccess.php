@@ -62,3 +62,4 @@
 </table>
 
   <a href="<?php echo url_for('comprobante/new') ?>">New</a>
+<?php include_partial('global/messageBox', array('messageBox' => $messageBox)) ?>

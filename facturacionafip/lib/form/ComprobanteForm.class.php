@@ -25,6 +25,10 @@ class ComprobanteForm extends BaseComprobanteForm
 	      $this['cae'],
 	      $this['fecha_vto_cae']
 	    );
+	    
+	    $ptoVenta = new Criteria();
+    	$ptoVenta->add(PuntoVentaPeer::ACTIVE, true);
+    	$this->widgetSchema['punto_venta_id']->setOption('criteria', $ptoVenta);
   }
 	
 }

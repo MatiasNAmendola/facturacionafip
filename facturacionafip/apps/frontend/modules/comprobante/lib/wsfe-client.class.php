@@ -28,7 +28,7 @@ class WsfeClient{
 	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FEUltNroRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FEUltNroRequestResult->RError->perrmsg);
+	    	throw new WsfeException($results->FEUltNroRequestResult->RError->percode);
 	    }
 	  return $results->FEUltNroRequestResult->nro->value;
 	}

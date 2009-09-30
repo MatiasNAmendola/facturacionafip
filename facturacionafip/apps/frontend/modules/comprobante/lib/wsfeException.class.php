@@ -1,5 +1,4 @@
 <?php
-class WsfeException extends Exception{
-	
+class WsfeException extends WsException{
 }
 ?>

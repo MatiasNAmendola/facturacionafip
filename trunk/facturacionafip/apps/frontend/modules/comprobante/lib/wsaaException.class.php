@@ -1,5 +1,4 @@
 <?php
-class WsaaException extends Exception{
-	
+class WsaaException extends WsException{
 }
 ?>

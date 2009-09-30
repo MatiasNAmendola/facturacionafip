@@ -65,7 +65,7 @@
 	    !PKCS7_DETACHED
 	    );
 	  if (!$STATUS) {
-	  	throw new WsaaException("Error al intentar firmar el TRA");
+	  	throw new WsaaException(0, "Error al intentar firmar el TRA");
 	  }
 	  $inf=fopen("TRA.tmp", "r");
 	  $i=0;
@@ -104,7 +104,7 @@
 	          )); 
 	  $results=$client->loginCms(array('in0'=>$CMS));
 	  if (is_soap_fault($results)) {
-	  	throw new WsaaException("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
+	  	throw new WsaaException(0, $results->faultcode.$results->faultstring);
 	  }
 	  return $results->loginCmsReturn;
 	}

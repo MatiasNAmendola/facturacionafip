@@ -150,7 +150,35 @@ PuntoVenta:
   Ppal:
     code: 1
     description: Casa Central
-    
+
+WsError:
+  1000:
+    code: 1000
+    message: La AFIP no lo está autorizando a emitir comprobantes.
+  1001:
+    code: 1001
+    message: Cuit solicitante no se encuentra entre sus representados
+  1014:
+    code: 1014
+    message: Alguno de los campos está fuera de los parámetros permitidos. Revisar el documento y agregar las validaciones pertinentes.
+  1013:
+    code: 1013
+    message: Cantidad de registros de detalle de la factura/lote de ingreso sea igual a lo informado en cabecera de la factura/lote de ingreso
+  1012:
+    code: 1012
+    message: Solo puede realizar los comprobantes de una sola sucursal
+  1016:
+    code: 1016
+    message: Campo cbt_desde sea igual o menor al campo Nro de Comprobante hasta. En los comprobantes A, deben ser iguales
+  1018:
+    code: 1018
+    message: Tipo de comprobante inválido
+  1017:
+    code: 1017
+    message: Solo puede realizar comprobantes tipo A, para clientes con CUIT
+  1019:
+    code: 1019
+    message: Los comprobantes del tipo B, no pueden superar los $1.000 por cada uno
 #Cliente:
 #  protean:
 #    razonSocial: Protean

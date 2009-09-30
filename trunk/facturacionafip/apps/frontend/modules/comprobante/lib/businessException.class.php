@@ -1,5 +1,4 @@
 <?php
-class BusinessException extends Exception{
-	
+class BusinessException extends WsException{
 }
 ?>

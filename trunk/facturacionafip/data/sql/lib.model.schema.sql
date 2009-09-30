@@ -145,5 +145,20 @@ CREATE TABLE `punto_venta`
 	UNIQUE KEY `punto_venta_U_1` (`code`)
 )Type=InnoDB;
 
+#-----------------------------------------------------------------------------
+#-- ws_error
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `ws_error`;
+
+
+CREATE TABLE `ws_error`
+(
+	`code` INTEGER  NOT NULL,
+	`message` VARCHAR(255),
+	PRIMARY KEY (`code`),
+	UNIQUE KEY `ws_error_U_1` (`code`)
+)Type=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

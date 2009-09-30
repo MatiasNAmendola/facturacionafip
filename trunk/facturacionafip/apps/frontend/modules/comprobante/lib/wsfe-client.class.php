@@ -9,13 +9,14 @@ sfConfig::set("CUIT", 20135344991);
 #==============================================================================
 class WsfeClient{
 	public static function RecuperaQTY ($client, $token, $sign) {
-	  $results=$client->FERecuperaQTYRequest(
+	  $results = $client->FERecuperaQTYRequest(
 	    array('argAuth'=>array('Token' => $token,
 	                            'Sign' => $sign,
 	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FERecuperaQTYRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FERecuperaQTYRequestResult->RError->perrmsg);
+	    	throw new WsfeException($results->FERecuperaQTYRequestResult->RError->percode, 
+	    							$results->FERecuperaQTYRequestResult->RError->perrmsg);
 	    }
 	  return $results->FERecuperaQTYRequestResult->qty->value;
 	}
@@ -28,7 +29,8 @@ class WsfeClient{
 	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FEUltNroRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FEUltNroRequestResult->RError->percode);
+	    	throw new WsfeException($results->FEUltNroRequestResult->RError->percode,
+	    							$results->FEUltNroRequestResult->RError->perrmsg);
 	    }
 	  return $results->FEUltNroRequestResult->nro->value;
 	}
@@ -43,7 +45,8 @@ class WsfeClient{
 	                              'TipoCbte' => $tipocbte)));
 	  if ( $results->FERecuperaLastCMPRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FERecuperaLastCMPRequestResult->RError->perrmsg);
+	    	throw new WsfeException($results->FERecuperaLastCMPRequestResult->RError->percode,
+	    							$results->FERecuperaLastCMPRequestResult->RError->perrmsg);
 	    }
 	  return $results->FERecuperaLastCMPRequestResult->cbte_nro;
 	}
@@ -80,7 +83,8 @@ class WsfeClient{
 	                   'fecha_venc_pago' => $comprobante->getFechaVencimientoPago('Ymd'))))));
 	  if ( $results->FEAutRequestResult->RError->percode != 0 )
 	    {
-	    	throw new BusinessException($results->FEAutRequestResult->RError->perrmsg);
+	    	throw new BusinessException($results->FEAutRequestResult->RError->percode,
+	    								$results->FEAutRequestResult->RError->perrmsg);
 	    }
 	    
 	  $comprobante->setNroComprobante($results->FEAutRequestResult->FecResp->id);
@@ -104,7 +108,7 @@ class WsfeClient{
 	         $results->FEDummyResult->authserver);
 	  if (is_soap_fault($results)) 
 	   { 
-	   		throw new WsfeException($results->faultstring); 
+	   		throw new WsfeException($results->faultcode, $results->faultstring); 
 	   }
 	  return;
 	}

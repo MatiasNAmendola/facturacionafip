@@ -15,6 +15,7 @@ class BasePuntoVentaForm extends BaseFormPropel
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
       'code'        => new sfWidgetFormInput(),
+      'old_code'    => new sfWidgetFormInput(),
       'description' => new sfWidgetFormInput(),
       'active'      => new sfWidgetFormInputCheckbox(),
       'created_at'  => new sfWidgetFormDateTime(),
@@ -23,7 +24,8 @@ class BasePuntoVentaForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'          => new sfValidatorPropelChoice(array('model' => 'PuntoVenta', 'column' => 'id', 'required' => false)),
-      'code'        => new sfValidatorInteger(),
+      'code'        => new sfValidatorInteger(array('required' => false)),
+      'old_code'    => new sfValidatorInteger(array('required' => false)),
       'description' => new sfValidatorString(array('max_length' => 255)),
       'active'      => new sfValidatorBoolean(),
       'created_at'  => new sfValidatorDateTime(array('required' => false)),

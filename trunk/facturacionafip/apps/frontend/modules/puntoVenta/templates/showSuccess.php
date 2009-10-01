@@ -1,10 +1,6 @@
 <table>
   <tbody>
     <tr>
-      <th>Id:</th>
-      <td><?php echo $punto_venta->getId() ?></td>
-    </tr>
-    <tr>
       <th>Code:</th>
       <td><?php echo $punto_venta->getCode() ?></td>
     </tr>
@@ -17,5 +13,7 @@
 
 <hr />
 <a href="<?php echo url_for('puntoVenta/edit?id='.$punto_venta->getId()) ?>">Edit</a>
+&nbsp;
+<a href="<?php echo url_for('puntoVenta/delete?id='.$punto_venta->getId()) ?>">Delete</a>
 &nbsp;
 <a href="<?php echo url_for('puntoVenta/index') ?>">List</a>

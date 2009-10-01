@@ -15,8 +15,9 @@ class WsfeClient{
 	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FERecuperaQTYRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FERecuperaQTYRequestResult->RError->percode, 
-	    							$results->FERecuperaQTYRequestResult->RError->perrmsg);
+	    	$ec = $results->FERecuperaQTYRequestResult->RError->percode;
+	    	throw new WsfeException($ec, 
+	    							WsErrorPeer::getByCode($ec)."/n/n/n Descripción técnica: ".$results->FERecuperaQTYRequestResult->RError->perrmsg);
 	    }
 	  return $results->FERecuperaQTYRequestResult->qty->value;
 	}
@@ -29,8 +30,9 @@ class WsfeClient{
 	                            'cuit' => sfConfig::get("CUIT"))));
 	  if ( $results->FEUltNroRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FEUltNroRequestResult->RError->percode,
-	    							$results->FEUltNroRequestResult->RError->perrmsg);
+	    	$ec = $results->FEUltNroRequestResult->RError->percode;
+	    	throw new WsfeException($ec,
+	    							WsErrorPeer::getByCode($ec)."/n/n/n Descripción técnica: ".$results->FEUltNroRequestResult->RError->perrmsg);
 	    }
 	  return $results->FEUltNroRequestResult->nro->value;
 	}
@@ -45,8 +47,9 @@ class WsfeClient{
 	                              'TipoCbte' => $tipocbte)));
 	  if ( $results->FERecuperaLastCMPRequestResult->RError->percode != 0 )
 	    {
-	    	throw new WsfeException($results->FERecuperaLastCMPRequestResult->RError->percode,
-	    							$results->FERecuperaLastCMPRequestResult->RError->perrmsg);
+	    	$ec = $results->FERecuperaLastCMPRequestResult->RError->percode;
+	    	throw new WsfeException($ec,
+	    							WsErrorPeer::getByCode($ec)."/n/n/n Descripción técnica: ".$results->FERecuperaLastCMPRequestResult->RError->perrmsg);
 	    }
 	  return $results->FERecuperaLastCMPRequestResult->cbte_nro;
 	}
@@ -83,8 +86,9 @@ class WsfeClient{
 	                   'fecha_venc_pago' => $comprobante->getFechaVencimientoPago('Ymd'))))));
 	  if ( $results->FEAutRequestResult->RError->percode != 0 )
 	    {
-	    	throw new BusinessException($results->FEAutRequestResult->RError->percode,
-	    								$results->FEAutRequestResult->RError->perrmsg);
+	    	$ec = $results->FEAutRequestResult->RError->percode;
+	    	throw new BusinessException($ec,
+	    								WsErrorPeer::getByCode($ec)."/n/n/n Descripción técnica: ".$results->FEAutRequestResult->RError->perrmsg);
 	    }
 	    
 	  $comprobante->setNroComprobante($results->FEAutRequestResult->FecResp->id);

@@ -14,6 +14,7 @@ class PuntoVentaForm extends BasePuntoVentaForm
   {
   	unset(
 	      $this['id'],
+	      $this['old_code'],
 	      $this['created_at'], 
 	      $this['updated_at'],
 	      $this['active']

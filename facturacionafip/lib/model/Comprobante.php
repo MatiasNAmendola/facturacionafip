@@ -12,7 +12,7 @@ class Comprobante extends BaseComprobante{
 		try {
 			$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
 		}catch (WsfeException $e){
-			if ($e->getMessage() == "1000"){
+			if ($e->getCode() == "1000"){
 				$ta->actualizate();
 				$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
 			}

@@ -55,7 +55,8 @@ propel:
     
   punto_venta:
     id:          ~
-    code:        { type: integer, required: true, index: unique }
+    code:        { type: integer, required: false, index: unique }
+    old_code:    { type: integer, required: false }
     description: { type: varchar(255), required: true }
     active:      { type: boolean, required: true, default: 1 }
     created_at:  ~

@@ -136,7 +136,8 @@ DROP TABLE IF EXISTS `punto_venta`;
 CREATE TABLE `punto_venta`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
-	`code` INTEGER  NOT NULL,
+	`code` INTEGER,
+	`old_code` INTEGER,
 	`description` VARCHAR(255)  NOT NULL,
 	`active` TINYINT default 1 NOT NULL,
 	`created_at` DATETIME,

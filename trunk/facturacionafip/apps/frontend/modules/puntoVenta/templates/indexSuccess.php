@@ -18,6 +18,7 @@
     <?php endforeach; ?>
   </tbody>
 </table>
-
   <a href="<?php echo url_for('puntoVenta/new') ?>">New</a>
+   <?php if(isset($messageBox)): ?>
 <?php include_partial('global/messageBox', array('messageBox' => $messageBox)) ?>
+   <?php endif;?>

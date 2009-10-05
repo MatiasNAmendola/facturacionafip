@@ -37,5 +37,7 @@
     </div>
 
     <div id="footer" class="footer">Powered by symfony  -  Todos los derechos reservados</div>
+
+    <?php include_partial('global/messageBox') ?>
   </body>
 </html>

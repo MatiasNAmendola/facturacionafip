@@ -102,4 +102,3 @@
 <hr />
 
 <a href="<?php echo url_for('comprobante/index') ?>">List</a>
-<?php include_partial('global/messageBox', array('messageBox' => $messageBox)) ?>

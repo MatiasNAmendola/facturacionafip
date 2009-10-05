@@ -12,7 +12,7 @@ class comprobanteActions extends sfActions {
 	
   public function executeIndex(sfWebRequest $request) {
   	if ($request->hasParameter('code')){
-    	$this->messageBox = new MessageBox('error', WsErrorPeer::getByCode($request->getParameter('code')));
+	  $this->messageBox = new MessageBox('error', WsErrorPeer::getByCode($request->getParameter('code')), $this->getUser());
     }
     $this->comprobante_list = ComprobantePeer::doSelect(new Criteria());
   }
@@ -20,7 +20,7 @@ class comprobanteActions extends sfActions {
   public function executeShow(sfWebRequest $request) {
     $this->comprobante = ComprobantePeer::retrieveByPk($request->getParameter('id'));
     if ($request->hasParameter('creado')){
-    	$this->messageBox = new MessageBox('success', "Su comprobante ya está avalado por la AFIP");
+      $this->messageBox = new MessageBox('success', "Su comprobante ya está avalado por la AFIP", $this->getUser());
     }
     $this->forward404Unless($this->comprobante);
   }
@@ -38,7 +38,7 @@ class comprobanteActions extends sfActions {
 
   protected function processForm(sfWebRequest $request, sfForm $form){
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    $this->messageBox = new MessageBox('error', "Complete los datos requeridos");
+    $this->messageBox = new MessageBox('error', "Complete los datos requeridos", $this->getUser());
     if ($form->isValid()){
 		$comprobante = $form->updateObject();
 		try{
@@ -48,9 +48,9 @@ class comprobanteActions extends sfActions {
 		}catch (WsaaException $wsaaE){
 			$this->redirect('comprobante/index?code='.$wsaaE->getCode());
 		}catch (WsfeException $wsfeE){
-			$this->messageBox = new MessageBox('error', $wsfeE->getMessage());
+		  $this->messageBox = new MessageBox('error', $wsfeE->getMessage(), $this->getUser());
 		}catch (BusinessException $be){
-			$this->messageBox = new MessageBox('error', $be->getMessage());
+		  $this->messageBox = new MessageBox('error', $be->getMessage(), $this->getUser());
 		}
     }
   }

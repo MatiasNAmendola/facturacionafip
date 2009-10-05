@@ -13,10 +13,10 @@ class puntoVentaActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     if ($request->hasParameter('created')){
-    	$this->messageBox = new MessageBox('success', 'su punto de venta fue creado exitosamente');
+      $this->messageBox = new MessageBox('success', 'su punto de venta fue creado exitosamente', $this->getUser());
     }
     if ($request->hasParameter('deleted')){
-    	$this->messageBox = new MessageBox('success', 'su punto de venta fue dado de baja');
+      $this->messageBox = new MessageBox('success', 'su punto de venta fue dado de baja', $this->getUser());
     }
     $this->punto_venta_list = PuntoVentaPeer::findAllActivos();
   }

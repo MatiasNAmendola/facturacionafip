@@ -29,4 +29,3 @@ Clientes
   <a href="<?php echo url_for('cliente/new')
  ?>">Nuevo Cliente</a>
 </div>
-<?php include_partial('global/messageBox', array('messageBox' => $messageBox)) ?>

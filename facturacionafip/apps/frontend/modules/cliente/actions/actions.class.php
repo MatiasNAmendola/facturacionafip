@@ -34,7 +34,8 @@ class clienteActions extends sfActions
     $this->form = new ClienteForm();
 
     $this->processForm($request, $this->form);
-    $this->messageBox = new MessageBox("success", "Cliente creado con exito");
+
+    
     $this->setTemplate('new');
   }
 
@@ -51,7 +52,6 @@ class clienteActions extends sfActions
     $this->forward404Unless($cliente = ClientePeer::retrieveByPk($request->getParameter('id')), sprintf('Object cliente does not exist (%s).', $request->getParameter('id')));
     $this->form = new ClienteForm($cliente);
    
-    $this->messageBox = new MessageBox("success", "Cliente actualizado con exito");
     $this->processForm($request, $this->form);
   }
 
@@ -70,7 +70,6 @@ class clienteActions extends sfActions
       $contacto->delete();
     }
 
-    $this->messageBox = new MessageBox("success", "Cliente eliminado con exito");
     $this->redirect('cliente/index');
   }
 
@@ -80,8 +79,10 @@ class clienteActions extends sfActions
     if ($form->isValid())
     {
       $cliente = $form->save();
-
-      $this->redirect('cliente/index');
+      $this->messageBox = new MessageBox("success","Operacion efectuada correctamente", $this->getUser());
+      $this->redirect('cliente/index/');
+    }else{
+      $this->messageBox = new MessageBox("error","Verifique los datos ingresados", $this->getUser());
     }
-  }
+  } // processForm
 }

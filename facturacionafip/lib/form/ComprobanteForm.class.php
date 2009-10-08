@@ -23,12 +23,21 @@ class ComprobanteForm extends BaseComprobanteForm
 	      $this['motivo'],
 	      $this['reproceso'],
 	      $this['cae'],
-	      $this['fecha_vto_cae']
+	      $this['fecha_vto_cae'],
+	      $this['imp_total'],
+	      $this['imp_total_conceptos'],
+	      $this['imp_neto'],
+	      $this['imp_liquidado'],
+	      $this['imp_liquidado_rni'],
+	      $this['imp_operaciones_ex']
 	    );
 	    
 	    $ptoVenta = new Criteria();
     	$ptoVenta->add(PuntoVentaPeer::ACTIVE, true);
     	$this->widgetSchema['punto_venta_id']->setOption('criteria', $ptoVenta);
-  }
-	
+    	
+    	$clientes = new Criteria();
+    	$clientes->add(ClientePeer::ACTIVO, true);
+    	$this->widgetSchema['cliente_id']->setOption('criteria', $clientes);
+  }	
 }

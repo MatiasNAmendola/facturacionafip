@@ -6,14 +6,16 @@ class Comprobante extends BaseComprobante{
 		$client = WsfeClient::generateSoapClient();
 
 		$ta = new TA();
-		$sign = $ta->getSign();
 		$token = $ta->getToken();
-
+		$sign = $ta->getSign();
+		
 		try {
 			$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
 		}catch (WsfeException $e){
 			if ($e->getCode() == "1000"){
 				$ta->actualizate();
+				$token = $ta->getToken();
+				$sign = $ta->getSign();
 				$ultimoNro = WsfeClient::UltNro($client, $token, $sign);
 			}
 		}
@@ -30,5 +32,34 @@ class Comprobante extends BaseComprobante{
 		$this->setResultado($comprobanteAutorizado->getResultado());
 		$this->setMotivo($comprobanteAutorizado->getMotivo());
 		$this->setFechaVtoCae($comprobanteAutorizado->getFechaVtoCae());
+	}
+	
+	public function calculateTotales(){
+		$this->setImpLiquidado(0);
+		$this->setImpLiquidadoRni(0);
+		$this->setImpNeto(0);
+		$this->setImpOperacionesEx(0);
+		$this->setImpTotal(0);
+		$this->setImpTotalConceptos(0);
+		foreach ($this->getComprobanteItems() as $l){
+			$this->setImpLiquidado($this->getImpLiquidado() + $l->getImpLiquidado());
+			$this->setImpLiquidadoRni($this->getImpLiquidadoRni() + $l->getImpLiquidadoRni());
+			$this->setImpNeto($this->getImpNeto() + $l->getImpNeto());
+			$this->setImpOperacionesEx($this->getImpOperacionesEx() + $l->getImpOperacionesEx());
+			$this->setImpTotal($this->getImpTotal() + $l->getImpTotal());
+			$this->setImpTotalConceptos($this->getImpTotalConceptos() + $l->getImpTotalConceptos());
+		}
+	}
+	
+	public function copiarImportes(Comprobante $otro){
+		$this->setImpLiquidado($otro->getImpLiquidado());
+		$this->setImpLiquidadoRni($otro->getImpLiquidadoRni());
+		$this->setImpNeto($otro->getImpNeto());
+		$this->setImpOperacionesEx($otro->getImpOperacionesEx());
+		$this->setImpTotal($otro->getImpTotal());
+		$this->setImpTotalConceptos($otro->getImpTotalConceptos());
+		foreach ($otro->getComprobanteItems() as $l){
+			$l->setComprobante($this);
+		}
 	}
 }

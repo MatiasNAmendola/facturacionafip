@@ -43,10 +43,21 @@ propel:
     fecha_vencimiento_pago: { type: timestamp }
     cae:                    { type: varchar(255), required: true }
     fecha_cae:              { type: timestamp, required: true }
-    fecha_vto_cae:          { type: timestamp, required: true }
+    fecha_vto_cae:          { type: timestamp }
     resultado:              { type: varchar(255) }
     motivo:                 { type: varchar(255) }
     reproceso:              { type: varchar(255) }
+
+  comprobante_item:
+    id:                     ~
+    comprobante_id:	        ~
+    imp_total:              { type: real, required: true }
+    imp_total_conceptos:    { type: real, required: true, default 0 }
+    imp_neto:               { type: real, required: true, default 0 }
+    imp_liquidado:          { type: real, required: true, default 0 }
+    imp_liquidado_rni:      { type: real, required: true, default 0 }
+    imp_operaciones_ex:     { type: real, required: true, default 0 }
+    description:            { type: varchar(255), required: true }
 
   tipo_comprobante:
     id:          ~

@@ -12,12 +12,6 @@ class puntoVentaActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    if ($request->hasParameter('created')){
-      $this->messageBox = new MessageBox('success', 'su punto de venta fue creado exitosamente', $this->getUser());
-    }
-    if ($request->hasParameter('deleted')){
-      $this->messageBox = new MessageBox('success', 'su punto de venta fue dado de baja', $this->getUser());
-    }
     $this->punto_venta_list = PuntoVentaPeer::findAllActivos();
   }
 
@@ -70,8 +64,8 @@ class puntoVentaActions extends sfActions
     $punto_venta->setOldCode($punto_venta->getCode());
     $punto_venta->setCode(null);
     $punto_venta->save();
-
-    $this->redirect('puntoVenta/index?deleted=1');
+    $this->messageBox = new MessageBox('success', 'su punto de venta fue dado de baja', $this->getUser());
+    $this->redirect('puntoVenta/index');
   }
   
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -80,8 +74,8 @@ class puntoVentaActions extends sfActions
     if ($form->isValid())
     {
       $punto_venta = $form->save();
-
-      $this->redirect('puntoVenta/index?created=1');
+      $this->messageBox = new MessageBox('success', 'su punto de venta fue creado exitosamente', $this->getUser());
+      $this->redirect('puntoVenta/index');
     }
   }
 }

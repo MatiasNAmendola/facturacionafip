@@ -33,9 +33,18 @@ class TA{
   private function generateTA(){
     ini_set("soap.wsdl_cache_enabled", "0");
 
-    WsaaClient::CreateTRA();
-	$CMS = WsaaClient::SignTRA();
-	$TA = WsaaClient::CallWSAA($CMS);
+    try {
+	    WsaaClient::CreateTRA();
+		$CMS = WsaaClient::SignTRA();
+		$TA = WsaaClient::CallWSAA($CMS);
+    }catch (ConectionException $ce){
+			/**
+		 * TODO: GENERAR EXCEPCIÓN
+		 */
+		echo "ERROR ERROR ERROR ta.class.php.generateTA";
+		echo "<br> NO HAY CONEXIÓN";
+		die();	
+	}
 	
 	if (!file_put_contents(sfConfig::get("TA"), $TA)) {
 		/**

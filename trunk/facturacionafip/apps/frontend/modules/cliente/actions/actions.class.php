@@ -57,10 +57,9 @@ class clienteActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+//    $request->checkCSRFProtection();
 
     $this->forward404Unless($cliente = ClientePeer::retrieveByPk($request->getParameter('id')), sprintf('Object cliente does not exist (%s).', $request->getParameter('id')));
-
     // Baja logica
     $cliente->setActivo(false);
     $cliente->save();
@@ -69,7 +68,7 @@ class clienteActions extends sfActions
     foreach($cliente->getContactos() as $contacto){
       $contacto->delete();
     }
-
+    $this->messageBox = new MessageBox("success" , "Su cliente fue borrado correctamente", $this->getUser());
     $this->redirect('cliente/index');
   }
 
@@ -79,7 +78,7 @@ class clienteActions extends sfActions
     if ($form->isValid())
     {
       $cliente = $form->save();
-      $this->messageBox = new MessageBox("success","Operacion efectuada correctamente", $this->getUser());
+      $this->messageBox = new MessageBox("success","Su cliente ha sido dado de alta correctamente", $this->getUser());
       $this->redirect('cliente/index/');
     }else{
       $this->messageBox = new MessageBox("error","Verifique los datos ingresados", $this->getUser());

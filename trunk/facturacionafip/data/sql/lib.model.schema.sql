@@ -112,6 +112,31 @@ CREATE TABLE `comprobante`
 )Type=InnoDB;
 
 #-----------------------------------------------------------------------------
+#-- comprobante_item
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `comprobante_item`;
+
+
+CREATE TABLE `comprobante_item`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`comprobante_id` INTEGER,
+	`imp_total` REAL  NOT NULL,
+	`imp_total_conceptos` REAL default 0 NOT NULL,
+	`imp_neto` REAL default 0 NOT NULL,
+	`imp_liquidado` REAL default 0 NOT NULL,
+	`imp_liquidado_rni` REAL default 0 NOT NULL,
+	`imp_operaciones_ex` REAL default 0 NOT NULL,
+	`description` VARCHAR(255)  NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `comprobante_item_FI_1` (`comprobante_id`),
+	CONSTRAINT `comprobante_item_FK_1`
+		FOREIGN KEY (`comprobante_id`)
+		REFERENCES `comprobante` (`id`)
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
 #-- tipo_comprobante
 #-----------------------------------------------------------------------------
 

@@ -28,6 +28,11 @@ class WsfeClient{
 	    array('argAuth'=>array('Token' => $token,
 	                            'Sign' => $sign,
 	                            'cuit' => sfConfig::get("CUIT"))));
+	    
+//	  if ($results->getMessage() == "Could not connect to host"){
+//	  	throw new ConectionException("no se puede conectar con el servidor. Revise su conexión de internet", 1);
+//	  }
+	    
 	  if ( $results->FEUltNroRequestResult->RError->percode != 0 )
 	    {
 	    	$ec = $results->FEUltNroRequestResult->RError->percode;

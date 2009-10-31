@@ -1,3 +1,3 @@
-<h1>Edit PuntoVenta</h1>
+<h1>Editar Punto de Venta</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

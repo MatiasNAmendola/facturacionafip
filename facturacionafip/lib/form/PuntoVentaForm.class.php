@@ -18,6 +18,9 @@ class PuntoVentaForm extends BasePuntoVentaForm
 	      $this['created_at'], 
 	      $this['updated_at'],
 	      $this['active']
-	    );	    
+	    );
+	    
+	$this->widgetSchema->setLabel('code', 'C&oacute;digo');
+	$this->widgetSchema->setLabel('description', 'Descripci&oacute;n');
   }
 }

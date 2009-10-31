@@ -9,8 +9,8 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          &nbsp;<a href="<?php echo url_for('puntoVenta/index') ?>">Cancel</a>
-          <input type="submit" value="Save" />
+          &nbsp;<a href="<?php echo url_for('puntoVenta/index') ?>">Cancelar</a>
+          <input type="submit" value="Aceptar" />
         </td>
       </tr>
     </tfoot>

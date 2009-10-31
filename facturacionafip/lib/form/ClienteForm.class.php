@@ -12,8 +12,9 @@ class ClienteForm extends BaseClienteForm
 {
   public function configure()
   {
-     // Deshacerse de la edicion del campo de baja logica y de las fechas de creacion y modificacion
     unset($this['created_at'], $this['updated_at'], $this['activo']);
 
+	$this->widgetSchema->setLabel('tipo_documento_id', 'Tipo de Documento');
+	$this->widgetSchema->setLabel('direccion', 'Direcci&oacute;n');
   }
 }

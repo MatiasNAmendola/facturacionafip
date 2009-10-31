@@ -62,4 +62,8 @@ class Comprobante extends BaseComprobante{
 			$l->setComprobante($this);
 		}
 	}
+	
+	public function getEsServicioSiNo() {
+		return ($this->es_servicio ? 'Si': 'No');
+	}
 }

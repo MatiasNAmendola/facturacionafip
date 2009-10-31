@@ -10,23 +10,19 @@ echo 'Detalles del Cliente';
     <table>
       <tbody>
 	<tr>
-	  <th>Id:</th>
-	  <td><?php echo $cliente->getId() ?></td>
-	</tr>
-	<tr>
-	  <th>Razon social:</th>
+	  <th>Raz&oacute;n Social:</th>
 	  <td><?php echo $cliente->getRazonSocial() ?></td>
 	</tr>
 	<tr>
-	  <th>Tipo documento:</th>
-	  <td><?php echo $cliente->getTipoDocumentoId() ?></td>
+	  <th>Tipo de Documento:</th>
+	  <td><?php echo $cliente->getTipoDocumento() ?></td>
 	</tr>
 	<tr>
-	  <th>Nro documento:</th>
+	  <th>Nro Documento:</th>
 	  <td><?php echo $cliente->getNroDocumento() ?></td>
 	</tr>
 	<tr>
-	  <th>Direccion:</th>
+	  <th>Direcci&oacute;n:</th>
 	  <td><?php echo $cliente->getDireccion() ?></td>
 	</tr>
       </tbody>
@@ -34,6 +30,10 @@ echo 'Detalles del Cliente';
 
     <div id="linkBoton" class="linkBoton">
         <a href="<?php echo url_for('cliente/edit?id='.$cliente->getId()) ?>">Editar Cliente</a>
+    </div>
+    
+    <div id="linkBoton" class="linkBoton">
+        <a href="<?php echo url_for('cliente/delete?id='.$cliente->getId()) ?>">Borrar Cliente</a>
     </div>
 </div>
 
@@ -46,17 +46,15 @@ echo 'Detalles del Cliente';
     <table>
       <thead>
 	<tr>
-	  <th>Id</th>
 	  <th>Nombre</th>
-	  <th>Telefono</th>
+	  <th>Tel&eacute;fono</th>
 	  <th>E-Mail</th>
 	</tr>
       </thead>
       <tbody>
 	<?php foreach ($contactos as $contacto): ?>
 	<tr>
-	  <td><a href="<?php echo url_for('contacto/show?id='.$contacto->getId()) ?>"><?php echo $contacto->getId() ?></a></td>
-	  <td><?php echo $contacto->getNombre() ?></td>
+	  <td><a href="<?php echo url_for('contacto/show?id='.$contacto->getId()) ?>"><?php echo $contacto->getNombre() ?></a></td>
 	  <td><?php echo $contacto->getTelefono() ?></td>
 	  <td><?php echo $contacto->getEmail() ?></td>
 	</tr>
@@ -72,5 +70,3 @@ echo 'Detalles del Cliente';
 <div id="linkBoton" class="linkBoton">
     <a href="<?php echo url_for('cliente/index') ?>">Volver</a>
 </div>
-
-

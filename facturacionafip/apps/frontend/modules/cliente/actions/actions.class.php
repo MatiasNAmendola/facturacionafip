@@ -33,7 +33,7 @@ class clienteActions extends sfActions
 
     $this->form = new ClienteForm();
 
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form, 'creado');
 
     
     $this->setTemplate('new');
@@ -52,7 +52,7 @@ class clienteActions extends sfActions
     $this->forward404Unless($cliente = ClientePeer::retrieveByPk($request->getParameter('id')), sprintf('Object cliente does not exist (%s).', $request->getParameter('id')));
     $this->form = new ClienteForm($cliente);
    
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form, 'actualizado');
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -72,16 +72,16 @@ class clienteActions extends sfActions
     $this->redirect('cliente/index');
   }
 
-  protected function processForm(sfWebRequest $request, sfForm $form)
+  protected function processForm(sfWebRequest $request, sfForm $form, $accion)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $cliente = $form->save();
-      $this->messageBox = new MessageBox("success","Su cliente ha sido dado de alta correctamente", $this->getUser());
+      $this->messageBox = new MessageBox("success", "Su cliente ha sido dado $accion correctamente", $this->getUser());
       $this->redirect('cliente/index/');
     }else{
-      $this->messageBox = new MessageBox("error","Verifique los datos ingresados", $this->getUser());
+      $this->messageBox = new MessageBox("error", "Verifique los datos ingresados", $this->getUser());
     }
   } // processForm
 }

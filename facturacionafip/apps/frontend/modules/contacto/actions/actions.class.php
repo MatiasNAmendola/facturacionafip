@@ -42,6 +42,7 @@ class contactoActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   {
     $this->forward404Unless($contacto = ContactoPeer::retrieveByPk($request->getParameter('id')), sprintf('Object contacto does not exist (%s).', $request->getParameter('id')));
+    $this->cliente = $contacto->getCliente();
     $this->form = new ContactoForm($contacto);
   }
 
@@ -58,7 +59,7 @@ class contactoActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+//    $request->checkCSRFProtection();
 
     $this->forward404Unless($contacto = ContactoPeer::retrieveByPk($request->getParameter('id')), sprintf('Object contacto does not exist (%s).', $request->getParameter('id')));
 

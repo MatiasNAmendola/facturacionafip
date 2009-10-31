@@ -39,5 +39,9 @@ class ComprobanteForm extends BaseComprobanteForm
     	$clientes = new Criteria();
     	$clientes->add(ClientePeer::ACTIVO, true);
     	$this->widgetSchema['cliente_id']->setOption('criteria', $clientes);
+    	
+		$this->widgetSchema->setLabel('tipo_comprobante_id', 'Tipo de Comprobante');
+		$this->widgetSchema->setLabel('punto_venta_id', 'Punto de Venta');
+		$this->widgetSchema->setLabel('cliente_id', 'Cliente');
   }	
 }

@@ -1,3 +1,3 @@
-<h1>Edit Contacto</h1>
+<h1>Editar Contacto</h1>
 
-<?php include_partial('form', array('form' => $form)) ?>
+<?php include_partial('form', array('form' => $form, 'cliente' => $cliente)) ?>

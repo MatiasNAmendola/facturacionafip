@@ -51,7 +51,8 @@ class puntoVentaActions extends sfActions
 
     $this->processForm($request, $this->form);
 
-    $this->setTemplate('edit');
+    $this->messageBox = new MessageBox('success', 'su punto de venta fue modificado exitosamente', $this->getUser());
+    $this->redirect('puntoVenta/index');
   }
 
   public function executeDelete(sfWebRequest $request)

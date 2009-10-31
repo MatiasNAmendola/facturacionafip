@@ -9,26 +9,26 @@ echo 'Detalles del contacto';
     <table>
       <tbody>
 	<tr>
-	  <th>Id:</th>
-	  <td><?php echo $contacto->getId() ?></td>
-	</tr>
-	<tr>
 	  <th>Nombre:</th>
 	  <td><?php echo $contacto->getNombre() ?></td>
 	</tr>
 	<tr>
-	  <th>Telefono:</th>
+	  <th>Tel&eacute;fono:</th>
 	  <td><?php echo $contacto->getTelefono() ?></td>
 	</tr>
 	<tr>
 	  <th>Cliente:</th>
-	  <td><?php echo $contacto->getClienteId() ?></td>
+	  <td><?php echo $contacto->getCliente() ?></td>
 	</tr>
       </tbody>
     </table>
 
     <div class="linkBoton" id="linkBoton">
         <a href="<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>">Editar Contacto</a>
+    </div>
+    
+    <div class="linkBoton" id="linkBoton">
+        <a href="<?php echo url_for('contacto/delete?id='.$contacto->getId()) ?>">Borrar Contacto</a>
     </div>
 </div>
 

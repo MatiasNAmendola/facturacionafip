@@ -1,0 +1,22 @@
+/*
+Metodo encontrado en
+http://www.kyleschaeffer.com/tutorials/karate-corners-easy-rounded-corners-xhtml-no-script/
+*/
+
+/* Por color */
+.cornerGray { position: absolute; width: 10px; height: 10px; background: url('/images/bordersGray.gif') no-repeat; font-size: 0%; }
+
+.gray{background: #cfcfcf;}
+
+/* Comunes */
+.borderFillerL{position:absolute; top: 10px; bottom: 10px;left:0px; width:10px; }
+.borderFillerR{position:absolute; top: 10px; bottom: 10px;right:0px; width:10px; }
+
+.box { position: relative; width: 100%; }
+.cornerBoxInner {margin: 10px; }
+.TL { top: 0; left: 0; background-position: 0 0; }
+.TR { top: 0; right: 0; background-position: -10px 0; }
+.BL { bottom: 0; left: 0; background-position: 0 -10px; }
+.BR { bottom: 0; right: 0; background-position: -10px -10px; }
+
+

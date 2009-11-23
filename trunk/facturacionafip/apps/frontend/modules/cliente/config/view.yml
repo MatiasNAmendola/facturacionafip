@@ -1,2 +1,2 @@
 default:
-  stylesheets: [main.css, cliente.css, contacto.css]
+  stylesheets: [main.css, borders.css , cliente.css, contacto.css]

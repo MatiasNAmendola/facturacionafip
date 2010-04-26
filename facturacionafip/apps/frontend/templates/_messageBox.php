@@ -4,9 +4,11 @@ $messageBox->popFromSession($sf_user);
 
 if ($messageBox->isDefined()) : 
 ?>
-<div class="<?php echo $messageBox->getClass() ?>" onclick="javascript:this.style.visibility='hidden'">
-  <p>
-	<?php echo $messageBox->getMessage() ?>
-  </p>
-</div>    
+       <div class="box <?=$messageBox->getClass()?>"  onclick="javascript:this.style.display='none'">
+
+
+<?php echo $messageBox->getMessage() ?>
+
+        </div>
+
 <?php endif; ?>

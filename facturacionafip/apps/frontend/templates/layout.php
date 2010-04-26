@@ -6,95 +6,77 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
-  <body id="body">
+  <body>
 
+	<div class="box light_green app_header">
+		<div id="app_title">
+			<a href="<?php echo url_for('home/index') ?>">FACTURACION AFIP</a>
+		</div>
+	</div>
 
-       <div class="box">
-       <div class="cornerGray TL"></div>
-       <div class="cornerGray TR"></div>
-       <div class="cornerGray BL"></div>
-       <div class="cornerGray BR"></div>
-       <div class="cornerBoxInner gray">
-       <div class="borderFillerL gray"></div>
-       <div class="borderFillerR gray"></div>
+	<? WebHelper::vseparator("1%"); ?>
+	<div id="menu" class="box light_blue">
+		<span class="menu_item">
+			<a href="<?php echo url_for('cliente/index') ?>">Clientes</a>
+		</span>
 
-    <div id="header" class="header">
-       <p>
-          <a href="<?php echo url_for('home/index') ?>">FACTURACION AFIP</a>
-       <P>
-    </div>
+		<span> &nbsp;|&nbsp;  </span>
 
-</div>
-</div>
+		<span class="menu_item">
+			<a href="<?php echo url_for('comprobante/index') ?>">Comprobantes</a>
+		</span>
 
-   
-    <div id="menu" class="menu">
-   
-       <div class="box">
-       <div class="cornerGray TL"></div>
-       <div class="cornerGray TR"></div>
-       <div class="cornerGray BL"></div>
-       <div class="cornerGray BR"></div>
-       <div class="cornerBoxInner gray">
-       <div class="borderFillerL gray"></div>
-       <div class="borderFillerR gray"></div>
+		<span> &nbsp;|&nbsp;  </span>
+
+		<span class="menu_item">
+			<a href="<?php echo url_for('puntoVenta/index') ?>">Puntos de venta</a>
+		</span>
+	</div>
 
 
 
+	<div id="body">
+		<?php include_partial('global/messageBox') ?>
 
-  <span><a href="<?php echo url_for('cliente/index') ?>">Clientes</a></span>
-   <span> &nbsp;|&nbsp;  </span>
-   <span><a href="<?php echo url_for('comprobante/index') ?>">Comprobantes</a></span>
-   <span> &nbsp;|&nbsp;  </span>
-   <span><a href="<?php echo url_for('puntoVenta/index') ?>">Puntos de venta</a></
+		<div class="box">
+			<div id="principal" class="principal"> 
 
-span>
+				<?php if(has_slot('title')): ?>
 
-        </div>
+					<div id="titulo" class="titulo">
+						<h1>
+						  <?php include_slot('title'); ?>
+						</h1>
+					</div>
 
-    </div>
-   <table class = "centered">
-   <tr>
-   <td>
-       <div class="box">
-       <div class="cornerGray TL"></div>
-       <div class="cornerGray TR"></div>
-       <div class="cornerGray BL"></div>
-       <div class="cornerGray BR"></div>
+				<?php else: ?>
 
+					<div id="welcome" class="welcome">
+						<h1>
+						    Bienvenido
+						</h1>
+					</div>
+			
+				<?php endif; ?>
 
-       <div class="borderFillerL gray"></div>
-       <div class="borderFillerR gray"></div>
+				<div id="contenido" class="contenido ">
+					<?php echo $sf_content ?> 
+				</div>
+			</div>
+		</div>
+	</div><!-- body -->
 
-       <div class="cornerBoxInner gray">
-
-
-            <div id="principal" class="principal"> 
-              <div id="titulo" class="titulo">
-                <h1>
-                  <?php if (!include_slot('title')): ?>
-                    Bienvenido
-                  <?php endif; ?>
-                </h1>
-              </div>
-              <div id="contenido" class="contenido">
-                <?php echo $sf_content ?> 
-              </div>
-            </div>
-   
-         </div>
-        </div>
-   </td>
-   </tr>
-   </table>
-
-
-    <div id="separadorFinal" class="separadorFinal">
-       <hr/>
-    </div>
-
-    <div id="footer" class="footer">Powered by symfony  -  Todos los derechos reservados</div>
-
-    <?php include_partial('global/messageBox') ?>
+	<div id="separadorFinal" class="separadorFinal">
+		<hr class="separadorFinal"/>
+	</div>
+	<table class="centered" >
+		<tbody>
+			<tr>
+				<td>
+					<div id="footer" class="footer">Powered by symfony  -  Todos los derechos reservados</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
   </body>
 </html>

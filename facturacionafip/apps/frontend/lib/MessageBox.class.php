@@ -8,10 +8,14 @@ class MessageBox
   
   private $defined = false;
   private $type;
+  private $cornerClass;
+
   private $message;
   private $classesByType = array(
-			     'error' => 'messageBoxError',
-			     'success' => 'messageBoxSuccess'
+			     'error' => 'green',
+			     'success' => 'green',
+			     'green' => 'green',
+			     'red' => 'red'
 			     );
 
   private function serialize(){
@@ -35,8 +39,12 @@ class MessageBox
     if( $k < count($split)){
       $this->message = $split[$k++];
     }
-  }# serialize
+  }# deserialize
      
+  public function getCornerClass(){
+    return $this->cornerClass;
+  }
+
   public function popFromSession($sfUser){
     $this->defined = false;    
 
@@ -92,7 +100,7 @@ class MessageBox
   public function getClass(){
     $class = $this->classesByType[$this->type];
     if(!$class){
-      $class = "messageBox";
+      $class = "";
     }
     return $class;
   }
@@ -101,23 +109,5 @@ class MessageBox
     return $this->message;
   }
 
-
-
-  // Devuelve el codigo html para incluir en el template
-  public  function render(){
-    $class = $this->classesByType[$this->type];
-    if(!$class){
-      $class = "messageBox";
-    }
-
-    $html = "";
-    $html    .= "<div class='".$class."'>";
-    $html    .=     "<p>";
-    $html    .=         $this->message;
-    $html    .=     "</p>";
-    $html    .= "</div>";
-    
-    return $html;
-  } // render
 } // MessageBox
 ?>

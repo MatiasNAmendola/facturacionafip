@@ -27,14 +27,10 @@ echo 'Detalles del Cliente';
 	</tr>
       </tbody>
     </table>
-
-    <div id="linkBoton" class="linkBoton">
-        <a href="<?php echo url_for('cliente/edit?id='.$cliente->getId()) ?>">Editar Cliente</a>
-    </div>
     
-    <div id="linkBoton" class="linkBoton">
-        <a href="<?php echo url_for('cliente/delete?id='.$cliente->getId()) ?>">Borrar Cliente</a>
-    </div>
+    <?WebHelper::linkButton("Editar Cliente", url_for('cliente/edit?id='.$cliente->getId()));?>
+    <?WebHelper::linkButton("Borrar Cliente", url_for('cliente/delete?id='.$cliente->getId()));?>
+
 </div>
 
 

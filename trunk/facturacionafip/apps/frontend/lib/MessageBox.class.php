@@ -29,7 +29,7 @@ class MessageBox
   }# serialize
      
   private function deserialize($serialization){
-    $split = split(MessageBox::$_separator, $serialization);
+    $split = explode(MessageBox::$_separator, $serialization);
     
     $k = 0;
     

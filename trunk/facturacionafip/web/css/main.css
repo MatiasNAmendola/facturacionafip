@@ -199,3 +199,7 @@ body{
 
 	border-color: black;
 }
+
+.error_list li{
+    color: red;
+}

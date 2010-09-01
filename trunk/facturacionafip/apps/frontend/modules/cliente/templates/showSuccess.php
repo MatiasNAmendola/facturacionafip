@@ -28,8 +28,8 @@ echo 'Detalles del Cliente';
       </tbody>
     </table>
     
-    <?WebHelper::linkButton("Editar Cliente", url_for('cliente/edit?id='.$cliente->getId()));?>
-    <?WebHelper::linkButton("Borrar Cliente", url_for('cliente/delete?id='.$cliente->getId()));?>
+    <?php WebHelper::linkButton("Editar Cliente", url_for('cliente/edit?id='.$cliente->getId()));?>
+    <?php WebHelper::linkButton("Borrar Cliente", url_for('cliente/delete?id='.$cliente->getId()));?>
 
 </div>
 

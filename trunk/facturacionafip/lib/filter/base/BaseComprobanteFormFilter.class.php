@@ -34,7 +34,7 @@ class BaseComprobanteFormFilter extends BaseFormFilterPropel
       'fecha_vencimiento_pago' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'cae'                    => new sfWidgetFormFilterInput(),
       'fecha_cae'              => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'fecha_vto_cae'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'fecha_vto_cae'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'resultado'              => new sfWidgetFormFilterInput(),
       'motivo'                 => new sfWidgetFormFilterInput(),
       'reproceso'              => new sfWidgetFormFilterInput(),

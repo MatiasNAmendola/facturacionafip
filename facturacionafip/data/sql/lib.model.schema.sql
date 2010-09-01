@@ -92,7 +92,7 @@ CREATE TABLE `comprobante`
 	`fecha_vencimiento_pago` DATETIME,
 	`cae` VARCHAR(255)  NOT NULL,
 	`fecha_cae` DATETIME  NOT NULL,
-	`fecha_vto_cae` DATETIME  NOT NULL,
+	`fecha_vto_cae` DATETIME,
 	`resultado` VARCHAR(255),
 	`motivo` VARCHAR(255),
 	`reproceso` VARCHAR(255),

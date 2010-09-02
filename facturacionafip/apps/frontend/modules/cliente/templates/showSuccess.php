@@ -38,7 +38,8 @@ echo 'Detalles del Cliente';
     <div class="subtitulo" id="subtituloListaContactos">
       <h3>Contactos</h3>
     </div>
-
+    
+    <?php if(sizeof($contactos)>0): ?>
     <table>
       <thead>
 	<tr>
@@ -57,8 +58,13 @@ echo 'Detalles del Cliente';
 	<?php endforeach; ?>
       </tbody>
     </table>
+    
+    <?php else: ?>
+      <p>No se han informado Contactos para este cliente</p>
+    <?php endif;?>
+
     <div id="linkBoton" class="linkBoton">
-      <a href="<?php echo url_for('contacto/new?cliente_id='.$cliente->getId()) ?>">Nuevo</a>
+      <a href="<?php echo url_for('contacto/new?cliente_id='.$cliente->getId()) ?>">Agregar Contacto</a>
     </div>
 
 </div>

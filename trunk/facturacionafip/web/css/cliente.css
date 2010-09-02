@@ -1,15 +1,14 @@
 .datosCliente{
-    border-bottom: 1px dotted blue;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+#    border-bottom: 1px dotted blue;
+#    margin-bottom: 20px;
+#    padding-bottom: 20px;
 }
 
 .listaContactos{
-    margin-left: 10%;
-    background-color: #CCCCFF;
+#    margin-left: 10%;
+#    background-color: #CCCCFF;
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 12px;
-    border-bottom: 1px dotted blue;
 } 

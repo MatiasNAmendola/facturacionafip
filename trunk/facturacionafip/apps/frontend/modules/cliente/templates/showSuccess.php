@@ -35,36 +35,38 @@ echo 'Detalles del Cliente';
 
 
 <div class="listaContactos" id="listaContactos">
+    <?php if(sizeof($contactos)>0): ?>
     <div class="subtitulo" id="subtituloListaContactos">
       <h3>Contactos</h3>
     </div>
-    
-    <?php if(sizeof($contactos)>0): ?>
+
     <table>
       <thead>
 	<tr>
 	  <th>Nombre</th>
 	  <th>Tel&eacute;fono</th>
 	  <th>E-Mail</th>
+	  <th></th>
 	</tr>
       </thead>
       <tbody>
 	<?php foreach ($contactos as $contacto): ?>
 	<tr>
-	  <td><a href="<?php echo url_for('contacto/show?id='.$contacto->getId()) ?>"><?php echo $contacto->getNombre() ?></a></td>
+	  <td><a href="<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>"><?php echo $contacto->getNombre() ?></a></td>
 	  <td><?php echo $contacto->getTelefono() ?></td>
 	  <td><?php echo $contacto->getEmail() ?></td>
+	  <td><a onclick='javascript:return confirm("¿Está seguro de eliminar este contacto?")' href="<?php echo url_for('contacto/delete?id='.$contacto->getId()) ?>">Borrar</a></td></td>
 	</tr>
 	<?php endforeach; ?>
       </tbody>
     </table>
     
-    <?php else: ?>
-      <p>No se han informado Contactos para este cliente</p>
+
     <?php endif;?>
 
     <div id="linkBoton" class="linkBoton">
-      <a href="<?php echo url_for('contacto/new?cliente_id='.$cliente->getId()) ?>">Agregar Contacto</a>
+<p>
+      <a href="<?php echo url_for('contacto/new?cliente_id='.$cliente->getId()) ?>">Agregar Contacto</a></p>
     </div>
 
 </div>

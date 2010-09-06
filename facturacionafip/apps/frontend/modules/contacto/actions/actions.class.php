@@ -23,7 +23,6 @@ class contactoActions extends sfActions
 
     $this->form = new ContactoForm();
     
-
     // Agregar el id del cliente al formulario
     $this->form->setDefault('cliente_id', $this->cliente->getId());
   }
@@ -31,10 +30,9 @@ class contactoActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod('post'));
-
     $this->form = new ContactoForm();
-
     $this->processForm($request, $this->form);
+    $this->cliente = ClientePeer::retrieveByPk($this->form['cliente_id']->getValue());
 
     $this->setTemplate('new');
   }

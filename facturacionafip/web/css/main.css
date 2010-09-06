@@ -97,6 +97,15 @@ border-top:1px solid transparent;
 color:#666699;
 padding:8px;
 }
+
+.principal tfoot tr td{
+    background: #FFFFFF;
+}
+
+.principal tfoot tr:hover td{
+    background: #FFFFFF;
+}
+
 .principal tr:hover td {
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;

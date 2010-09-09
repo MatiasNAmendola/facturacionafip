@@ -12,7 +12,7 @@ class MessageBox
 
   private $message;
   private $classesByType = array(
-			     'error' => 'green',
+			     'error' => 'red',
 			     'success' => 'green',
 			     'green' => 'green',
 			     'red' => 'red'

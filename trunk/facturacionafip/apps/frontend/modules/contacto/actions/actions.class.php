@@ -48,6 +48,8 @@ class contactoActions extends sfActions
   {
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($contacto = ContactoPeer::retrieveByPk($request->getParameter('id')), sprintf('Object contacto does not exist (%s).', $request->getParameter('id')));
+    $this->cliente = $contacto->getCliente();
+
     $this->form = new ContactoForm($contacto);
 
     $this->processForm($request, $this->form);

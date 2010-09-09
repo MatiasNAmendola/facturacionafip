@@ -11,15 +11,22 @@ Clientes
 	<th>Tipo de Documento</th>
 	<th>Nro Documento</th>
 	<th>Direcci&oacute;n</th>
+	<th></th>
+	<th></th>
+	<th></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($cliente_list as $cliente): ?>
-      <tr>
-	<td><a href="<?php echo url_for('cliente/show?id='.$cliente->getId()) ?>"><?php echo $cliente->getRazonSocial() ?></a></td>
+      <tr onclick="javascript:window.location='<?php echo url_for('cliente/show?id='.$cliente->getId());?>'">
+	<td ><?php echo $cliente->getRazonSocial() ?></td>
 	<td><?php echo $cliente->getTipoDocumento() ?></td>
 	<td><?php echo $cliente->getNroDocumento() ?></td>
 	<td><?php echo $cliente->getDireccion() ?></td>
+    
+	<td><?php WebHelper::linkButton("Ver", url_for('cliente/show?id='.$cliente->getId()));?></td>
+	<td><?php WebHelper::linkButton("Editar", url_for('cliente/edit?id='.$cliente->getId()));?></td>
+	<td><?php WebHelper::linkButton("Borrar", url_for('cliente/delete?id='.$cliente->getId()),"¿Está seguro de eliminar este Cliente?");?></td>
       </tr>
       <?php endforeach; ?>
     </tbody>

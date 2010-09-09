@@ -29,7 +29,7 @@ echo 'Detalles del Cliente';
     </table>
     
     <?php WebHelper::linkButton("Editar Cliente", url_for('cliente/edit?id='.$cliente->getId()));?>
-    <?php WebHelper::linkButton("Borrar Cliente", url_for('cliente/delete?id='.$cliente->getId()));?>
+    <?php WebHelper::linkButton("Borrar Cliente", url_for('cliente/delete?id='.$cliente->getId()),"¿Está seguro de eliminar este cliente?");?>
 
 </div>
 
@@ -47,14 +47,16 @@ echo 'Detalles del Cliente';
 	  <th>Tel&eacute;fono</th>
 	  <th>E-Mail</th>
 	  <th></th>
+	  <th></th>
 	</tr>
       </thead>
       <tbody>
 	<?php foreach ($contactos as $contacto): ?>
-	<tr>
-	  <td><a href="<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>"><?php echo $contacto->getNombre() ?></a></td>
+	<tr onclick="javascript:window.location='<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>'">
+	  <td><?php echo $contacto->getNombre() ?></td>
 	  <td><?php echo $contacto->getTelefono() ?></td>
 	  <td><?php echo $contacto->getEmail() ?></td>
+	  <td><a href="<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>">Editar</a></td>
 	  <td><a onclick='javascript:return confirm("¿Está seguro de eliminar este contacto?")' href="<?php echo url_for('contacto/delete?id='.$contacto->getId()) ?>">Borrar</a></td></td>
 	</tr>
 	<?php endforeach; ?>

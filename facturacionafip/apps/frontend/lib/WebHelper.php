@@ -12,8 +12,14 @@ class WebHelper
   }
 
   # Inserta un link con label y url indicados
-  public static function linkButton($label, $url){
-  	  print("<a href=\"".$url."\">".$label."</a>");  	  
+  # Si el tercer parametro es distinto de 0, se utiliza como mensaje para un
+  # dialogo que debe aceptarse para seguir el vinculo
+  public static function linkButton($label, $url, $confirmMessage=""){
+  	 $condition = "true";
+	 if($confirmMessage != ""){
+ 	  	 $condition = "confirm('".$confirmMessage."')";
+         }
+  	 print("<a onclick = \"javascript:return ".$condition."\" href=\"".$url."\">".$label."</a>");  	  
   }
 
 

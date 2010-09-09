@@ -44,6 +44,7 @@ class clienteActions extends sfActions
     $this->forward404Unless($cliente = ClientePeer::retrieveByPk($request->getParameter('id')), sprintf('Object cliente does not exist (%s).', $request->getParameter('id')));
     $this->form = new ClienteForm($cliente);
     $this->cliente = $cliente;
+
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -53,6 +54,7 @@ class clienteActions extends sfActions
     $this->form = new ClienteForm($cliente);
    
     $this->processForm($request, $this->form, 'actualizado');
+    $this->setTemplate('edit');
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -78,8 +80,8 @@ class clienteActions extends sfActions
     if ($form->isValid())
     {
       $cliente = $form->save();
-      $this->messageBox = new MessageBox("success", "Su cliente ha sido dado $accion correctamente", $this->getUser());
-      $this->redirect('cliente/index/');
+      $this->messageBox = new MessageBox("success", "El cliente ha sido dado $accion correctamente", $this->getUser());
+      $this->redirect('cliente/show?id='.$cliente->getId());
     }else{
       $this->messageBox = new MessageBox("error", "Verifique los datos ingresados", $this->getUser());
     }

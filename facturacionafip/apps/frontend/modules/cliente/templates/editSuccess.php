@@ -6,5 +6,5 @@
 
 <?php end_slot(); ?>
 
-<?php include_partial('form', array('form' => $form, 'volver_a_cliente' => isset($volver_a_cliente) )) ?>
+<?php include_partial('form', array('form' => $form, 'volver_a_cliente' => $volver_a_cliente)) ?>
 

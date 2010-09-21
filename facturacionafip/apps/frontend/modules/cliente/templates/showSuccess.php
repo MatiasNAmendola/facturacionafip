@@ -27,12 +27,23 @@ echo 'Detalles del Cliente';
 	</tr>
       </tbody>
     </table>
-    
-    <?php WebHelper::linkButton("Editar Cliente", url_for('cliente/edit?id='.$cliente->getId().'&volver_a=cliente'));?>
-    <?php WebHelper::linkButton("Borrar Cliente", url_for('cliente/delete?id='.$cliente->getId()),"¿Está seguro de eliminar este cliente?");?>
-
+    <div style="float:left" class="smallMargins">
+    <?php WebHelper::linkButton(array(
+				     'linkClass'=>'btnEdit',	
+				     'text'=>'Editar Cliente',
+				     'target'=>url_for('cliente/edit?id='.$cliente->getId().'&volver_a=cliente'))
+			       );?>
+    </div>
+    <div style="float:left" class = "smallMargins"> &nbsp</div>
+    <div   class = "smallMargins">
+    <?php WebHelper::linkButton(array(
+				     'linkClass'=>'btnX',	
+				     'text'=>'Borrar Cliente',
+				     'target'=>url_for('cliente/delete?id='.$cliente->getId()),
+				     'confirmMessage'=>'¿Está seguro de eliminar este cliente?')
+				     );?>
+    </div>
 </div>
-
 
 <div class="listaContactos" id="listaContactos">
     <?php if(sizeof($contactos)>0): ?>
@@ -66,13 +77,23 @@ echo 'Detalles del Cliente';
 
     <?php endif;?>
 
-    <div id="linkBoton" class="linkBoton">
-<p>
-      <a href="<?php echo url_for('contacto/new?cliente_id='.$cliente->getId()) ?>">Agregar Contacto</a></p>
+   <div class="smallMargins">
+      <?php WebHelper::linkButton(array(
+				     'linkClass'=>'btnAdd',
+				     'text'=>'Agregar Contacto',
+				     'target'=>url_for('contacto/new?cliente_id='.$cliente->getId()))
+				     );?>
+
     </div>
 
 </div>
+    <hr/>
 
-<div id="linkBoton" class="linkBoton">
-    <a href="<?php echo url_for('cliente/index') ?>">Volver</a>
+
+<div class="smallMargins">
+      <?php WebHelper::linkButton(array(
+				     'linkClass'=>'btnBack',
+				     'text'=>'Volver',
+				     'target'=>url_for('cliente/index'))
+				     );?>
 </div>

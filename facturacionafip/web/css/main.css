@@ -95,7 +95,8 @@ background:#E8EDFF none repeat scroll 0 0;
 border-bottom:1px solid #FFFFFF;
 border-top:1px solid transparent;
 color:#666699;
-padding:8px;
+#padding:8px;
+height: 40px;
 }
 
 .principal tfoot tr td{
@@ -111,7 +112,7 @@ padding:8px;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 background:#D0DAFD none repeat scroll 0 0;
-color:#333399;
+#color:#333399;
 }
 
 .box{
@@ -193,22 +194,75 @@ body{
 	margin-right: auto;
 }
 
-.linkButton{
-}
 
-.linkButton a{
-
-	color: black;
-	font-style: italic bold;
-	text-decoration: none;
-/*	background-color: #bbbbff;*/
-
-	border-left: 1px solid;
-	border-bottom: 1px solid;
-
-	border-color: black;
+.smallMargins{
+    margin-top: 10px;
 }
 
 .error_list li{
     color: red;
+}
+
+
+.btn{
+    background-position: center;
+    padding-left:25px;
+    padding-top:5px;
+    padding-bottom:5px;
+    text-decoration: none;
+}
+
+.btnVer{
+    background: url(/images/icons/normal/view.gif) 0 0 no-repeat;
+}
+
+.btnVer:hover { 
+    background: url(/images/icons/highlighted/view.gif) 0 0 no-repeat;
+}
+.btnVer:active {
+    background: url(/images/icons/pressed/view.gif) 0 0 no-repeat;
+}
+
+.btnEdit{
+    background: url(/images/icons/normal/edit.gif) 0 0 no-repeat;
+}
+
+.btnEdit:hover { 
+    background: url(/images/icons/highlighted/edit.gif) 0 0 no-repeat;
+}
+.btnEdit:active {
+    background: url(/images/icons/pressed/edit.gif) 0 0 no-repeat;
+}
+
+.btnX{
+    background: url(/images/icons/normal/no.gif) 0 0 no-repeat;
+}
+
+.btnX:hover { 
+    background: url(/images/icons/highlighted/no.gif) 0 0 no-repeat;
+}
+.btnX:active {
+    background: url(/images/icons/pressed/no.gif) 0 0 no-repeat;
+}
+
+
+.btnAdd{
+   background: url(/images/icons/normal/add.gif) 0 0 no-repeat;
+}
+.btnAdd:hover{
+   background: url(/images/icons/highlighted/add.gif) 0 0 no-repeat;
+}
+.btnAdd:active{
+   background: url(/images/icons/pressed/add.gif) 0 0 no-repeat;
+}
+
+
+.btnBack{
+   background: url(/images/icons/normal/back.gif) 0 0 no-repeat;
+}
+.btnBack:hover{
+   background: url(/images/icons/highlighted/back.gif) 0 0 no-repeat;
+}
+.btnBack:active{
+   background: url(/images/icons/pressed/back.gif) 0 0 no-repeat;
 }

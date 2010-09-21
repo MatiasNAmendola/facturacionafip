@@ -24,9 +24,28 @@ Clientes
 	<td><?php echo $cliente->getNroDocumento() ?></td>
 	<td><?php echo $cliente->getDireccion() ?></td>
     
-	<td><?php WebHelper::linkButton("Ver", url_for('cliente/show?id='.$cliente->getId()));?></td>
-	<td><?php WebHelper::linkButton("Editar", url_for('cliente/edit?id='.$cliente->getId()));?></td>
-	<td><?php WebHelper::linkButton("Borrar", url_for('cliente/delete?id='.$cliente->getId()),"¿Está seguro de eliminar este Cliente?");?></td>
+	<td>
+		<?php WebHelper::linkButton(array(
+						  'target'=>url_for('cliente/show?id='.$cliente->getId()),
+						  'linkClass'=>'btnVer'
+						  )
+					    );?>
+	</td>
+
+	<td>
+		<?php WebHelper::linkButton(array(
+						  'target'=>url_for('cliente/edit?id='.$cliente->getId()),
+						  'linkClass'=>'btnEdit')
+					   );?>
+	</td>
+
+	<td>
+		<?php WebHelper::linkButton(array(
+						  'target'=>url_for('cliente/delete?id='.$cliente->getId()),
+						  'confirmMessage'=>'¿Está seguro de eliminar este Cliente?',
+						  'linkClass'=>'btnX')
+					    );?>
+	</td>
       </tr>
       <?php endforeach; ?>
     </tbody>
@@ -38,7 +57,14 @@ Clientes
    ?>
 </div>
 
-<div id="linkBoton" class="linkBoton">
-  <a href="<?php echo url_for('cliente/new')
- ?>">Nuevo Cliente</a>
+
+
+<div class="smallMargins">
+  <?php WebHelper::linkButton(array(
+				    'text'=>'Nuevo Cliente', 
+				    'target'=>url_for('cliente/new'),
+				    'linkClass'=>'btnAdd'
+				    
+				   )
+   			     );?>
 </div>

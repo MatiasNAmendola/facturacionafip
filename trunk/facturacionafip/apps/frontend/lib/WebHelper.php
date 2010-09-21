@@ -11,15 +11,30 @@ class WebHelper
   	  # No implementado
   }
 
-  # Inserta un link con label y url indicados
-  # Si el tercer parametro es distinto de 0, se utiliza como mensaje para un
-  # dialogo que debe aceptarse para seguir el vinculo
-  public static function linkButton($label, $url, $confirmMessage=""){
+  # Inserta un link que cumple la funcion de un boton
+  # Recibe un array asociativo con los parametros que 
+  # definen el aspecto y comportamiento del boton
+  public static function linkButton($params){
+  	 $text = (isset($params['text']))?$params['text']:"";
+  	 $target   = (isset($params['target']))?$params['target']:"";
+	 $imgClass   = (isset($params['imgClass']))?$params['imgClass']:"";
+	 $imgAlt   = (isset($params['imgAlt']))?$params['imgAlt']:"";
+	 $linkClass = (isset($params['linkClass']))?$params['linkClass']:"";
+	 $class = (isset($params['class']))?$params['class']:"";
+	 $confirmMessage = (isset($params['confirmMessage']))?$params['confirmMessage']:"";
+
   	 $condition = "true";
 	 if($confirmMessage != ""){
  	  	 $condition = "confirm('".$confirmMessage."')";
          }
-  	 print("<a onclick = \"javascript:return ".$condition."\" href=\"".$url."\">".$label."</a>");  	  
+
+  	 print("<a class=\"btn ".$linkClass."\" onclick = \"javascript:return ".$condition."\" href=\"".$target."\">");
+	 print($text);
+	 if( isset($imgClass) && $imgClass != '' || isset($imgAlt) && $imgAlt != '' ){
+	     print("<img class=\"".$imgClass."\" alt=\"".$imgAlt."\" />");
+	 }
+	 print("</a>");  	  
+
   }
 
 

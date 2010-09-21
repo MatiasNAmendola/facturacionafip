@@ -111,7 +111,7 @@ height: 40px;
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
-background:#D0DAFD none repeat scroll 0 0;
+#background:#D0DAFD none repeat scroll 0 0;
 #color:#333399;
 }
 
@@ -120,6 +120,11 @@ background:#D0DAFD none repeat scroll 0 0;
 	padding-bottom: 5px;
 	padding-left  : 10px;
 	padding-right : 10px;
+
+}
+
+.box img{
+    	vertical-align: middle;
 }
 
 .light_green{
@@ -210,7 +215,28 @@ body{
     padding-top:5px;
     padding-bottom:5px;
     text-decoration: none;
+    color: #000000;
 }
+
+.btn:hover{
+    color: #444444;
+}
+
+.btn:active{
+    color: #DDDDDD;
+}
+
+.btnOk{
+    background: url(/images/icons/normal/ok.gif) 0 0 no-repeat;
+}
+
+.btnOk:hover { 
+    background: url(/images/icons/highlighted/ok.gif) 0 0 no-repeat;
+}
+.btnOk:active {
+    background: url(/images/icons/pressed/ok.gif) 0 0 no-repeat;
+}
+
 
 .btnVer{
     background: url(/images/icons/normal/view.gif) 0 0 no-repeat;
@@ -222,6 +248,7 @@ body{
 .btnVer:active {
     background: url(/images/icons/pressed/view.gif) 0 0 no-repeat;
 }
+
 
 .btnEdit{
     background: url(/images/icons/normal/edit.gif) 0 0 no-repeat;

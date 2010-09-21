@@ -22,13 +22,20 @@ class WebHelper
 	 $linkClass = (isset($params['linkClass']))?$params['linkClass']:"";
 	 $class = (isset($params['class']))?$params['class']:"";
 	 $confirmMessage = (isset($params['confirmMessage']))?$params['confirmMessage']:"";
+	 $clickAction = (isset($params['clickAction']))?$params['clickAction']:"";
 
   	 $condition = "true";
 	 if($confirmMessage != ""){
  	  	 $condition = "confirm('".$confirmMessage."')";
          }
 
-  	 print("<a class=\"btn ".$linkClass."\" onclick = \"javascript:return ".$condition."\" href=\"".$target."\">");
+	 $onclick = "return ".$condition;
+	 if($clickAction != ""){
+	     $onclick="if(".$condition.") ".$clickAction.";  return false";
+	 }
+
+	 
+  	 print("<a class=\"btn ".$linkClass."\" onclick = \"javascript:".$onclick."\" href=\"".$target."\">");
 	 print($text);
 	 if( isset($imgClass) && $imgClass != '' || isset($imgAlt) && $imgAlt != '' ){
 	     print("<img class=\"".$imgClass."\" alt=\"".$imgAlt."\" />");

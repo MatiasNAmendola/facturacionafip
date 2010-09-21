@@ -18,6 +18,13 @@ class MessageBox
 			     'red' => 'red'
 			     );
 
+  private $imgByType = array(
+			     'error' => 'no.gif',
+			     'success' => 'ok.gif',
+			     'green' => 'ok.gif',
+			     'red' => 'no.gif'
+			     );
+
   private function serialize(){
     $result = "";
 
@@ -103,6 +110,14 @@ class MessageBox
       $class = "";
     }
     return $class;
+  }
+
+  public function getImg(){
+    $img = $this->imgByType[$this->type];
+    if(!$img){
+      $img = "";
+    }
+    return $img;
   }
 
   public function getMessage(){

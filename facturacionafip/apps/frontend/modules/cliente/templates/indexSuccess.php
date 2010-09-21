@@ -18,7 +18,7 @@ Clientes
     </thead>
     <tbody>
       <?php foreach ($cliente_list as $cliente): ?>
-      <tr onclick="javascript:window.location='<?php echo url_for('cliente/show?id='.$cliente->getId());?>'">
+      <tr>
 	<td ><?php echo $cliente->getRazonSocial() ?></td>
 	<td><?php echo $cliente->getTipoDocumento() ?></td>
 	<td><?php echo $cliente->getNroDocumento() ?></td>

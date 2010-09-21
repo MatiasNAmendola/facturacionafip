@@ -31,7 +31,7 @@ class contactoActions extends sfActions
   {
     $this->forward404Unless($request->isMethod('post'));
     $this->form = new ContactoForm();
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form, 'creado');
     $this->cliente = ClientePeer::retrieveByPk($this->form['cliente_id']->getValue());
 
     $this->setTemplate('new');
@@ -52,7 +52,7 @@ class contactoActions extends sfActions
 
     $this->form = new ContactoForm($contacto);
 
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form, 'actualizado');
 
     $this->setTemplate('edit');
   }
@@ -66,10 +66,12 @@ class contactoActions extends sfActions
     $cliente = $contacto->getCliente();
     $contacto->delete();
 
+    $this->messageBox = new MessageBox("success" , "El contacto fué borrado correctamente", $this->getUser());
+
     $this->redirect('cliente/show?id='.$cliente->getId());
   }
 
-  protected function processForm(sfWebRequest $request, sfForm $form)
+  protected function processForm(sfWebRequest $request, sfForm $form, $accion)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
@@ -80,8 +82,12 @@ class contactoActions extends sfActions
       $this->forward404Unless($cliente, sprintf('Cliente no encontrado (%s).', $form->getValue('cliente_id')));	
       
       $contacto = $form->save();
+      $this->messageBox = new MessageBox("success", "El contacto ha sido $accion correctamente", $this->getUser());	
+
 
       $this->redirect('cliente/show?id='.$contacto->getCliente()->getId());
-    } # if form isvalid
+    }else{
+      $this->messageBox = new MessageBox("error", "Verifique los datos ingresados", $this->getUser());
+    }
   } # processForm
 } # actions

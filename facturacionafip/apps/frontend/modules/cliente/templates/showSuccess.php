@@ -48,7 +48,7 @@ echo 'Detalles del Cliente';
 <div class="listaContactos" id="listaContactos">
     <?php if(sizeof($contactos)>0): ?>
     <div class="subtitulo" id="subtituloListaContactos">
-      <h3>Contactos</h3>
+      <h3>Contactos <img src="/images/icons/normal/people.gif" alt="" /></h3>
     </div>
 
     <table>
@@ -63,12 +63,25 @@ echo 'Detalles del Cliente';
       </thead>
       <tbody>
 	<?php foreach ($contactos as $contacto): ?>
-	<tr onclick="javascript:window.location='<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>'">
+	<tr> 
 	  <td><?php echo $contacto->getNombre() ?></td>
 	  <td><?php echo $contacto->getTelefono() ?></td>
 	  <td><?php echo $contacto->getEmail() ?></td>
-	  <td><a href="<?php echo url_for('contacto/edit?id='.$contacto->getId()) ?>">Editar</a></td>
-	  <td><a onclick='javascript:return confirm("¿Está seguro de eliminar este contacto?")' href="<?php echo url_for('contacto/delete?id='.$contacto->getId()) ?>">Borrar</a></td></td>
+	  <td>
+		<?php WebHelper::linkButton(array(
+				     'linkClass'=>'btnEdit',	
+				     'target'=>url_for('contacto/edit?id='.$contacto->getId()))
+			       );?>
+	  </td>
+
+	  <td>
+		<?php WebHelper::linkButton(array(
+				     'linkClass'=>'btnX',	
+				     'target'=>url_for('contacto/delete?id='.$contacto->getId()),
+				     'confirmMessage'=>"¿Está seguro de eliminar este contacto?"
+				     )
+			       );?>
+	  </td>
 	</tr>
 	<?php endforeach; ?>
       </tbody>

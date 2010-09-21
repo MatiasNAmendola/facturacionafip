@@ -56,6 +56,9 @@ class clienteActions extends sfActions
     $this->form = new ClienteForm($cliente);
     $this->processForm($request, $this->form, 'actualizado');
     $this->setTemplate('edit');
+
+    $volver_a = $request->getParameter('volver_a_cliente');
+    $this->volver_a_cliente = isset($volver_a) && ($volver_a  == 'true');
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -81,7 +84,7 @@ class clienteActions extends sfActions
     if ($form->isValid())
     {
       $cliente = $form->save();
-      $this->messageBox = new MessageBox("success", "El cliente ha sido dado $accion correctamente", $this->getUser());	
+      $this->messageBox = new MessageBox("success", "El cliente ha sido $accion correctamente", $this->getUser());	
       
       $volver_a_cliente = $request->getParameter('volver_a_cliente');
       if(isset($volver_a_cliente) && $volver_a_cliente == 'true'){

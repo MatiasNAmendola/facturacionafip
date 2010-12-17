@@ -32,7 +32,7 @@ class puntoVentaActions extends sfActions
 
     $this->form = new PuntoVentaForm();
 
-    $this->processForm($request, $this->form);
+    $this->processForm($request, $this->form, "creado");
 
     $this->setTemplate('new');
   }
@@ -48,11 +48,9 @@ class puntoVentaActions extends sfActions
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($punto_venta = PuntoVentaPeer::retrieveByPk($request->getParameter('id')), sprintf('Object punto_venta does not exist (%s).', $request->getParameter('id')));
     $this->form = new PuntoVentaForm($punto_venta);
-
-    $this->processForm($request, $this->form);
-
-    $this->messageBox = new MessageBox('success', 'su punto de venta fue modificado exitosamente', $this->getUser());
-    $this->redirect('puntoVenta/index');
+    
+    $this->setTemplate('edit');
+    $this->processForm($request, $this->form, "actualizado");
   }
 
   public function executeDelete(sfWebRequest $request)
@@ -65,18 +63,21 @@ class puntoVentaActions extends sfActions
     $punto_venta->setOldCode($punto_venta->getCode());
     $punto_venta->setCode(null);
     $punto_venta->save();
-    $this->messageBox = new MessageBox('success', 'su punto de venta fue dado de baja', $this->getUser());
+    $this->messageBox = new MessageBox('success', 'El Punto de Venta ha sido dado de baja con éxito', $this->getUser());
     $this->redirect('puntoVenta/index');
   }
   
-  protected function processForm(sfWebRequest $request, sfForm $form)
+  protected function processForm(sfWebRequest $request, sfForm $form, $accion)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $punto_venta = $form->save();
-      $this->messageBox = new MessageBox('success', 'su punto de venta fue creado exitosamente', $this->getUser());
+
+      $this->messageBox = new MessageBox('success', 'El punto de venta ha sido '.$accion.' exitosamente', $this->getUser());
       $this->redirect('puntoVenta/index');
+    }else{
+      $this->messageBox = new MessageBox('error', 'Verifique los datos ingresados', $this->getUser());
     }
   }
 }

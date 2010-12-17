@@ -41,6 +41,8 @@ class puntoVentaActions extends sfActions
   {
     $this->forward404Unless($punto_venta = PuntoVentaPeer::retrieveByPk($request->getParameter('id')), sprintf('Object punto_venta does not exist (%s).', $request->getParameter('id')));
     $this->form = new PuntoVentaForm($punto_venta);
+    $widgetSchema = $this->form->getWidgetSchema();
+    $widgetSchema['code'] =  new sfWidgetFormInputHidden();
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -48,7 +50,7 @@ class puntoVentaActions extends sfActions
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($punto_venta = PuntoVentaPeer::retrieveByPk($request->getParameter('id')), sprintf('Object punto_venta does not exist (%s).', $request->getParameter('id')));
     $this->form = new PuntoVentaForm($punto_venta);
-    
+
     $this->setTemplate('edit');
     $this->processForm($request, $this->form, "actualizado");
   }

@@ -13,12 +13,12 @@ class PuntoVentaForm extends BasePuntoVentaForm
   public function configure()
   {
   	unset(
-	      $this['id'],
 	      $this['old_code'],
 	      $this['created_at'], 
 	      $this['updated_at']
 	    );
 
+	$this->widgetSchema['id'] = new sfWidgetFormInputHidden();    
 	$this->widgetSchema['active'] = new sfWidgetFormInputHidden();    
 
 	$formatter = $this->getWidgetSchema()->getFormFormatter();
@@ -34,8 +34,6 @@ class PuntoVentaForm extends BasePuntoVentaForm
 	$validator = $this->getValidator($name);
 	$validator->setMessage("required", "El campo es requerido");        
 	$validator->setMessage("invalid", "El valor ingresado no es v&aacute;lido");        
-
-
 
     } // for all fields
     $post_validator = $validatorSchema->getPostValidator();

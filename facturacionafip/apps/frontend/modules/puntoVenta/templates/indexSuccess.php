@@ -2,8 +2,6 @@
 Puntos de Venta
 <?php end_slot(); ?>
 
-
-<h1>Puntos de Venta</h1>
 <div>
   <?php if(sizeof($punto_venta_list) > 0): ?>
 <table>
